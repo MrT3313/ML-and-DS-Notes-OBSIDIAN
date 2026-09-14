@@ -1,8 +1,14 @@
 ---
 note_kind: source
-title: "{{title}}"
-book:
+medium: book
 chapter:
-Github:
 up:
+url:
+aliases:
 ---
+
+## Thesis
+
+## Extracted
+
+## Open questions
