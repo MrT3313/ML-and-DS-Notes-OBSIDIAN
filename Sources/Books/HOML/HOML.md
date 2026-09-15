@@ -12,8 +12,6 @@ up: "[[Home]]"
 
 # HOML
 
-Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, third edition. Read in teaching order; notes are filed in reference order per the Charter, and this note is the reading-order record.
-
 ## Chapters
 
 - [[HOML Ch01 The Machine Learning Landscape]]

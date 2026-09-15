@@ -1,0 +1,35 @@
+---
+note_kind: concept
+aliases:
+  - hypothesis
+  - predictor
+  - model parameters
+up:
+sources:
+  - "[[HOML Ch01 The Machine Learning Landscape]]"
+confidence: draft
+---
+## Definition
+
+The [[Model]] is the part of a machine learning system that learns from the [[Training Set]] and then makes predictions. It is a function from a feature vector to an output, plus the parameters that were set during training.
+
+## Formal statement
+
+The model is the hypothesis $h$ with parameters $\boldsymbol\theta$ chosen from data:
+
+$$\hat{y}^i = h_{\boldsymbol\theta}(\mathbf{x}^i)$$
+
+Training picks $\boldsymbol\theta$ to optimize a [[Performance Measure]] on the [[Training Set]].
+
+## Where it is used
+
+[[Model-Based Learning]] is the strategy of fitting such an $h$
+- [[Instance-Based Learning]] replaces it with a similarity lookup. 
+
+Choosing between candidate models is [[Model Selection]]
+- a model too flexible for its data shows [[Overfitting]], one too rigid shows [[Underfitting]]. 
+
+A deployed model decays through [[Model Rot]]. 
+
+> [!example] Examples
+> [[Linear Regression]], [[Logistic Regression]].
