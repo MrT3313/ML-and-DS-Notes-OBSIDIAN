@@ -1,8 +1,26 @@
-# IDE
-.idea/
+# OS / IDE
 .DS_Store
+.idea/
+.vscode/
 
-# Obsidian (per-machine UI state)
+# Obsidian: per-machine UI state
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
-.obsidian/plugins/*/data.json
+.obsidian/graph.json
+
+# Obsidian: personal preferences
+.obsidian/hotkeys.json
+.obsidian/appearance.json
+.obsidian/bookmarks.json
+
+# Obsidian: third-party code and sync state (collaborators install plugins/themes themselves)
+.obsidian/plugins/
+.obsidian/themes/
+.obsidian/sync*.json
+
+# Obsidian: deleted notes
+.trash/
+
+# Agent tooling
+.claude/settings.local.json
+.claude/projects/
