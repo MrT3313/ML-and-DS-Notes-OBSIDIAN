@@ -3,7 +3,7 @@ note_kind: concept
 aliases:
   - data beats algorithms
   - more data beats better algorithms
-up:
+up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft
@@ -15,7 +15,7 @@ The unreasonable effectiveness of data is the empirical finding that very differ
 
 ## Formal statement
 
-Not quantitative as a law. The evidence is a plot of accuracy against training-set size on a natural-language disambiguation task, where the curves for four algorithms rise together and converge as $m$ goes from $10^5$ to $10^9$ words.
+Not further quantitative at this depth. The evidence is a plot of accuracy against training-set size on a natural-language disambiguation task, where the curves for four algorithms rise together and converge as $m$ goes from $10^5$ to $10^9$ words.
 
 ## Where it is used
 

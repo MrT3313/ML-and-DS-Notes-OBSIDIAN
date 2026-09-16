@@ -5,7 +5,7 @@ aliases:
   - generalization gap
   - out-of-sample error
   - generalize
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

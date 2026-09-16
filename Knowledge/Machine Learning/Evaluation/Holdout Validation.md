@@ -6,7 +6,7 @@ aliases:
   - development set
   - holdout set
   - train-validation-test split
-up:
+up: "[[Model Selection]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

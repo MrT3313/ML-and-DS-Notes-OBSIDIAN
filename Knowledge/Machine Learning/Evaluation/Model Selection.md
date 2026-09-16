@@ -4,7 +4,7 @@ aliases:
   - hyperparameter tuning
   - hyperparameter search
   - model comparison
-up:
+up: "[[Generalization]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

@@ -4,7 +4,7 @@ aliases:
   - underfit
   - underfitting the training data
   - high bias
-up:
+up: "[[Generalization]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

@@ -1,11 +1,11 @@
 ---
 note_kind: concept
 aliases:
-  - feature engineering
-  - feature selection
-  - feature extraction
+  - irrelevant feature
   - garbage in garbage out
-up:
+  - garbage in, garbage out
+  - GIGO
+up: "[[Feature]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

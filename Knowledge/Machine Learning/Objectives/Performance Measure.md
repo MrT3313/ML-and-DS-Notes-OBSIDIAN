@@ -4,7 +4,7 @@ aliases:
   - performance metric
   - evaluation metric
   - objective
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

@@ -2,7 +2,7 @@
 note_kind: concept
 aliases:
   - training data
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

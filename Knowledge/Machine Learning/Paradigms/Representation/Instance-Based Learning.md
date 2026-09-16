@@ -4,7 +4,7 @@ aliases:
   - memory-based learning
   - lazy learning
   - nonparametric learning
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

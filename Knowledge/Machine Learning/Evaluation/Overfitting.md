@@ -4,7 +4,7 @@ aliases:
   - overfit
   - overfitting the training data
   - high variance
-up:
+up: "[[Generalization]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

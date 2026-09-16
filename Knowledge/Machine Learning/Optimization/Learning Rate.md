@@ -5,7 +5,7 @@ aliases:
   - eta
   - $\eta$
   - adaptation rate
-up:
+up: "[[Hyperparameter]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

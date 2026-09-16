@@ -4,7 +4,7 @@ aliases:
   - self-supervised
   - SSL
   - pretext task
-up:
+up: "[[Supervised Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

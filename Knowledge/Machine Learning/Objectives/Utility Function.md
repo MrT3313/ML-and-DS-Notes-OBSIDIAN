@@ -4,7 +4,7 @@ aliases:
   - fitness function
   - reward function
   - objective function (maximized)
-up:
+up: "[[Performance Measure]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

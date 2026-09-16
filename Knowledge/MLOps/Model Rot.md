@@ -6,7 +6,7 @@ aliases:
   - data drift
   - model decay
   - performance decay
-up:
+up: "[[MLOps]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

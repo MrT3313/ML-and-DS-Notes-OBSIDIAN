@@ -1,0 +1,93 @@
+---
+note_kind: method
+aliases:
+  - random sampling
+  - random split
+  - simple random sampling
+  - uniform sampling
+  - shuffle split
+  - train_test_split
+  - hash split
+  - ID hash split
+up: "[[Testing Set]]"
+sources:
+  - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+confidence: draft
+---
+
+## What it does and when
+
+Carve a [[Testing Set]] out of the data by drawing instances uniformly at random, every instance equally likely and no structure imposed. It is the default when instances are independent and identically distributed and $m$ is large enough that chance alone is unlikely to skew the sample; when a variable that matters is unevenly distributed, or $m$ is small, use [[Stratified Sampling]] instead. The three implementations below differ only in how membership is decided.
+
+## Algorithm or formula
+
+Permutation route. Draw a uniform permutation $\pi$ of $\{1, \dots, m\}$, send the first $\lfloor m \cdot r \rfloor$ positions to the test set and the rest to the [[Training Set]], where $r$ is the test ratio.
+
+Hash route. Give each instance a stable identifier $\text{id}^{(i)}$ and send it to the test set exactly when
+
+$$\text{crc32}\big(\text{id}^{(i)}\big) < r \cdot 2^{32}$$
+
+CRC32 spreads identifiers roughly uniformly over $[0, 2^{32})$, so the fraction below the threshold is approximately $r$. Membership depends on the identifier alone: not on $m$, not on row order, not on a [[Random Seed]].
+
+That is why the hash route exists. A seeded permutation is reproducible only while the dataset is frozen: append rows and $m$ changes, so the permutation changes and rows that trained last run are tested this run. Refresh a few times and the model has effectively seen everything, which is [[Data Snooping Bias]] by the back door. Hashing pins each row to one side forever, and new rows join the test set at rate $r$ unprompted.
+
+## Hyperparameters
+
+| name | symbol | default | effect of increasing | how to tune |
+|---|---|---|---|---|
+| test ratio | $r$ | 0.25 in `train_test_split`, 0.2 by convention | test estimate less noisy, training set smaller so the fitted model is worse | 0.2 at moderate $m$, shrink it as $m$ grows since a fixed count is enough to pin the metric down |
+| seed | - | `None` (a fresh unreproducible split each run) | no monotone effect, different integers give different equally valid splits | fix one integer for the life of the project, see [[Random Seed]] |
+| identifier column | - | none, the hash route needs one | - | pick a column that is unique, immutable, and never reassigned |
+| `shuffle` | - | `True` | - | set `False` only for ordered data you intend to split by position |
+
+## Failure modes
+
+- Data that is not independent and identically distributed. A time series split at random puts future rows into training and leaks them into the past. Grouped rows (several readings per patient) and duplicates do the same, splitting a group across train and test.
+- Small $m$, where a fair draw is unrepresentative by luck. Sampling 1000 people from a population that is 51.1% female lands outside 48.5% to 53.5% about 10.7% of the time: sampling noise, not a bug, producing [[Nonrepresentative Training Data]].
+- The unstable split: a permutation reshuffles silently whenever the data is refreshed, reordered, or filtered, even with the seed fixed.
+- `reset_index()` as the identifier column is safe only if new rows are appended at the end and none is ever deleted or reordered. Otherwise the index is reassigned and rows migrate across the split; a natural immutable key is better.
+- `crc32(np.int64(identifier))` truncates toward zero, so a float identifier built from coordinates collides past the decimal point.
+
+## Implementation
+
+NumPy 2.x, using the modern `Generator` rather than legacy global state:
+
+```python
+import numpy as np
+
+def shuffle_and_split_data(*, data, test_ratio=0.2, seed=None):
+    rng = np.random.default_rng(seed)
+    shuffled_indices = rng.permutation(len(data))
+    test_set_size = int(len(data) * test_ratio)
+    test_indices = shuffled_indices[:test_set_size]
+    train_indices = shuffled_indices[test_set_size:]
+    return data.iloc[train_indices], data.iloc[test_indices]
+
+train_set, test_set = shuffle_and_split_data(data=housing, seed=42)
+```
+
+Python standard library `zlib`, the stable hash split:
+
+```python
+from zlib import crc32
+
+def is_id_in_test_set(*, identifier, test_ratio=0.2):
+    return crc32(np.int64(identifier)) < test_ratio * 2**32
+
+def split_data_with_id_hash(*, data, id_column, test_ratio=0.2):
+    ids = data[id_column]
+    in_test_set = ids.apply(lambda id_: is_id_in_test_set(identifier=id_,
+                                                          test_ratio=test_ratio))
+    return data.loc[~in_test_set], data.loc[in_test_set]
+
+housing_with_id = housing.reset_index()  # adds an `index` column
+train_set, test_set = split_data_with_id_hash(data=housing_with_id, id_column="index")
+```
+
+scikit-learn 1.6:
+
+```python
+from sklearn.model_selection import train_test_split
+
+train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
+```

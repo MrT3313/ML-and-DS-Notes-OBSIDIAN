@@ -6,7 +6,7 @@ aliases:
   - input variable
   - predictor variable
   - covariate
-up:
+up: "[[Training Instance]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

@@ -15,7 +15,7 @@ up: "[[Home]]"
 ## Chapters
 
 - [[HOML Ch01 The Machine Learning Landscape]]
-- Ch02 End-to-End Machine Learning Project
+- [[HOML Ch02 End-to-End Machine Learning Project]]
 - Ch03 Classification
 - Ch04 Training Models
 - Ch05 Support Vector Machines

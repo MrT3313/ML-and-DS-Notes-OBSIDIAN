@@ -5,8 +5,8 @@ aliases:
   - data cleaning
   - noisy data
   - dirty data
-  - missing values
-up:
+  - poor quality data
+up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft
@@ -18,7 +18,7 @@ Poor-quality data contains errors, outliers, noise, and missing values that hide
 
 ## Formal statement
 
-Not quantitative. The observed value is $\tilde{\mathbf{x}}^{(i)} = \mathbf{x}^{(i)} + \boldsymbol\epsilon^{(i)}$ or has components missing; a model that fits $\tilde{\mathbf{x}}$ closely fits $\boldsymbol\epsilon$, which is one route to [[Overfitting]].
+The observed value is $\tilde{\mathbf{x}}^{(i)} = \mathbf{x}^{(i)} + \boldsymbol\epsilon^{(i)}$ or has components missing; a model that fits $\tilde{\mathbf{x}}$ closely fits $\boldsymbol\epsilon$, which is one route to [[Overfitting]].
 
 ## Where it is used
 

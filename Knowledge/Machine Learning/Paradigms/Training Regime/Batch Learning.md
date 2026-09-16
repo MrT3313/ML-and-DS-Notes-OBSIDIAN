@@ -3,7 +3,7 @@ note_kind: concept
 aliases:
   - offline learning
   - batch training
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

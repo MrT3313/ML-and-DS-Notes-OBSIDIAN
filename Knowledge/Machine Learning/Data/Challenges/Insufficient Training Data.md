@@ -4,7 +4,7 @@ aliases:
   - insufficient data
   - small data
   - too little data
-up:
+up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

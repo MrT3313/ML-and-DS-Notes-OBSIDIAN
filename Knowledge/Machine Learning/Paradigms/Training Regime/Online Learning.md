@@ -4,7 +4,7 @@ aliases:
   - incremental learning
   - streaming learning
   - mini-batch learning
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

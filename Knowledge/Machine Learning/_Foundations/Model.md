@@ -3,8 +3,9 @@ note_kind: concept
 aliases:
   - hypothesis
   - predictor
+  - predictors
   - model parameters
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

@@ -18,20 +18,25 @@ Mitchell's $E$, $T$ and $P$ are the three hooks the rest of the domain hangs on:
 
 ## Areas
 
-- **`_Foundations/`** the vocabulary every other note assumes: [[Model]], [[Feature]], [[Hyperparameter]], [[Training Set]], [[Training Instance]].
+- **`_Foundations/`** the framework-independent vocabulary every other note assumes: [[Model]], [[Feature]], [[Hyperparameter]], [[Training Set]], [[Training Instance]].
 - **`Paradigms/`** the three independent axes a system can be placed on. Supervision ([[Supervised Learning]] through [[Unsupervised Learning]]), training regime ([[Batch Learning]] versus [[Online Learning]]), and representation ([[Instance-Based Learning]] versus [[Model-Based Learning]]).
 - **`Tasks/`** what the system is asked to do: [[Classification]], [[Regression]], [[Clustering]], [[Dimensionality Reduction]], [[Anomaly Detection]], [[Novelty Detection]], [[Association Rule Learning]].
-- **`Models/`** the algorithm families, one folder per family. Currently `Linear/` only.
-- **`Objectives/`** what training optimizes: [[Performance Measure]] and its two sign conventions, [[Cost Function]] and [[Utility Function]].
+- **`Models/`** the algorithm families, one folder per family. `Linear/` holds [[Linear Regression]] and [[Logistic Regression]]; `Ensembles/` holds [[Ensemble Learning]], the idea rather than any method built on it.
+- **`Objectives/`** what training optimizes: [[Performance Measure]] and its two sign conventions, [[Cost Function]] and [[Utility Function]]. `Metrics/` holds the measures themselves, [[Root Mean Squared Error]] and [[Mean Absolute Error]].
 - **`Optimization/`** the mechanics of fitting. [[Learning Rate]] today, gradient descent and regularization from chapter 4.
-- **`Evaluation/`** estimating [[Generalization]] honestly: [[Testing Set]], [[Holdout Validation]], [[Cross-Validation]], [[Model Selection]], and the two failures, [[Overfitting]] and [[Underfitting]].
-- **`Data/`** everything about the input. `Challenges/` holds the six ways data defeats a model.
+- **`Evaluation/`** estimating [[Generalization]] honestly: [[Testing Set]], [[Holdout Validation]], [[Cross-Validation]], [[Model Selection]], the two failures, [[Overfitting]] and [[Underfitting]], and [[Data Snooping Bias]], the way a test set quietly stops being one. `Hyperparameter Search/` automates the choosing, through [[Grid Search]] and [[Randomized Search]].
+- **`Data/`** everything about the input. At the top sit [[Feature Engineering]], deciding what the model actually sees, and [[Open Data Repositories]], where a dataset comes from in the first place. `Challenges/` holds the six ways data defeats a model. `Sampling/` carves a dataset up: [[Random Sampling]], [[Stratified Sampling]], and the [[Random Seed]] that makes either one reproducible. `Exploration/` is the looking that comes before any fitting: [[Exploratory Data Analysis]], [[Correlation]], [[Skewed Data]]. `Preprocessing/` falls into three jobs. Fill the gaps, [[Missing Value Imputation]]. Turn categories into numbers, [[Ordinal Encoding]] and [[One-Hot Encoding]]. Put columns on comparable ranges, [[Feature Scaling]] and its two forms [[Min-Max Scaling]] and [[Standardization]], with [[Feature Distribution Transformation]] for columns that need reshaping first and [[Target Scaling]] for the label.
+- **`Composition/`** the plumbing that combines estimators into one estimator, acting on estimators rather than on data. [[Scikit-Learn Estimator API]] is the contract the other three rest on, and its estimator, transformer and predictor taxonomy is what the `## Implementation` sections across the vault assume, not these three alone. [[Pipeline]] chains steps into a single fitted object and is what guarantees each step sees training folds only, [[Column Transformer]] routes named column subsets to their own branch and concatenates the results, and [[Custom Transformer]] is how an idea of your own earns the same interface, and so the same safety, as a built-in.
 
-Operational concerns sit outside this domain, in `Knowledge/MLOps/`. [[Model Rot]] is the first of them.
+Operational concerns sit outside this domain, in `Knowledge/MLOps/`, indexed at [[MLOps]]. [[Model Rot]] is the first of them. The mathematics these notes lean on sits outside it too, in `Knowledge/Mathematics/`, indexed at [[Mathematics]] and holding [[Lp Norm]], [[Triangle Inequality]] and [[Moment]] so far.
 
 ## What is missing
 
 - Reinforcement learning has no note and no folder; HOML chapter 1 covers it.
 - Regularization and the no free lunch theorem are named in chapter 1 and written nowhere.
-- `Models/` holds one family. Trees, ensembles, kernel methods, neighbours, and neural networks all arrive in later chapters.
-- No metrics notes yet. Chapter 3 fills `Evaluation/`.
+- `Models/` holds one real family. `Ensembles/` exists but carries the concept note alone, with no ensemble method under it yet; trees, kernel methods, neighbours, and neural networks all arrive in later chapters.
+- No classification metrics yet. `Objectives/Metrics/` holds the two regression measures; precision, recall and the ROC curve come with chapter 3.
+- The models chapter 2 actually fits went unwritten. DecisionTreeRegressor, RandomForestRegressor and SVR all appear in its worked example, and chapters 6, 7 and 5 own them.
+- Feature extraction is the one branch of [[Feature Engineering]] with no note of its own.
+- Launch, monitor and maintain, the last section of chapter 2, produced nothing. It belongs in `Knowledge/MLOps/` beside [[Model Rot]], and it is the largest single gap this chapter left.
+- Framing the business objective and the machine learning project checklist, the chapter's opening, likewise produced no note.

@@ -7,7 +7,7 @@ aliases:
 up: "[[Machine Learning]]"
 ---
 
-Every method that predicts a continuous numerical value for an input: a house price, a temperature, next month's sales. A [[Supervised Learning]] task. Géron's terms: univariate when there is one feature, multiple when several.
+Every method that predicts a continuous numerical value for an input: a house price, a temperature, next month's sales. A [[Supervised Learning]] task. Géron's terms run along two independent axes. Univariate versus multivariate counts the outputs, one predicted value per instance or several at once; simple versus multiple counts the inputs, one feature or many. Chapter 2's housing problem is both multiple and univariate: many features per district, a single median house value out.
 
 ## Methods
 

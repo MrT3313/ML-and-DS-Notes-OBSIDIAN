@@ -3,7 +3,7 @@ note_kind: concept
 aliases:
   - semi-supervised
   - partially labeled learning
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

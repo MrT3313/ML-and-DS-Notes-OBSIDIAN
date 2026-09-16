@@ -3,7 +3,7 @@ note_kind: concept
 aliases:
   - unsupervised
   - unlabeled learning
-up:
+up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft
@@ -19,7 +19,7 @@ It is one end of the supervision axis with [[Supervised Learning]] at the other 
 
 ## Formal statement
 
-Given $D = \{\mathbf{x}^{(i)}\}_{i=1}^{m}$ with no $y$, learn a description of the data distribution $p(\mathbf{x})$ or a function of it. Not quantitative beyond that at this depth; each task has its own objective.
+Given $D = \{\mathbf{x}^{(i)}\}_{i=1}^{m}$ with no $y$, learn a description of the data distribution $p(\mathbf{x})$ or a function of it. Not further quantitative at this depth. Each task has its own objective.
 
 ## Where it is used
 

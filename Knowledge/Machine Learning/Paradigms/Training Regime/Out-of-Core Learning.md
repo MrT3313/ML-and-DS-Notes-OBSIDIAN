@@ -3,7 +3,7 @@ note_kind: concept
 aliases:
   - out-of-core
   - out-of-memory training
-up:
+up: "[[Online Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

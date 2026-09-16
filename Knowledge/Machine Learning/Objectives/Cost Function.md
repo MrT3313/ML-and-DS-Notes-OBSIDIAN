@@ -5,7 +5,7 @@ aliases:
   - objective function
   - error function
   - J
-up:
+up: "[[Performance Measure]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
 confidence: draft

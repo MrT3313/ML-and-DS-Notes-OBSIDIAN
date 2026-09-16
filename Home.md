@@ -9,11 +9,13 @@ Root of the vault. A source of truth for machine learning, MLOps, and data scien
 ## Domains
 
 - [[Machine Learning]] the main body of the vault.
-- **`Knowledge/MLOps/`** operating models in production. [[Model Rot]] so far.
+- **`Knowledge/MLOps/`** operating models in production, indexed at [[MLOps]]. [[Model Rot]] so far.
+- **`Knowledge/Mathematics/`** the results the other domains lean on, indexed at [[Mathematics]]. [[Lp Norm]] so far.
 
 ## Sources
 
-- [[HOML]] Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, Géron, 2022. Chapter 1 extracted.
+- [[HOML]] Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, Géron, 2022. Chapters 1 and 2 extracted.
+- [[California Housing]] the 1990 census extract chapter 2 runs end to end, and the file behind every worked example here.
 
 ## Reference
 
