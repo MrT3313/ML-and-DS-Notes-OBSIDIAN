@@ -14,8 +14,11 @@ Root of the vault. A source of truth for machine learning, MLOps, and data scien
 
 ## Sources
 
-- [[HOML]] Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, Géron, 2022. Chapters 1 and 2 extracted.
+- [[HOML]] Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, Géron, 2022. Chapters 1 to 3 extracted.
+
+## Datasets
 - [[California Housing]] the 1990 census extract chapter 2 runs end to end, and the file behind every worked example here.
+- [[MNIST]] 70,000 handwritten digit images, 784 pixel features apiece, the file every chapter 3 example runs on.
 
 ## Reference
 

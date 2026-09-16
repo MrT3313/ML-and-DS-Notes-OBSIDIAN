@@ -86,6 +86,6 @@ Production:
 ## Open questions
 
 - The chapter also covers regularization, the no free lunch theorem, and reinforcement learning. None of these is in my notes yet; each needs a note in `Generalization/` or `Reinforcement Learning/`.
-- "Learning rate" in this chapter means how fast an online system adapts; in chapter 4 it means the gradient descent step size. Is the same number doing both jobs in SGD, or are these two different knobs?
+- "Learning rate" in this chapter means how fast an online system adapts; in chapter 4 it means the gradient descent step size. Is the same number doing both jobs in SGD, or are these two different knobs? Chapter 3 does not settle it: it introduces the [[Stochastic Gradient Descent Classifier]] and fits it, but takes the optimizer that names the estimator entirely as given and never covers gradient descent. The question stands, and it is still chapter 4's to answer.
 - Is novelty detection a separate task from anomaly detection, or the same task with a clean training set? Chapter 9 should settle it.
 - Association rule learning gets no later HOML chapter. Does it stay a single note under `Tasks/`?

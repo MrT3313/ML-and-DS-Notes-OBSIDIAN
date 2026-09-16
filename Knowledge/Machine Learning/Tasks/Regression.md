@@ -11,7 +11,7 @@ Every method that predicts a continuous numerical value for an input: a house pr
 
 ## Methods
 
-- [[Linear Regression]]: weighted sum of features, least squares. The baseline and the chapter's worked example.
+- [[Linear Regression]]: weighted sum of features, least squares. The baseline, and the worked example on [[California Housing]].
 
 ```base
 filters:

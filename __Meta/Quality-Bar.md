@@ -40,6 +40,14 @@ Headings are `##`. Subsections inside a required section are `###`.
 
 Under `Knowledge/`, reserve `#` for nothing: the note title is the filename, and an H1 only repeats it. This holds without exception across the knowledge base. Outside it, a note opens with an H1 carrying its name when it is a document read front to back: this file, `README`, the prompts, a book container note, a dataset note. A chapter note is the exception and takes no H1, because it is reached through a link, from its container note and from the `sources:` of every note it produced, which makes it an atom like the notes under `Knowledge/`. An `index` takes no H1 wherever it lives, as its required shape already implies: a scope statement, before any heading.
 
+Notes under `Knowledge/` are cumulative. They are the vault's standing account of a topic, revised and sharpened as more sources are read, so they are organized by the topic and never by the source that happened to supply a piece of it. **A heading that names a source is a defect**: `### From Chapter 3`, `### What the chapter says`, `### Géron's version`. Each one freezes the topic into per-source layers, and the layers multiply with every book added, until the note is a stack of reading notes rather than one account of the thing. New material is merged into the section it belongs in by topic, and a subsection is named for what it contains: `### Out-of-fold predictions`, not `### From Chapter 3`. `Cross-Validation`, `Testing Set`, `Scikit-Learn Estimator API` and `Error Analysis` all carried such headings and were normalised on sight.
+
+Attribution is `sources:` in the frontmatter, plus a `[[link]]` in the prose wherever naming the source actually adds something: a specific worked example, a quotation, a claim the source is unusual in making, or how much weight it gives a topic. `[[HOML Ch03 Classification|HOML chapter 3]]` is concrete and navigable. "The chapter" is neither, and it is an anonymous referent besides, since a reader arriving by link from anywhere else has no idea which chapter is meant. An ordinary fact needs no citation in the body at all; it is simply stated, and `sources:` already records where the reading came from.
+
+Three things are not this defect. An `index` naming the chapter that will bring an unwritten method, which its required shape asks for. A forward promise about scheduled material, ex "gradient descent and regularization from chapter 4". And library history, ex "`root_mean_squared_error` arrived in scikit-learn 1.4", which is a fact about the tool rather than a source being used as an authority.
+
+When a new source contradicts what a note already says, the answer is research, not a second layer. Settle which version is correct against a primary source, rewrite the note to say that, and record the correction. Two headings in one note each asserting a different thing is the one outcome that is never acceptable.
+
 A new `note_kind` is earned when the thing shares no required sections with any existing kind. `dataset` shares none with `source`, so it is a kind. A metric shares all three of `concept`'s and needs only one more, so it is a loosening of `concept`, not a kind of its own.
 
 ### `concept`
@@ -142,6 +150,7 @@ For a data file the vault works on, under `Sources/Datasets/`. Frontmatter is `n
 - A `## Where it is used` section with fewer than two outbound links.
 - Book phrasing copied rather than restated.
 - Placement commentary in the body. Where a note lives is expressed by the folder tree and by `up`, never by a sentence in the prose explaining why it was filed somewhere. Such sentences go stale the first time anything moves.
+- A heading that names a source, and "the chapter" used as a bare subject in the prose. A note under `Knowledge/` is organized by its topic, with attribution in `sources:` and in `[[links]]`. See section 2.
 - `confidence: solid` on a note you have not been questioned on.
 
 ## 4. Review protocol

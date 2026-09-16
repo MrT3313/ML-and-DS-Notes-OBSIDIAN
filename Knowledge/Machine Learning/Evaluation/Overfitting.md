@@ -18,7 +18,7 @@ A model overfits when it learns the training data too closely, including its noi
 
 $$\mathcal{L}_{\text{train}} \ll \mathcal{L}_{\text{test}}$$
 
-The generalization gap of [[Generalization]] is large. It appears when model capacity is high relative to $m$, so the remedies are: a simpler model or fewer parameters, more training data, or less noise in the data (fix errors, remove outliers). Constraining the model is regularization, which the chapter covers and this vault does not yet have a note for.
+The generalization gap of [[Generalization]] is large. It appears when model capacity is high relative to $m$, so the remedies are: a simpler model or fewer parameters, more training data, or less noise in the data (fix errors, remove outliers). Constraining the model is regularization, which [[HOML Ch01 The Machine Learning Landscape|HOML chapter 1]] covers and this vault does not yet have a note for.
 
 ## Where it is used
 

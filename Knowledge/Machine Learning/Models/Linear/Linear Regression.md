@@ -13,7 +13,7 @@ confidence: draft
 
 ## What it does and when
 
-Linear regression predicts a continuous target as a weighted sum of the features plus a bias, with the weights chosen to minimize squared error on the training set. Use it when the relation is close to linear, when interpretability matters, or as the baseline every other regressor must beat. Belongs to the [[Regression]] map and is the chapter's example of [[Model-Based Learning]].
+Linear regression predicts a continuous target as a weighted sum of the features plus a bias, with the weights chosen to minimize squared error on the training set. Use it when the relation is close to linear, when interpretability matters, or as the baseline every other regressor must beat. Belongs to the [[Regression]] map and is the worked example of [[Model-Based Learning]].
 
 ## Algorithm or formula
 
@@ -23,7 +23,7 @@ with $x_0 = 1$. The [[Cost Function]] is mean squared error,
 
 $$J(\boldsymbol\theta) = \frac{1}{m} \sum_{i=1}^{m} \big(\boldsymbol\theta^{T}\mathbf{x}^{(i)} - y^{(i)}\big)^2$$
 
-and training sets $\boldsymbol\theta^{*} = \arg\min J$. Chapter 4 gives the closed form and the gradient descent route.
+and training sets $\boldsymbol\theta^{*} = \arg\min J$. The closed form and the gradient descent route arrive with HOML chapter 4.
 
 ## Hyperparameters
 

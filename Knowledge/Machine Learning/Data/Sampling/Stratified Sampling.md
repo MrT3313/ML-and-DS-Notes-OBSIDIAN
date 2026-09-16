@@ -32,7 +32,7 @@ The stratification key must be categorical, so a continuous variable is binned f
 
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|
-| number of strata | $k$ | none, you choose the binning | mix matched more finely, but each stratum holds fewer instances until some are too small to sample from | enough that every stratum is well populated, the chapter uses 5 and aims for strata that are not tiny |
+| number of strata | $k$ | none, you choose the binning | mix matched more finely, but each stratum holds fewer instances until some are too small to sample from | enough that every stratum is well populated, five income bands on the housing data is the worked case and no stratum should be tiny |
 | bin edges | - | none | - | place cuts where the variable's mass actually is, check the category counts before splitting |
 | `test_size` | $r$ | 0.25 in `train_test_split`, 0.1 in `StratifiedShuffleSplit` | test estimate less noisy, training set smaller | 0.2 at moderate $m$, less as $m$ grows |
 | `n_splits` | - | 10 in `StratifiedShuffleSplit` | more distinct stratified splits produced, linear cost | leave at 1 unless you genuinely need several splits |

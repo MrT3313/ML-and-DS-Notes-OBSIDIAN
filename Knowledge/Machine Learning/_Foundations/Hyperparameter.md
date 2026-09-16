@@ -11,7 +11,7 @@ confidence: draft
 
 ## Definition
 
-A hyperparameter is a setting of the learning algorithm rather than of the model: it is fixed before training and does not change during it. The amount of regularization and the [[Learning Rate]] are the chapter's two examples.
+A hyperparameter is a setting of the learning algorithm rather than of the model: it is fixed before training and does not change during it. The amount of regularization and the [[Learning Rate]] are the two standard examples.
 
 ## Formal statement
 

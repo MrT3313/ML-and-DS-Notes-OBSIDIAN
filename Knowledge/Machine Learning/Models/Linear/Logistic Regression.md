@@ -7,12 +7,13 @@ aliases:
 up: "[[Classification]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[HOML Ch03 Classification]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-Logistic regression is a classifier, despite the name. It predicts the probability that an instance belongs to the positive class by passing a linear score through the sigmoid, then thresholds that probability. Use it for binary [[Classification]] when a linear decision boundary is plausible and calibrated probabilities are wanted; the multiclass extension (softmax) is chapter 4.
+Logistic regression is a classifier, despite the name. It predicts the probability that an instance belongs to the positive class by passing a linear score through the sigmoid, then thresholds that probability. Use it for binary [[Classification]] when a linear decision boundary is plausible and calibrated probabilities are wanted; the multiclass extension (softmax) is derived in chapter 4, though nothing has to be switched on to use it, since in scikit-learn 1.6 a target with three or more classes is already fitted multinomially by default under every solver but `liblinear` and `newton-cholesky`, so [[Multiclass Classification]] works out of the box.
 
 ## Algorithm or formula
 
@@ -29,13 +30,13 @@ minimized by gradient descent; there is no closed form.
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|
 | inverse regularization strength | $C$ | 1.0 | less regularization, more flexible boundary, more [[Overfitting]] risk | [[Cross-Validation]] over a log grid |
-| decision threshold | $t$ | 0.5 | fewer positives predicted, higher precision, lower recall | chapter 3 metrics |
+| decision threshold | $t$ | 0.5 | fewer positives predicted, so [[Recall]] falls monotonically. [[Precision]] usually rises but not always: losing one true positive can drop it | sweep $t$ and pick the operating point off the curve rather than accepting $0.5$, see [[Precision-Recall Tradeoff]] |
 
 ## Failure modes
 
 - Classes not linearly separable in the feature space: underfits; add features or change family.
 - Perfectly separable classes: weights diverge without regularization.
-- Class imbalance: the 0.5 threshold predicts the majority class; move $t$ or reweight.
+- [[Class Imbalance]]: the 0.5 threshold predicts the majority class; move $t$ or reweight, `class_weight="balanced"` being the built-in form of the second.
 
 ## Implementation
 

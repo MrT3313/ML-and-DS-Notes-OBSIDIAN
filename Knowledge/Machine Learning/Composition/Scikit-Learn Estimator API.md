@@ -13,6 +13,7 @@ aliases:
 up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[HOML Ch03 Classification]]"
 confidence: draft
 ---
 
@@ -32,6 +33,22 @@ Not further quantitative at this depth. The API is an interface contract rather 
 
 The roles nest: every transformer and every predictor is an estimator, and `fit_transform` is only an optimized shortcut for `fit` followed by `transform`. Unsupervised estimators ignore `y`, which is why a scaler and a regressor can sit in the same pipeline.
 
+### The response methods behind predict
+
+The predictor row above understates what a classifier owes its caller, so take this subsection as that row corrected. `predict` is seldom the whole interface: underneath it sits a continuous response, and the label is only that response cut at a fixed threshold.
+
+| method | what it returns | range |
+|---|---|---|
+| `decision_function(X)` | one uncalibrated signed score per instance. The sign gives the predicted class, the magnitude gives how far from the boundary the instance fell, so it reads as confidence and not as probability | all of $\mathbb{R}$ |
+| `predict_proba(X)` | one estimated probability per class, calibrated only as well as the model happens to be | $[0, 1]$, each row summing to $1$ |
+| `predict(X)` | the label, obtained by thresholding whichever of the two the estimator has | the class set |
+
+Which of the two an estimator exposes is a property of that estimator, not of the contract. [[Stochastic Gradient Descent Classifier]] always has `decision_function`, and has `predict_proba` only for `loss="log_loss"` or `loss="modified_huber"`; under the default hinge loss there is no probability to report without wrapping the model in a separate calibration step. `RandomForestClassifier` is the mirror image: `predict_proba` is there, computed from the class votes of its trees, and `decision_function` does not exist on it at all.
+
+This is not API trivia. Anything that sweeps a threshold needs a continuous response to sweep, so a [[ROC Curve]] and a [[Precision-Recall Tradeoff]] are built from whichever of the two the estimator provides, and code that compares two classifiers has to ask each one for the method it actually has rather than assume they share one. That is why a random forest has to be scored through the positive-class column of `predict_proba` while a linear classifier is scored from `decision_function` directly, and why the generic `cross_val_predict` takes the response method as an argument instead of fixing it.
+
+### Design conventions
+
 Four conventions hold the design together.
 
 - **Hyperparameters go on the constructor**, stored unchanged under the same name as a public attribute. The constructor validates nothing and touches no data, so an unfitted estimator is a cheap, inspectable, copyable description of a recipe.
@@ -43,4 +60,4 @@ That last rule costs column names, since a dataframe becomes a bare array on the
 
 ## Where it is used
 
-The contract is what makes composition possible. [[Pipeline]] chains estimators only because each answers to the same method names, and [[Column Transformer]] routes column subsets to separate branches for the same reason. Writing a [[Custom Transformer]] means implementing this contract by hand, which is where the constructor and underscore rules bite. Grid search relies on `get_params` to enumerate what is tunable and clones an unfitted estimator for each fold, which works only because constructors do no work. [[Missing Value Imputation]] and [[Feature Scaling]] supply the chapter's first transformers, [[Linear Regression]] its first predictor.
+The contract is what makes composition possible. [[Pipeline]] chains estimators only because each answers to the same method names, and [[Column Transformer]] routes column subsets to separate branches for the same reason. Writing a [[Custom Transformer]] means implementing this contract by hand, which is where the constructor and underscore rules bite. Grid search relies on `get_params` to enumerate what is tunable and clones an unfitted estimator for each fold, which works only because constructors do no work. [[Missing Value Imputation]] and [[Feature Scaling]] are the first transformers most projects meet, [[Linear Regression]] the first predictor.

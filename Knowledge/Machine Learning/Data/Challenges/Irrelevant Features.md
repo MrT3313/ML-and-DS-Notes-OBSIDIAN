@@ -21,4 +21,4 @@ A [[Feature]] $x_j$ is irrelevant when $y \perp x_j \mid \mathbf{x}_{-j}$, so no
 
 ## Where it is used
 
-Three sub-tasks from the chapter: feature selection (choose among existing), feature extraction (combine, including [[Dimensionality Reduction]]), and feature creation (collect new data). Interacts with [[Overfitting]]: more irrelevant columns give a flexible model more noise to memorize.
+Feature engineering splits into three sub-tasks: feature selection (choose among existing), feature extraction (combine, including [[Dimensionality Reduction]]), and feature creation (collect new data). Interacts with [[Overfitting]]: more irrelevant columns give a flexible model more noise to memorize.

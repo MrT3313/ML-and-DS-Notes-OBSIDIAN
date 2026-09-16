@@ -27,7 +27,7 @@ The built-in transformers cover imputation, scaling and encoding. Anything else 
 - `fit` returns `self`; everything it learns ends in a trailing underscore.
 - `transform` calls `check_is_fitted(self)` first, which is what raises the `NotFittedError` users see.
 
-**Route 3: wrap a whole estimator.** A transformer may fit another model inside itself. The chapter's worked example, `ClusterSimilarity`, fits a $k$-means clustering ([[Clustering]]) on latitude and longitude at fit time, keeps the centres, and at transform time emits an [[Feature Distribution Transformation|RBF similarity]] from each instance to each centre, turning two raw coordinates into $k$ smooth features that a linear model can actually use. What makes it route 3 rather than route 1 is only where the landmarks come from: they are fitted, not hand-picked, so the object has state to carry.
+**Route 3: wrap a whole estimator.** A transformer may fit another model inside itself. The worked example below, `ClusterSimilarity`, fits a $k$-means clustering ([[Clustering]]) on latitude and longitude at fit time, keeps the centres, and at transform time emits an [[Feature Distribution Transformation|RBF similarity]] from each instance to each centre, turning two raw coordinates into $k$ smooth features that a linear model can actually use. What makes it route 3 rather than route 1 is only where the landmarks come from: they are fitted, not hand-picked, so the object has state to carry.
 
 ### Validation
 
@@ -35,7 +35,7 @@ The built-in transformers cover imputation, scaling and encoding. Anything else 
 
 ## Hyperparameters
 
-Whatever you put on the constructor, and nothing else: that is the point of the rule. The chapter's example carries these.
+Whatever you put on the constructor, and nothing else: that is the point of the rule. `ClusterSimilarity` carries these.
 
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|

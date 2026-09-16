@@ -11,7 +11,7 @@ confidence: draft
 
 ## Definition
 
-A model-based system uses the training examples to fit a model with adjustable parameters, then predicts from the model alone; the training instances are not consulted at prediction time. Géron's example fits a line to GDP per capita against life satisfaction and reads off predictions.
+A model-based system uses the training examples to fit a model with adjustable parameters, then predicts from the model alone; the training instances are not consulted at prediction time. The standard illustration fits a line to life satisfaction against GDP per capita and reads predictions off the line.
 
 ## Formal statement
 
@@ -23,4 +23,4 @@ Prediction is $h_{\boldsymbol\theta^{*}}(\mathbf{x})$, whose cost is independent
 
 ## Where it is used
 
-The alternative is [[Instance-Based Learning]]. [[Linear Regression]], [[Logistic Regression]], support vector machines, and neural networks are all model-based. The chapter's four-step loop is: study the data, select a model, train it, apply it. The family choice is the first [[Model Selection]] decision, and a wrong family gives [[Underfitting]].
+The alternative is [[Instance-Based Learning]]. [[Linear Regression]], [[Logistic Regression]], support vector machines, and neural networks are all model-based. The workflow is a four-step loop: study the data, select a model, train it, apply it to new cases. The family choice is the first [[Model Selection]] decision, and a wrong family gives [[Underfitting]].

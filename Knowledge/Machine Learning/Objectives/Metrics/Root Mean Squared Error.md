@@ -26,7 +26,7 @@ Mean squared error is $\text{MSE} = \text{RMSE}^{2}$. The square root is strictl
 
 ## Where it is used
 
-The [[Performance Measure]] chosen for the chapter's housing project, and the scorer passed to [[Cross-Validation]] when ranking candidate models before any of them touch the test set. It is the $p = 2$ member of the [[Lp Norm]] family, and [[Mean Absolute Error]] is the $p = 1$ member; that one difference is the whole argument between them. [[Linear Regression]] ties the knot: its [[Cost Function]] is exactly mean squared error, so least squares is literally minimizing this metric on the training set, which is why a linear model's reported RMSE and its training objective are the same quantity.
+The [[Performance Measure]] chosen for the [[California Housing]] project, and the scorer passed to [[Cross-Validation]] when ranking candidate models before any of them touch the test set. It is the $p = 2$ member of the [[Lp Norm]] family, and [[Mean Absolute Error]] is the $p = 1$ member; that one difference is the whole argument between them. [[Linear Regression]] ties the knot: its [[Cost Function]] is exactly mean squared error, so least squares is literally minimizing this metric on the training set, which is why a linear model's reported RMSE and its training objective are the same quantity.
 
 ### In scikit-learn
 

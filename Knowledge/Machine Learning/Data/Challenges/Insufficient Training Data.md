@@ -20,4 +20,4 @@ With $m$ instances and a model of capacity roughly $d$ parameters, the generaliz
 
 ## Where it is used
 
-It is the first of the chapter's data-side challenges, and the [[Unreasonable Effectiveness of Data]] is the empirical counterpart: past a certain size, data beats algorithm choice. The remedies are more data, a simpler model, or transfer from a model trained elsewhere.
+It is the first of the data-side challenges a project has to clear, and the [[Unreasonable Effectiveness of Data]] is its empirical counterpart: past a certain size, data beats algorithm choice. The remedies are more data, a simpler model, or transfer from a model trained elsewhere. Left unaddressed it shows up as [[Overfitting]], since too few instances relative to capacity leaves the model free to fit noise.

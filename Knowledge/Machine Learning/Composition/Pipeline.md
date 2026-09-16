@@ -19,7 +19,7 @@ A pipeline bundles a sequence of transformers, plus an optional final predictor,
 The second reason is deployment: a fitted pipeline carries preprocessing and [[Model]] in one artifact, so serving cannot apply a different median than training did.
 
 > [!warning]
-> The chapter uses "pipeline" in a second, unrelated sense: a *data pipeline* is a chain of data-processing components running asynchronously, each pulling input from a data store, processing it, and writing its output back for the next component to pick up later. There the interface between components is storage, and a component can fail without stopping the others. A `sklearn.pipeline.Pipeline` is the in-memory version: ordinary objects in one process, passing arrays directly from call to call.
+> The word carries a second, unrelated sense in data engineering: a *data pipeline* is a chain of data-processing components running asynchronously, each pulling input from a data store, processing it, and writing its output back for the next component to pick up later. There the interface between components is storage, and a component can fail without stopping the others. A `sklearn.pipeline.Pipeline` is the in-memory version: ordinary objects in one process, passing arrays directly from call to call.
 
 ## Algorithm or formula
 

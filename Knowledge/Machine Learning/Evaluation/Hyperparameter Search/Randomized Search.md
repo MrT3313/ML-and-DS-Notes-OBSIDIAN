@@ -45,7 +45,7 @@ Scoring follows the "higher is better" convention described under grid search, s
 
 ## Failure modes
 
-- A budget too small for the space. Ten draws over six hyperparameters is closer to a lucky guess than a search; the chapter's own `n_iter=10` is a demonstration, not a recommendation.
+- A budget too small for the space. Ten draws over six hyperparameters is closer to a lucky guess than a search; the `n_iter=10` in the implementation below is a demonstration, not a recommendation.
 - A badly chosen distribution. Uniform sampling over $[10^{-5}, 10^{-1}]$ puts roughly $99.99\%$ of draws in the last decade, so the small values are never really tried. Use `loguniform` for scale parameters.
 - Bounds that exclude the optimum. The search reports the best of what it drew, and a support stopping short of the good region looks exactly like a search that converged.
 - Irreproducibility. Without `random_state` the candidate set differs every run, so two runs disagree and neither can be re-examined ([[Random Seed]]).

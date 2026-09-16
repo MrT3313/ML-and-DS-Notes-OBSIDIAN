@@ -25,7 +25,7 @@ $$N_{\text{fits}} = v^{k} \cdot K + 1$$
 
 the trailing $1$ being the refit of the winner on the whole [[Training Set]]. The exponent is the entire story: adding one three-valued hyperparameter triples the bill.
 
-The chapter's grid is two dictionaries, $3 \times 3 = 9$ combinations and $2 \times 3 = 6$, so $15$ candidates at `cv=3`, giving $45$ fits plus the refit. A **list of dictionaries** is how you say "search these together, and separately search that other block", which keeps the search off combinations that make no sense jointly. The two blocks may overlap, and overlapping candidates are simply fitted twice.
+The worked housing grid is two dictionaries, $3 \times 3 = 9$ combinations and $2 \times 3 = 6$, so $15$ candidates at `cv=3`, giving $45$ fits plus the refit. A **list of dictionaries** is how you say "search these together, and separately search that other block", which keeps the search off combinations that make no sense jointly. The two blocks may overlap, and overlapping candidates are simply fitted twice.
 
 The double-underscore names reach into nested objects: `preprocessing__geo__n_clusters` means the step called `preprocessing`, its inner transformer called `geo`, its `n_clusters` argument. This works because every estimator exposes `get_params` and `set_params` over that flattened namespace ([[Scikit-Learn Estimator API]]), which is what lets a search tune preprocessing and model in one space.
 
@@ -54,7 +54,7 @@ Scikit-learn scorers always follow "higher is better", so error metrics are expo
 ## Failure modes
 
 - Combinatorial blowup. Five hyperparameters at four values each with `cv=5` is $5120$ fits: at a minute per fit, three and a half days.
-- The optimum lands on a grid edge. The chapter's grid returns `n_clusters=15`, the largest value offered, which means the grid was cut off before the score stopped improving. Re-centre on the boundary and run again: a randomized search over a wide range later reaches $45$ clusters and a clearly better score.
+- The optimum lands on a grid edge. The housing grid above returns `n_clusters=15`, the largest value offered, which means the grid was cut off before the score stopped improving. Re-centre on the boundary and run again: a randomized search over a wide range later reaches $45$ clusters and a clearly better score.
 - The budget is spent on hyperparameters the model is insensitive to: every value of the one that matters is re-tested under settings of the one that does not, which is precisely the argument for sampling at random instead.
 - Selection on a noisy score. With `cv=3` the per-fold spread can exceed the gap between the top candidates, so the winner may be the luckiest draw rather than the best one.
 - Preprocessing fitted outside the search, which leaks and makes every score in `cv_results_` optimistic.
