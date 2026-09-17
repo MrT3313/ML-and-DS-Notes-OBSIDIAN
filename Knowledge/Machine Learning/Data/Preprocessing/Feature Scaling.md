@@ -10,6 +10,7 @@ aliases:
 up: "[[Feature Engineering]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -27,11 +28,13 @@ Min-max scaling takes $a_j = \min_j$ and $b_j = \max_j - \min_j$; standardizatio
 
 **Distance.** $\lVert \mathbf{x}^{(i)} - \mathbf{x}^{(k)} \rVert_2^2 = \sum_j \big(x^{(i)}_j - x^{(k)}_j\big)^2$ sums squared differences across columns (see [[Lp Norm]]), so a column measured in tens of thousands contributes terms of order $10^8$ while a column in $[0,1]$ contributes terms of order $1$, and the second column is effectively ignored. k-nearest neighbors, k-means and the RBF kernel of a support vector machine inherit this directly.
 
-**Curvature.** For a squared-error [[Cost Function]] the Hessian is proportional to $\mathbf{X}^{T}\mathbf{X}$. Columns of very different scale give it eigenvalues of very different size, the contours stretch into a ravine, and gradient descent zigzags across the narrow direction instead of running down it. The largest eigenvalue caps the usable [[Learning Rate]], so the slowest direction sets the step count.
+**Curvature.** For a squared-error [[Cost Function]] the Hessian is proportional to $\mathbf{X}^{T}\mathbf{X}$. Columns of very different scale give it eigenvalues of very different size, the contours stretch into a ravine, and [[Gradient Descent]] zigzags across the narrow direction instead of running down it. The largest eigenvalue caps the usable [[Learning Rate]], so the slowest direction sets the step count.
 
-**Penalty.** A regularization term such as $\lambda \sum_j \theta_j^2$ charges every weight at one rate, which is only fair if a unit of each feature means a comparable amount.
+**Penalty.** A [[Regularization]] term such as $\alpha \sum_j \theta_j^2$ charges every weight at one rate, which is only fair if a unit of each feature means a comparable amount. [[Ridge Regression]] and [[Lasso Regression]] are the two standing cases, and neither is safe to fit on raw columns.
 
 Decision trees and tree ensembles use none of the three. A split tests $x_j \le t$, and any strictly increasing rescale carries $t$ along with it, so the tree is unchanged.
+
+The sharpest illustration that this is a property of the solver rather than of the model is [[Linear Regression]], which can be fitted two ways. Gradient descent on it wants scaled columns; the [[Normal Equation]] and the SVD route want nothing at all. Write a rescale as $\mathbf{X}' = \mathbf{X}\mathbf{D}$ with $\mathbf{D}$ diagonal and positive. Then $\boldsymbol\theta' = (\mathbf{X}'^{T}\mathbf{X}')^{-1}\mathbf{X}'^{T}\mathbf{y} = \mathbf{D}^{-1}\boldsymbol\theta$, so the coefficients change but the fitted predictions $\mathbf{X}'\boldsymbol\theta' = \mathbf{X}\boldsymbol\theta$ do not. Same model, same data, one solver that cares and one that does not. Two things keep the claim honest. The invariance is algebraic and is not free in floating point, for a reason [[Normal Equation]] sets out in the conditioning of $\mathbf{X}^{T}\mathbf{X}$. And the invariance dies the moment a penalty is added, since $\alpha \sum_j \theta_j^2$ is written in the units of $\boldsymbol\theta$ and $\mathbf{D}^{-1}\boldsymbol\theta$ is not charged the same as $\boldsymbol\theta$.
 
 ## Where it is used
 

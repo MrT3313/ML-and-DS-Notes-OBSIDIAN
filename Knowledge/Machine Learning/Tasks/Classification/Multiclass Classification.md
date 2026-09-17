@@ -12,6 +12,7 @@ aliases:
 up: "[[Classification]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -39,7 +40,7 @@ The scores become probabilities obeying the sum rule through the softmax,
 
 $$P(y = k \mid \mathbf{x}) = \frac{e^{s_k(\mathbf{x})}}{\sum_{j=1}^{K} e^{s_j(\mathbf{x})}}$$
 
-which sums to $1$ by construction and is strictly increasing in $s_k$, so softmax never changes which class wins the $\arg\max$. It supplies calibrated-looking probabilities, not a different decision.
+which sums to $1$ by construction and is strictly increasing in $s_k$, so softmax never changes which class wins the $\arg\max$. It supplies calibrated-looking probabilities, not a different decision. Nothing here says where the scores come from; [[Softmax Regression]] is the model that fits them, one linear score per class, and it is named for this function because the function is the only part of it that is not already [[Logistic Regression]].
 
 ### Counting the binary sub-problems
 
@@ -91,4 +92,4 @@ It is tempting to say some algorithms are binary only, and from the caller's sid
 - **Binary algorithms that scikit-learn wraps automatically.** The caller passes a multiclass `y` and gets a fitted model, but a decomposition happened inside. One-versus-rest is used by `SGDClassifier`, `Perceptron`, `PassiveAggressiveClassifier` and `GradientBoostingClassifier`. One-versus-one is used by `SVC` and `NuSVC`.
 - **Explicit wrapping.** `OneVsRestClassifier`, `OneVsOneClassifier` and `OutputCodeClassifier` in `sklearn.multiclass` are needed only to override the default strategy, not to obtain multiclass support that is missing.
 
-[[Logistic Regression]] is the case where the strategy changed recently. Its `multi_class` argument was deprecated in scikit-learn 1.5 and is scheduled for removal in 1.7; the 1.6 default `multi_class="auto"` already selects multinomial softmax for $K \ge 3$, falling back to one-versus-rest only for binary targets or `solver="liblinear"`. After removal, multinomial is used for $K \ge 3$ unconditionally and one-versus-rest requires wrapping the estimator in `OneVsRestClassifier` by hand. So the softmax in the formula above is what a plain `LogisticRegression` fits on a multiclass target in 1.6, not an opt-in.
+[[Logistic Regression]] is the case where the strategy changed recently. Its `multi_class` argument was deprecated in scikit-learn 1.5 and is scheduled for removal in 1.7; the 1.6 default `multi_class="auto"` already selects multinomial softmax for $K \ge 3$, falling back to one-versus-rest only for binary targets or `solver="liblinear"`. After removal, multinomial is used for $K \ge 3$ unconditionally and one-versus-rest requires wrapping the estimator in `OneVsRestClassifier` by hand. So the softmax in the formula above is what a plain `LogisticRegression` fits on a multiclass target in 1.6, not an opt-in, and [[Softmax Regression]] is the name for the model it thereby fits.

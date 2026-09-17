@@ -4,19 +4,19 @@ aliases:
   - SGD classifier
   - SGDClassifier
   - SGDC
-  - SGD
   - stochastic gradient descent classifier
   - linear classifier fitted by SGD
   - sgd_clf
 up: "[[Classification]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-`SGDClassifier` is not a model family of its own. It is a linear classifier fitted by stochastic gradient descent, and the `loss` argument decides which linear model you are actually fitting: the default `hinge` gives a linear support vector machine, `log_loss` gives [[Logistic Regression]], `perceptron` gives the perceptron. The thing held constant across those choices is the optimizer, not the model.
+`SGDClassifier` is not a model family of its own. It is a linear classifier fitted by [[Stochastic Gradient Descent]], and the `loss` argument decides which linear model you are actually fitting: the default `hinge` gives a linear support vector machine, `log_loss` minimizes [[Log Loss]] and so gives [[Logistic Regression]], `perceptron` gives the perceptron. The thing held constant across those choices is the optimizer, not the model.
 
 Reach for it when the training set is large enough that a solver touching every instance per step is too slow, or when the data arrives as a stream. Updating on one instance at a time is what makes it an [[Online Learning]] estimator: it exposes `partial_fit`, and the scikit-learn guide to scaling lists it among the classifiers that train out of core, because no step ever needs more than the current batch in memory.
 
@@ -32,21 +32,23 @@ and the decision is that score against a threshold $t$:
 
 $$\hat{y} = \begin{cases} 1 & \text{if } s(\mathbf{x}) > t \\ 0 & \text{otherwise} \end{cases}$$
 
-The fixed default is $t = 0$, not $0.5$. The $0.5$ that appears in [[Logistic Regression]] is a threshold on a *probability*; `decision_function` returns a signed distance to the hyperplane, which runs over all of $\mathbb{R}$, and the sign of that number is exactly the side of the boundary the instance falls on. So $0$ is the natural cut and $0.5$ would be an arbitrary one.
+The fixed default is $t = 0$, not $0.5$. The $0.5$ that appears in [[Logistic Regression]] is a threshold on a *probability*; `decision_function` returns a signed distance to the hyperplane, which runs over all of $\mathbb{R}$, and the sign of that number is exactly the side of the [[Decision Boundary]] the instance falls on. So $0$ is the natural cut and $0.5$ would be an arbitrary one.
 
 What gets minimized is the regularized training error
 
 $$E(\boldsymbol\theta, b) = \frac{1}{m}\sum_{i=1}^{m} L\big(y^{(i)}, s(\mathbf{x}^{(i)})\big) + \alpha R(\boldsymbol\theta)$$
 
-with $L$ chosen by `loss` and $R$ by `penalty`. Ordinary gradient descent would evaluate that whole sum before moving. Stochastic gradient descent does not: it takes one instance $i$ (or one small batch) at a time and steps on that instance's gradient alone,
+with $L$ chosen by `loss` and $R$ by `penalty`, so `penalty` and $\alpha$ together are this estimator's [[Regularization]] controls. [[Batch Gradient Descent]] would evaluate that whole sum before moving; [[Stochastic Gradient Descent]] takes one instance $i$ (or one small batch) at a time and steps on that instance's gradient alone,
 
 $$\boldsymbol\theta \leftarrow \boldsymbol\theta - \eta \left[ \alpha \nabla_{\boldsymbol\theta} R(\boldsymbol\theta) + \nabla_{\boldsymbol\theta} L\big(y^{(i)}, s(\mathbf{x}^{(i)})\big) \right]$$
 
-so the cost of one update does not grow with $m$. The [[Learning Rate]] $\eta$ is not constant by default. Under `learning_rate="optimal"` it decays with the number of updates $s$ taken so far,
+so the cost of one update does not grow with $m$. [[Gradient Descent]] carries the update rule the variants share, and the consequences of sampling one instance at a time, a noisy descent that needs a decaying step to settle, belong to the optimizer rather than to this class.
 
-$$\eta_s = \frac{1}{\alpha \, (s + s_0)}$$
+The [[Learning Rate]] $\eta$ is not constant by default: `learning_rate` picks a [[Learning Schedule]], and the classifier's default `"optimal"` decays with the update counter $t$, which equals $1$ on the first update and is exposed afterwards as `t_` (a different quantity from the decision threshold $t$ above, and [[Notation]] separates the two readings):
 
-with $s_0$ set by a heuristic. Note that $\alpha$ therefore does two jobs at once under the default schedule: it is the regularization strength and it sets the step size.
+$$\eta_t = \frac{1}{\alpha\,(t_0 + t - 1)}$$
+
+with $t_0$ fixed by a heuristic due to Léon Bottou that reads `alpha` and the loss, which is why `eta0` is never consulted under this schedule and why `alpha` must be nonzero. [[Learning Schedule]] carries that heuristic and the second indexing convention the scikit-learn user guide writes the same schedule in. Note that $\alpha$ therefore does two jobs at once under that schedule: it is the regularization strength and it sets the step size. That default is particular to the classifier and does not generalize to the optimizer: `SGDRegressor` ships `learning_rate="invscaling"` with `eta0=0.01` and `power_t=0.25`, so $\alpha$ there is regularization strength and nothing more.
 
 ### The threshold is exposed, not settable
 
@@ -65,17 +67,17 @@ That is the whole mechanism behind the [[Precision-Recall Tradeoff]]: sweep $t$ 
 
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|
-| loss function | `loss` | `"hinge"` | not ordered. `"hinge"` fits a linear SVM, `"log_loss"` fits [[Logistic Regression]] and unlocks `predict_proba`, `"modified_huber"` is smooth, outlier tolerant and also gives probabilities, `"perceptron"` fits a perceptron | pick by what you need out of the model, probabilities or a margin, then [[Cross-Validation]] between the survivors |
-| regularization penalty | `penalty` | `"l2"` | not ordered. `"l1"` and `"elasticnet"` drive weights to exactly zero and so select features, `None` removes the penalty entirely | `"l2"` unless you want sparsity |
-| regularization strength | $\alpha$ | `0.0001` | stronger penalty, smaller weights, more [[Underfitting]]. Under the default schedule it also shrinks the step size $\eta_s = 1/(\alpha(s+s_0))$, so raising it slows learning as well | log grid, the user guide suggests `10.0 ** -np.arange(1, 7)` |
+| loss function | `loss` | `"hinge"` | not ordered. `"hinge"` fits a linear SVM, `"log_loss"` fits [[Logistic Regression]] by minimizing [[Log Loss]] and unlocks `predict_proba`, `"modified_huber"` is smooth, outlier tolerant and also gives probabilities, `"perceptron"` fits a perceptron | pick by what you need out of the model, probabilities or a margin, then [[Cross-Validation]] between the survivors |
+| [[Regularization\|regularization]] penalty | `penalty` | `"l2"` | not ordered. `"l1"` and `"elasticnet"` drive weights to exactly zero and so select features, `None` removes the penalty entirely | `"l2"` unless you want sparsity |
+| regularization strength | $\alpha$ | `0.0001` | stronger penalty, smaller weights, more [[Underfitting]]. Under the default [[Learning Schedule\|schedule]] it also shrinks the step size $\eta_t = \dfrac{1}{\alpha\,(t_0 + t - 1)}$, so raising it slows learning as well | log grid, the user guide suggests `10.0 ** -np.arange(1, 7)` |
 | elastic net mixing | `l1_ratio` | `0.15` | more of the penalty is $\ell_1$, so a sparser weight vector. Only read when `penalty="elasticnet"` | log grid jointly with $\alpha$ |
-| maximum epochs | `max_iter` | `1000` | more passes over the data, longer fit, more chance of converging before the cap | the guide's heuristic is `np.ceil(1e6 / m)`, since SGD tends to converge after roughly $10^{6}$ instances seen |
-| stopping tolerance | `tol` | `0.001` | stops sooner on a smaller improvement, so an earlier and possibly underfit stop | lower it if the fit stops while still improving |
-| learning rate schedule | `learning_rate` | `"optimal"` | not ordered. `"constant"` holds $\eta = \eta_0$, `"invscaling"` decays as $\eta_0 / s^{\,p}$, `"adaptive"` holds $\eta_0$ and divides it by 5 whenever progress stalls | leave at `"optimal"` unless the loss diverges or plateaus early |
+| maximum [[Epoch\|epochs]] | `max_iter` | `1000` | more passes over the data, longer fit, more chance of converging before the cap | the guide's heuristic is `np.ceil(1e6 / m)`, since SGD tends to converge after roughly $10^{6}$ instances seen |
+| stopping tolerance | `tol` | `0.001` | stops sooner on a smaller improvement, so an earlier and possibly underfit stop | lower it if the fit stops while still improving. What the number is measured against is in [[Tolerance]] |
+| [[Learning Schedule\|learning rate schedule]] | `learning_rate` | `"optimal"` | not ordered. `"constant"` holds $\eta = \eta_0$, `"invscaling"` decays as $\eta_0 / t^{\,p}$, `"adaptive"` holds $\eta_0$ and divides it by 5 whenever progress stalls | leave at `"optimal"` unless the loss diverges or plateaus early |
 | initial learning rate | $\eta_0$ | `0.0` | bigger steps, faster movement, risk of overshooting and diverging. Ignored by the default `"optimal"` schedule, which is why the default is $0$ | only set it once you have left `"optimal"`, then a log grid |
 | inverse scaling exponent | `power_t` | `0.5` | faster decay of $\eta$, so less movement late in the fit. Only read when `learning_rate="invscaling"` | rarely worth touching |
 | class weights | `class_weight` | `None` | `"balanced"` reweights each class by $m / (K \, m_k)$, so the rare class counts for more per instance and recall on it rises | set it when the target shows [[Class Imbalance]], then check [[Precision]] and [[Recall]], not accuracy |
-| early stopping | `early_stopping` | `False` | `True` holds out a stratified slice and stops on the validation score instead of the training loss, which guards [[Overfitting]] at the cost of training data | turn on for large $m$ where the held-out slice is cheap |
+| [[Early Stopping\|early stopping]] | `early_stopping` | `False` | `True` holds out a stratified slice and stops on the validation score instead of the training loss, which guards [[Overfitting]] at the cost of training data | turn on for large $m$ where the held-out slice is cheap |
 | held-out fraction | `validation_fraction` | `0.1` | larger validation slice, less noisy stopping signal, less data to fit on. Only read when `early_stopping=True` | leave at 0.1 unless $m$ is small |
 | patience | `n_iter_no_change` | `5` | waits longer through flat stretches before stopping, so a longer fit and less risk of stopping on noise | raise it when the loss curve is jumpy |
 | iterate averaging | `average` | `False` | `True` stores the running average of the weights instead of the last iterate, which cuts the variance SGD leaves behind. An integer starts averaging after that many instances | try `True` when successive fits disagree with each other |

@@ -7,6 +7,7 @@ aliases:
 up: "[[Generalization]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -24,4 +25,6 @@ The estimate comes from [[Holdout Validation]] or [[Cross-Validation]]. Because 
 
 ## Where it is used
 
-It is the loop that balances [[Overfitting]] against [[Underfitting]]. Chapter 2 adds grid and random search over $\mathcal{C}$. The failure Géron warns about: selecting on the test set, which makes the reported score a selection artifact.
+It is the loop that balances [[Overfitting]] against [[Underfitting]]. [[Grid Search]] and [[Randomized Search]] are the standard ways of enumerating $\mathcal{C}$. The failure Géron warns about: selecting on the test set, which makes the reported score a selection artifact.
+
+$\arg\min$ over $\mathcal{C}$ answers only which candidate in the set is ahead, and it is silent about whether the set is the right set. The complementary diagnostic is a [[Learning Curve]], run on a single candidate rather than across them: it says whether the next move is more data or a different model family, which is the question you have to settle before enlarging $\mathcal{C}$ is worth the fits.

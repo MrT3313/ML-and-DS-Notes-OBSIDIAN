@@ -24,7 +24,7 @@ You can also just read the Markdown on GitHub. Nothing here depends on Obsidian 
 | Path | What lives there |
 |------|------------------|
 | `Knowledge/` | The permanent notes, filed by what kind of thing they are. `Machine Learning/` is the main body, `MLOps/` is early. |
-| `Sources/` | One note per source, plus one per chapter extracted from it, and one per dataset those chapters work on. Currently HOML (Géron, 2022), chapters 1 to 3, and two datasets, California housing and MNIST. |
+| `Sources/` | One note per source, plus one per chapter extracted from it, and one per dataset those chapters work on. Currently HOML (Géron, 2022), chapters 1 to 4, and three datasets, California housing, MNIST and iris. |
 | `_Slip Box (Zettelkasten)/` | Landing place for quick notes taken on the fly, before integration. Nothing here is expected to meet the quality bar. |
 | `__Meta/` | The vault's own documentation: the quality bar, callout reference, note templates, and the study prompt. |
 

@@ -6,12 +6,13 @@ aliases:
 up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
 ## Definition
 
-A hyperparameter is a setting of the learning algorithm rather than of the model: it is fixed before training and does not change during it. The amount of regularization and the [[Learning Rate]] are the two standard examples.
+A hyperparameter is a setting of the learning algorithm rather than of the model: it is fixed before training and does not change during it. [[Regularization]] strength and the [[Learning Rate]] are the two standard examples.
 
 ## Formal statement
 
@@ -21,4 +22,4 @@ $$\boldsymbol\theta^{*}(\lambda) = \arg\min_{\boldsymbol\theta} J(\boldsymbol\th
 
 ## Where it is used
 
-Every `method` note carries a hyperparameter table that links here. Tuning them on the [[Testing Set]] is the mistake [[Holdout Validation]] exists to prevent.
+Anything with a tunable setting has some: [[Ridge Regression]], [[Lasso Regression]] and [[Elastic Net Regression]] are searched over $\alpha$, every [[Gradient Descent]] variant over $\eta$ and its [[Learning Schedule]], and [[Polynomial Regression]] over the degree. Tuning them on the [[Testing Set]] is the mistake [[Holdout Validation]] exists to prevent, and enumerating them is what [[Grid Search]] and [[Randomized Search]] do.

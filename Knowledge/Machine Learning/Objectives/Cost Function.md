@@ -8,6 +8,7 @@ aliases:
 up: "[[Performance Measure]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -23,6 +24,10 @@ $$J(\boldsymbol\theta) = \frac{1}{m} \sum_{i=1}^{m} \ell\big(h_{\boldsymbol\thet
 
 Mean squared error is $\ell = (\hat{y} - y)^2$. Training is $\boldsymbol\theta^{*} = \arg\min_{\boldsymbol\theta} J(\boldsymbol\theta)$.
 
+A regularized objective is this same function with a penalty on the parameters added, $J(\boldsymbol\theta) + \alpha R(\boldsymbol\theta)$. The sum is what training minimizes; the metric you report stays the unpenalized $J$, since the penalty is there to constrain the fit rather than to describe the error. See [[Regularization]].
+
+Whether the minimum is unique is a property of $J$ rather than of the search for it: a convex $J$ has one global minimum and no local ones, so the answer does not depend on where the search started. See [[Convexity]].
+
 ## Where it is used
 
-Every [[Model-Based Learning]] method defines one; [[Linear Regression]] uses squared error, [[Logistic Regression]] uses log loss. Gradient descent moves $\boldsymbol\theta$ against $\nabla J$ scaled by the [[Learning Rate]]. Its value on training data versus the [[Testing Set]] is the diagnostic for [[Overfitting]] and [[Underfitting]]. The sign-flipped form is the [[Utility Function]].
+Every [[Model-Based Learning]] method defines one; [[Linear Regression]] uses squared error, [[Logistic Regression]] uses [[Log Loss]]. [[Gradient Descent]] moves $\boldsymbol\theta$ against $\nabla J$ scaled by the [[Learning Rate]]. Its value on training data versus the [[Testing Set]] is the diagnostic for [[Overfitting]] and [[Underfitting]]. The sign-flipped form is the [[Utility Function]].

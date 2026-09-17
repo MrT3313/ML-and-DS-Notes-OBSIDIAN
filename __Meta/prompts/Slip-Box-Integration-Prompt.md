@@ -9,9 +9,9 @@ This is a different role from `Chapter-Study-Prompt.md`. The study prompt's agen
 ```
 You are the coordinator agent for a knowledge-integration task in an Obsidian vault. The vault root is the current working directory. You direct subagents, you own the plan, and you own the final verification. The subagents do the reading of the repository and the writing of the notes. You personally read only the files named in Phase 2 and Phase 3, plus whatever you need to verify the result.
 
-Raw notes to integrate: [_Slip Box (Zettelkasten)/RAW HOML Ch03 Classification.md]
-Chapter: [HOML Ch03 Classification]
-Chapter notebook URL: [https://github.com/ageron/handson-ml3/blob/main/03_classification.ipynb]
+Raw notes to integrate: [_Slip Box (Zettelkasten)/RAW HOML Chapter 4 - Training Models]
+Chapter: [HOML Ch04 Training Models]
+Chapter notebook URL: [https://github.com/ageron/handson-ml3/blob/main/04_training_linear_models.ipynb]
 
 The raw file is my own notes, taken while reading the chapter, in my own words. It is the source of truth for what I understood. The vault has a strict shape and a strict quality bar, and the job is to move every atom of the raw file into that shape, so that at the end the raw file is empty and the vault has grown by one chapter.
 

@@ -20,6 +20,7 @@ aliases:
 up: "[[Mathematics]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -46,7 +47,7 @@ $p \geq 1$ is exactly the condition for the [[Triangle Inequality]] $\|\mathbf{u
 
 ## Where it is used
 
-[[Root Mean Squared Error]] is the $\ell_2$ norm of the residual vector rescaled by $1/\sqrt{m}$ and [[Mean Absolute Error]] is the $\ell_1$ norm rescaled by $1/m$, so the choice of $p$ is precisely what makes the first sensitive to outliers and the second not. Any [[Cost Function]] built on a norm inherits that behaviour from its $p$. HOML chapter 4 turns the same dial on the parameter vector instead of the residual vector: ridge regression adds an $\ell_2$ penalty on the weights, lasso an $\ell_1$ penalty, and lasso zeroes weights outright because the $\ell_1$ unit ball has corners sitting on the axes.
+[[Root Mean Squared Error]] is the $\ell_2$ norm of the residual vector rescaled by $1/\sqrt{m}$ and [[Mean Absolute Error]] is the $\ell_1$ norm rescaled by $1/m$, so the choice of $p$ is precisely what makes the first sensitive to outliers and the second not. Any [[Cost Function]] built on a norm inherits that behaviour from its $p$. [[Regularization]] turns the same dial on the parameter vector instead of the residual vector: [[Ridge Regression]] charges an $\ell_2$ penalty on the weights, [[Lasso Regression]] an $\ell_1$ penalty, and [[Elastic Net Regression]] a weighted sum of the two, so the choice of $p$ is the entire difference between those three models. Lasso drives weights to exactly zero and ridge never does, because the $\ell_1$ unit ball has corners sitting on the axes: a growing level set of the loss meets it at a corner, and a corner is a point where some coordinates are exactly zero. The $\ell_2$ ball is smooth and has no such point, so its contact is generically off the axes. That is the non-differentiability of $|v_i|$ at zero seen as geometry rather than as calculus.
 
 ## Additional Resources
 | Title                                                                                   | Link                                               |

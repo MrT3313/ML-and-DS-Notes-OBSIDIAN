@@ -7,6 +7,7 @@ aliases:
 up: "[[Generalization]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[HOML Ch04 Training Models]]"
 confidence: draft
 ---
 
@@ -18,7 +19,9 @@ A model underfits when it is too simple to capture the structure in the data, so
 
 $$\mathcal{L}_{\text{train}} \approx \mathcal{L}_{\text{test}}, \quad \text{both high}$$
 
-Remedies: a more powerful model, better [[Feature]]s, or fewer constraints (less regularization).
+Remedies: a more powerful model, better [[Feature]]s, or fewer constraints, which means less [[Regularization]]. Adding capacity is the standard fix, and [[Polynomial Regression]] is the worked case: a straight line through curved data underfits no matter how much data it is given, and raising the degree hands the model the terms it was missing.
+
+Underfitting is the high-bias end of the [[Bias-Variance Tradeoff]], the mirror of overfitting's high-variance end. A [[Learning Curve]] separates the two on sight, and its underfitting shape is the claim "no amount of extra data fixes it" drawn rather than asserted.
 
 ## Where it is used
 
