@@ -7,6 +7,7 @@ url: https://github.com/ageron/handson-ml3
 aliases:
   - Hands-On Machine Learning
   - Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow
+  - "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems"
 up: "[[Home]]"
 ---
 

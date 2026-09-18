@@ -84,7 +84,7 @@ Three optional sections, all in use:
 
   The test: a parameter counts if changing it changes the fitted or transformed output. Speed, memory, verbosity, container type and plot appearance do not count, however many of them the API exposes. `n_jobs`, `verbose`, `copy`, `sparse_output`, `figsize` and `bins` are not hyperparameters and do not belong in the table.
 - **Failure modes** is at least three bullets, each naming a concrete circumstance, not a generic caution.
-- **Implementation** is runnable code with the library version pinned in the prose above it.
+- **Implementation** is runnable code with the library version pinned in the prose above it. Not every subject has code to write. Where the domain has no pinned library, the section does the same job by other means: it names the systems that actually implement the method and says what differs between their implementations, which is what makes an abstract mechanism concrete enough to check a claim against. Where not even that can be named, discharge the section with exactly this string and nothing else: **No implementation to name at this depth.** Then say why. The string is fixed for the same reason the Formal statement discharge is, so the discharged notes can be found in one search.
 
 ### `index`
 
@@ -97,8 +97,9 @@ Three optional sections, all in use:
 
 - The scope statement says what qualifies for this index and names the paradigm it sits under.
 - **Methods** lists written notes with a one-line characterization each. Unwritten ones go as plain text naming the chapter that will bring them.
+- The list heading is named for what the list holds. `## Methods` is the default and covers most indexes. A domain or vault hub ([[Home]], [[Machine Learning]]) uses `## Areas`, listing folders rather than methods. An index whose members are neither uses their name: `Open Data Repositories` lists repositories under `## Repositories`, and that is correct rather than a deviation, because "methods" would be a lie about what is in the list. Only this heading varies. The scope statement, the Bases block and `## What is missing` are the same in every index.
+- The Bases block is part of the shape, not decoration, and every index carries one, hubs included. `Machine Learning` is currently the one index without one; that is the exception to correct, not the precedent to copy.
 - **What is missing** is the honest gap list. An index with no `## What is missing` is claiming completeness.
-- A domain or vault hub ([[Home]], [[Machine Learning]]) is also `index`, but uses `## Areas` in place of `## Methods`, listing folders rather than methods.
 - `index` is earned by having methods to list, not by what the note is about. A task with none is a `concept` carrying its own definition and any task-level mathematics, and converts to `index` when chapters bring it methods: the definition becomes the scope statement, and task-level measures move to their own note. `Association Rule Learning` is the standing case, a task in `Tasks/` whose support and confidence belong to every algorithm rather than to one.
 
 ### `source`
@@ -117,7 +118,7 @@ Three optional sections, all in use:
 - **Extracted** is every note this chapter produced, grouped by theme.
 - **Open questions** are the things the chapter left unresolved for you, each phrased so a later chapter can settle it.
 
-**Container notes**, one per book, of which `HOML` is the only one so far:
+**Container notes**, one per book:
 
 ```
 ## Chapters
@@ -164,13 +165,12 @@ The role of a review agent working from `__Meta/prompts/Chapter-Study-Prompt.md`
 - **Uncertainty is stated, not guessed.** If unsure whether something is wrong, it says so and names what to check in the book.
 - **No praise padding.** "Correct" is a complete evaluation.
 
-## 5. Deferred decisions
+## 5. New kinds
 
-A survey of HOML chapters 3 to 19 says what is coming, so these are decided now and revisited on a fixed trigger rather than argued again every chapter.
+Two kinds have been proposed and neither was added. **`process`**, for a workflow you run end to end rather than a method you call, and **`architecture`**, for a network topology. When they were proposed, three notes in the vault were process-shaped and none was architecture-shaped, and three does not earn a kind.
 
-- **`process`**, for a workflow you run end to end rather than a method you call. The survey projects 32 process-shaped notes book-wide, but only 3 of them before chapter 10. Three does not earn a kind. **Revisit at chapter 10.**
-- **`architecture`**, for a network topology. The survey projects 40 or more, concentrated almost entirely in chapters 14 and 16. **Revisit at chapter 14.**
-- **Datasets** run to 15 or 18 by the end. `dataset` is already a kind, so nothing is deferred here.
-- The vault lands at roughly 450 to 550 notes. Every rule in this file has to still work at that size.
+They stay out, and no chapter number brings them back. A trigger set from a survey of chapters not yet read is a decision made on the weakest evidence available, and it does not survive a second book, where "chapter 10" names two different things. The question reopens on evidence from notes actually written, and the evidence is one specific thing: a note that cannot be written to any existing kind without the required sections of that kind being actively wrong for it. Not "would read better under a new kind", and not "does not fit neatly". A run that meets a genuine case writes the note to the kind that fits least badly, records the strain in its report and in the `## What is missing` of the index that owns the note, and moves on. A kind is argued for when those records have accumulated to the point where the strain is systematic rather than incidental, and the standing precedent for "not yet" is three.
 
-One condition attaches to both: **when a kind is added, every existing note is re-audited against it in the same sitting.** Not later, not incrementally. A kind introduced without a backfill splits the vault into notes that were considered for it and notes that never were, and no query on that kind can tell the two apart, so every later query returns a quiet undercount rather than an error (Golder and Huberman 2006, on tag vocabularies that drift after the fact). If there is no appetite for the backfill, there is no appetite for the kind.
+Integrating a chapter is not the moment to redesign the vocabulary. New material merges into the notes that already exist, under the topic they belong to, and a contradiction found on the way is settled in the run that finds it, against a primary source, by rewriting the note to say one thing. Reaching for a new kind is not how a contradiction gets resolved; research is.
+
+One condition attaches to any kind that is eventually added: **every existing note is re-audited against it in the same sitting.** Not later, not incrementally. A kind introduced without a backfill splits the vault into notes that were considered for it and notes that never were, and no query on that kind can tell the two apart, so every later query returns a quiet undercount rather than an error (Golder and Huberman 2006, on tag vocabularies that drift after the fact). If there is no appetite for the backfill, there is no appetite for the kind. The backfill is also the honest measure of what a kind costs, and it grows with the vault: every rule in this file has to still work at several hundred notes across more than one subject, which is where this is heading.
