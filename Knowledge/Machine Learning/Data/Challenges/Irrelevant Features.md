@@ -21,6 +21,8 @@ A [[Feature]] $x_j$ is irrelevant when $y \perp x_j \mid \mathbf{x}_{-j}$, so no
 
 **Not further quantitative at this depth.**
 
+An irrelevant feature is a data pathology, and the conditional independence above is the whole of its mathematics at this depth: it says when a column is useless, not how to detect that from a finite sample. A later chapter would add the selection criteria that operationalize it, ex a mutual information score or an L1 penalty that drives the column's weight to zero.
+
 ## Where it is used
 
 Feature engineering splits into three sub-tasks: feature selection (choose among existing), feature extraction (combine, including [[Dimensionality Reduction]]), and feature creation (collect new data). Interacts with [[Overfitting]]: more irrelevant columns give a flexible model more noise to memorize.

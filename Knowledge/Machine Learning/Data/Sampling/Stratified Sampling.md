@@ -18,15 +18,17 @@ confidence: draft
 
 Split the population into disjoint homogeneous subgroups, the strata, and draw from each in proportion to its size, so the [[Testing Set]] reproduces the population mix by construction instead of by luck. Prefer it to plain [[Random Sampling]] when a variable strongly related to the target is unevenly distributed and a fair draw could still misrepresent it, which is likeliest when $m$ is small or a stratum is rare. The cost is that you must name the variable that matters, a modelling judgement rather than a mechanical step.
 
-## Algorithm or formula
+## Algorithm
 
-Let strata $S_1, \dots, S_k$ partition the dataset, with shares
+1. Name the stratification key, the variable the split must represent faithfully. It must be categorical, so a continuous variable is binned first. In the [[California Housing|housing dataset]] median income is the variable most correlated with the target, so `pd.cut` slices it into five categories at 1.5, 3.0, 4.5 and 6.0 (income in tens of thousands of dollars).
+2. Let the strata $S_1, \dots, S_k$ partition the dataset, with shares
 
-$$w_s = \frac{|S_s|}{m}, \qquad \sum_{s=1}^{k} w_s = 1$$
+   $$w_s = \frac{|S_s|}{m}, \qquad \sum_{s=1}^{k} w_s = 1$$
 
-Under proportional allocation, stratum $s$ contributes $w_s \cdot m_{\text{test}}$ instances, drawn at random from within that stratum, so the realised test share equals $w_s$ up to rounding. Random sampling matches it only in expectation, with variance $w_s(1 - w_s)/m_{\text{test}}$ around it.
+3. Under proportional allocation, draw $w_s \cdot m_{\text{test}}$ instances at random from within each stratum $s$, so the realised test share equals $w_s$ up to rounding. Random sampling matches it only in expectation, with variance $w_s(1 - w_s)/m_{\text{test}}$ around it.
+4. Drop the proxy column from both halves right afterwards. It existed only to steer the split, and left in place it leaks in as a [[Feature]].
 
-The stratification key must be categorical, so a continuous variable is binned first. In the [[California Housing|housing dataset]] median income is the variable most correlated with the target, so `pd.cut` slices it into five categories at 1.5, 3.0, 4.5 and 6.0 (income in tens of thousands of dollars). That column exists only to steer the split and is dropped from both halves right afterwards, so it never leaks in as a [[Feature]]. Create a categorical proxy, split on it, drop it: that move is the part worth remembering, and it generalizes to any continuous variable you need represented faithfully.
+Create a categorical proxy, split on it, drop it: that move is the part worth remembering, and it generalizes to any continuous variable you need represented faithfully.
 
 ## Hyperparameters
 
@@ -36,7 +38,8 @@ The stratification key must be categorical, so a continuous variable is binned f
 | bin edges | - | none | - | place cuts where the variable's mass actually is, check the category counts before splitting |
 | `test_size` | $r$ | 0.25 in `train_test_split`, 0.1 in `StratifiedShuffleSplit` | test estimate less noisy, training set smaller | 0.2 at moderate $m$, less as $m$ grows |
 | `n_splits` | - | 10 in `StratifiedShuffleSplit` | more distinct stratified splits produced, linear cost | leave at 1 unless you genuinely need several splits |
-| `random_state` | - | `None` | no monotone effect | fix an integer, see [[Random Seed]] |
+
+`random_state` is left out on purpose: it fixes which rows are drawn from each stratum, so it changes the split that comes back, but it is pinned rather than tuned. Fix one integer, see [[Random Seed]].
 
 ## Failure modes
 

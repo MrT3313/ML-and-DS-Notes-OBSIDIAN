@@ -46,7 +46,16 @@ One correction to a common way of stating the distinction: ETL is often describe
 
 ## Hyperparameters
 
-None. What a pipeline exposes (schedule, batch size, parallelism, retry policy) changes when and how fast the rows arrive, never which rows arrive or what is in them.
+A pipeline has a few, and they are switches rather than dials, so "increasing" below means moving from the weaker guarantee to the stronger one. Each is a setting one of the systems under `## Implementation` exposes.
+
+| name | symbol | default | effect of increasing | how to tune |
+|---|---|---|---|---|
+| Load mode, incremental or full rebuild | dbt `materialized` (`view`, `table`, `incremental`); Airbyte incremental versus full refresh sync | dbt: `view`; Airbyte: chosen per stream | A full rebuild re-reads the whole source every run, so a row deleted at the source disappears from the target; an incremental load keeps the rows earlier runs delivered, so the deletion is never reflected unless a change feed or a soft-delete flag (Fivetran's `_fivetran_deleted`) carries it across | Full rebuild while the source is small enough to re-read on every run; incremental once it is not, with the deletion path decided at the same time |
+| Deduplication key on an incremental load | dbt `unique_key` with `incremental_strategy` (`append`, `merge`, `delete+insert`, `insert_overwrite`); Airbyte "Incremental, Append" versus "Incremental, Append + Deduped" | dbt: no key, with `append` on Postgres and `merge` on Snowflake and BigQuery; Airbyte: chosen per stream | Without a key a rerun appends a second copy of every row it re-delivers, so the target holds each row at least once; with a key and a merging strategy exactly one row per key survives and a rerun is idempotent | Set a key on any incremental model whose source can re-deliver rows, which is any source that can be backfilled; leave `append` for immutable event streams only |
+| Change capture, cursor or log | Airbyte incremental on a cursor field versus log-based CDC; Fivetran log-based replication for database sources | Cursor-based unless the connector supports CDC and it is switched on | A cursor sees a row only when its cursor column moves, so hard deletes and every intermediate update between two runs are missed; the log carries each update in order and the deletes with them | Log-based whenever the source exposes its log and the target must reflect deletions; cursor-based where it does not, or where deletions do not matter |
+| Backfill of missed intervals | Airflow `catchup` | `True` in Airflow 2, `False` in Airflow 3 | `True` runs one DAG run for every interval between the start date and now, so rows for intervals the scheduler was down for still arrive; `False` runs only the latest interval and those rows never arrive unless somebody backfills by hand | `True` when the target must hold every interval's rows; `False` when each run is a full rebuild and the missed intervals add nothing |
+
+Schedule, batch size, parallelism, worker count, retry count and timeouts do not pass: they change when and how fast the rows arrive, and whether a run finishes tonight or tomorrow, never which rows arrive or what is in them.
 
 ## Failure modes
 

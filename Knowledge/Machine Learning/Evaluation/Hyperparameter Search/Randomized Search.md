@@ -17,9 +17,15 @@ Randomized search draws a fixed number of [[Hyperparameter]] combinations at ran
 
 As with any search, the estimator passed in is the whole [[Pipeline]], so preprocessing is refit inside each fold rather than once on data that includes the validation rows ([[Data Snooping Bias]]).
 
-## Algorithm or formula
+## Algorithm
 
-For $t = 1, \dots, n_{\text{iter}}$, sample $\boldsymbol\lambda_t \sim P$ over the hyperparameter space, score it with $K$-fold cross-validation, and return $\arg\min_t \hat{\mathcal{L}}_{\text{CV}}(\boldsymbol\lambda_t)$. The cost is $n_{\text{iter}} \cdot K + 1$ fits, flat in the dimension of the space.
+1. Give every hyperparameter to be searched a list or a distribution to draw from; together they define $P$ over the hyperparameter space.
+2. Fix the budget $n_{\text{iter}}$ and a [[Random Seed]], so the candidate set can be reproduced.
+3. For $t = 1, \dots, n_{\text{iter}}$, sample $\boldsymbol\lambda_t \sim P$.
+4. Score each $\boldsymbol\lambda_t$ with $K$-fold [[Cross-Validation]], the whole pipeline refit inside each fold.
+5. Return $\arg\min_t \hat{\mathcal{L}}_{\text{CV}}(\boldsymbol\lambda_t)$, refit on the whole [[Training Set]], and evaluate once on the [[Testing Set]].
+
+The cost is $n_{\text{iter}} \cdot K + 1$ fits, flat in the dimension of the space.
 
 The reason this beats a grid is an argument from *effective dimension*, due to Bergstra and Bengio, "Random Search for Hyper-Parameter Optimization" (JMLR, 2012). Suppose only one of $k$ hyperparameters actually moves the score. A grid of $v$ values per hyperparameter tries only $v$ distinct values of that one, re-testing each $v^{k-1}$ times under settings that do not matter. Random search tries a *different* value of every hyperparameter on every trial, so $n_{\text{iter}}$ draws give $n_{\text{iter}}$ distinct values of the one that counts. A related consequence is easy to state: if a fraction $p$ of the space is "good", the chance of missing it entirely in $n$ independent draws is $(1-p)^{n}$, so $60$ draws leave under a $5\%$ chance of missing the best $5\%$ of the space.
 
@@ -38,10 +44,10 @@ Scoring follows the "higher is better" convention described under grid search, s
 | `n_iter` | $n$ | 10 | better coverage, linearly more fits | as many as the time budget allows; 10 is a smoke test, 50 to 100 is a search |
 | `cv` | $K$ | 5 | less selection noise, linearly more fits | 3 while exploring, 5 or 10 to decide |
 | `scoring` | | estimator's own `score` | changes which candidate wins | name the metric the project is judged on |
-| `random_state` | | `None` | fixes which candidates are drawn | set it, always |
-| `n_jobs` | | 1 | wall-clock falls, memory rises | `-1` locally |
 | `refit` | | `True` | `best_estimator_` comes back fitted on all training data | leave on |
 | `factor` (halving) | | 3 | fewer, harsher elimination rounds | 2 to 4 |
+
+`n_jobs` is not in the table: it changes wall-clock time and memory, never which candidate wins. `random_state` is left out on purpose: it fixes which candidates are sampled from the distributions, so it changes which candidate comes back, but it is pinned rather than tuned. Set it to an integer, see [[Random Seed]].
 
 ## Failure modes
 

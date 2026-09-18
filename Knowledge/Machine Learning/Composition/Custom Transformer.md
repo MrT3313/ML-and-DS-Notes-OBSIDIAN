@@ -41,7 +41,8 @@ Whatever you put on the constructor, and nothing else: that is the point of the 
 |---|---|---|---|---|
 | `n_clusters` | $k$ | `10` | more centres, more output features, finer spatial resolution, higher variance | search it with the model attached, since the useful $k$ depends on the downstream regressor |
 | `gamma` | $\gamma$ | `1.0` | passed straight through to `rbf_kernel`, with the usual effect of the RBF width; because there are $k$ landmarks rather than one, too large a value leaves an instance near-zero on every output column at once | search jointly with `n_clusters` on a log scale |
-| `random_state` | | `None` | fixes the clustering initialization | pin it so runs are reproducible |
+
+`random_state` is left out on purpose: it is the worked example's own seed, fixing which centres `KMeans` settles on and so which similarity features come back, and it is pinned rather than tuned. Set it to an integer, see [[Random Seed]].
 
 ## Failure modes
 

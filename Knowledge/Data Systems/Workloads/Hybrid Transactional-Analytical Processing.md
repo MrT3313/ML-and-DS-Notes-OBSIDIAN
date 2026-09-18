@@ -20,8 +20,6 @@ What is on offer is usually less of a merger than the name suggests. These syste
 
 ## Formal statement
 
-Whether a given system delivers what the category promises is a question about that system's internals and not about the label it carries, so the architecture is the thing to read and the term is not.
-
 **Not further quantitative at this depth.**
 
 HTAP is a product category and an architectural goal rather than a measurable property, so there is no quantity attached to the term itself.

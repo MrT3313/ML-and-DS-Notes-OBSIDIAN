@@ -29,8 +29,8 @@ Each task has its own objective.
 
 ### Tasks
 
-- [[Clustering]]
-- [[Dimensionality Reduction]]
-- [[Anomaly Detection]]
-- [[Novelty Detection]]
-- [[Association Rule Learning]] 
+- [[Clustering]] groups the instances by similarity, with no label saying what the groups are.
+- [[Dimensionality Reduction]] finds a low-dimensional description of the data that keeps most of its variation.
+- [[Anomaly Detection]] flags instances far from the bulk of a training set that may itself contain some outliers.
+- [[Novelty Detection]] flags the same way but trains on a reference set assumed clean, so anything unlike it is novel.
+- [[Association Rule Learning]] finds attribute values that co-occur more often than chance and states them as rules.

@@ -32,7 +32,7 @@ Every step but the last must be a transformer. Setting a step to `"passthrough"`
 
 ## Hyperparameters
 
-None for the plain fit.
+None. The steps list is structure rather than a setting, and the hyperparameters belong to the steps themselves, reached through the `step__param` naming, which is where they are tuned.
 
 ## Failure modes
 

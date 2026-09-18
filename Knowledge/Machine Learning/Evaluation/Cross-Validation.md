@@ -29,11 +29,16 @@ The same call on a classifier, `cross_val_score(sgd_clf, X_train, y_train_5, cv=
 
 ## Algorithm
 
-Partition $D_{\text{train}}$ into folds $F_1, \dots, F_K$ of near-equal size. For each $k$, fit $h_{-k}$ on $D_{\text{train}} \setminus F_k$ and score it on $F_k$:
+1. Partition $D_{\text{train}}$ into folds $F_1, \dots, F_K$ of near-equal size.
+2. Hold out fold $F_k$ as the validation set for this round.
+3. Fit $h_{-k}$ on the remaining folds, $D_{\text{train}} \setminus F_k$, preprocessing included, so nothing is learned from $F_k$.
+4. Score $h_{-k}$ on $F_k$, recording $\mathcal{L}(h_{-k}, F_k)$.
+5. Repeat steps 2 to 4 for every $k = 1, \dots, K$, so each fold is held out exactly once and each instance is scored exactly once.
+6. Aggregate the $K$ fold scores into the estimate, keeping the standard deviation alongside the mean:
 
-$$\hat{\mathcal{L}}_{\text{CV}} = \frac{1}{K} \sum_{k=1}^{K} \mathcal{L}(h_{-k}, F_k)$$
+   $$\hat{\mathcal{L}}_{\text{CV}} = \frac{1}{K} \sum_{k=1}^{K} \mathcal{L}(h_{-k}, F_k)$$
 
-Choose the candidate with the lowest $\hat{\mathcal{L}}_{\text{CV}}$, refit on all of $D_{\text{train}}$, evaluate once on the [[Testing Set]]. Wrapping a loop over candidate settings around this whole procedure is exactly what [[Grid Search]] and [[Randomized Search]] are.
+7. Choose the candidate with the lowest $\hat{\mathcal{L}}_{\text{CV}}$, refit on all of $D_{\text{train}}$, evaluate once on the [[Testing Set]]. Wrapping a loop over candidate settings around this whole procedure is exactly what [[Grid Search]] and [[Randomized Search]] are.
 
 ### Reading the output as a distribution
 

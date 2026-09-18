@@ -11,7 +11,7 @@ Every method that reduces the number of features while keeping as much of the in
 
 ## Methods
 
-None written yet. Chapter 8 brings [[PCA]], random projection, LLE, and t-SNE for visualization.
+None written yet. Chapter 8 brings PCA, random projection, LLE, and t-SNE for visualization.
 
 ```base
 filters:

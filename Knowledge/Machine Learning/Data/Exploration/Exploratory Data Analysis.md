@@ -31,7 +31,7 @@ Step 5 is where the [[California Housing|housing data]] confesses. `housing_medi
 
 ## Hyperparameters
 
-None for the plain fit.
+None. The knobs the calls expose, `bins`, `figsize` and `alpha` among them, change plot appearance, bin counts and the sample size drawn for display, and none of them changes any downstream artefact.
 
 ## Failure modes
 

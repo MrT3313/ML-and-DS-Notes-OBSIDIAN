@@ -11,7 +11,7 @@ Every method that groups unlabeled instances so that members of a group are more
 
 ## Methods
 
-None written yet. Chapter 9 brings [[K-Means]], hierarchical clustering, and DBSCAN.
+None written yet. K-Means, arriving with HOML chapter 9, which also brings hierarchical clustering and DBSCAN.
 
 ```base
 filters:

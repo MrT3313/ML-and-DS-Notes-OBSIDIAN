@@ -19,13 +19,22 @@ confidence: draft
 
 Carve a [[Testing Set]] out of the data by drawing instances uniformly at random, every instance equally likely and no structure imposed. It is the default when instances are independent and identically distributed and $m$ is large enough that chance alone is unlikely to skew the sample; when a variable that matters is unevenly distributed, or $m$ is small, use [[Stratified Sampling]] instead. The three implementations below differ only in how membership is decided.
 
-## Algorithm or formula
+## Algorithm
 
-Permutation route. Draw a uniform permutation $\pi$ of $\{1, \dots, m\}$, send the first $\lfloor m \cdot r \rfloor$ positions to the test set and the rest to the [[Training Set]], where $r$ is the test ratio.
+Permutation route, where $r$ is the test ratio.
 
-Hash route. Give each instance a stable identifier $\text{id}^{(i)}$ and send it to the test set exactly when
+1. Draw a uniform permutation $\pi$ of $\{1, \dots, m\}$.
+2. Send the first $\lfloor m \cdot r \rfloor$ positions to the test set.
+3. Send the rest to the [[Training Set]].
 
-$$\text{crc32}\big(\text{id}^{(i)}\big) < r \cdot 2^{32}$$
+Hash route.
+
+1. Give each instance a stable identifier $\text{id}^{(i)}$.
+2. Send it to the test set exactly when
+
+   $$\text{crc32}\big(\text{id}^{(i)}\big) < r \cdot 2^{32}$$
+
+3. Send every other instance to the training set.
 
 CRC32 spreads identifiers roughly uniformly over $[0, 2^{32})$, so the fraction below the threshold is approximately $r$. Membership depends on the identifier alone: not on $m$, not on row order, not on a [[Random Seed]].
 
@@ -36,9 +45,10 @@ That is why the hash route exists. A seeded permutation is reproducible only whi
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|
 | test ratio | $r$ | 0.25 in `train_test_split`, 0.2 by convention | test estimate less noisy, training set smaller so the fitted model is worse | 0.2 at moderate $m$, shrink it as $m$ grows since a fixed count is enough to pin the metric down |
-| seed | - | `None` (a fresh unreproducible split each run) | no monotone effect, different integers give different equally valid splits | fix one integer for the life of the project, see [[Random Seed]] |
 | identifier column | - | none, the hash route needs one | - | pick a column that is unique, immutable, and never reassigned |
 | `shuffle` | - | `True` | - | set `False` only for ordered data you intend to split by position |
+
+`random_state` is left out on purpose: it fixes which rows the shuffle draws into the test set, so it changes the split that comes back, but it is pinned rather than tuned. Fix one integer for the life of the project, see [[Random Seed]].
 
 ## Failure modes
 

@@ -21,7 +21,7 @@ The difference shows up as soon as the two readings disagree. Three database nod
 
 What can be stated exactly about a node is the test for being one, and it has four parts. A node holds private state that no other participant can read directly. It keeps its own clock, which no other participant shares. It is reachable only by messages, never by a reach into its memory. And it fails on its own, so its stopping does not stop the others and theirs does not stop it. Anything with all four is a node, whether it is a machine, a virtual machine, a container or one of twenty processes on a laptop, and anything missing one of them is not.
 
-What may happen between nodes, what the network is allowed to do to a message and why a crashed node cannot be told apart from a slow one, is the system model, and it belongs to [[Distributed System]] rather than here. What this note supplies to it is the unit of counting. A replication factor, a quorum size and a failure threshold are all counts of nodes, and none of them is well defined until the participant, and not the box it runs in, is the thing being counted.
+The node is also the unit the system model of a [[Distributed System]] counts in. A replication factor, a quorum size and a failure threshold are all counts of nodes, and none of them is well defined until the participant, and not the box it runs in, is the thing being counted.
 
 **Not further quantitative at this depth.** A node is a unit of a system model, so it is what other quantities are counted in rather than a quantity of its own.
 

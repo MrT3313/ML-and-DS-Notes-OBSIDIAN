@@ -35,7 +35,8 @@ Both constants are stored at fit time and reapplied unchanged to validation, tes
 |---|---|---|---|---|
 | `feature_range` | $(l, u)$ | $(0, 1)$ | a wider interval spreads the transformed values further apart, and moving $l$ below zero recentres the column | $(0, 1)$ unless the consumer wants zero-centred input, then $(-1, 1)$ |
 | `clip` | | `False` | turning it on forces out-of-range test values back onto $[l, u]$, capping them instead of extrapolating | on when a downstream component hard-requires the bound, off when you want to see excursions |
-| `copy` | | `True` | turning it off permits in-place scaling to save memory, at the cost of the original array | leave on unless memory is the binding constraint |
+
+`copy` is not in the table: it only decides whether the scaling is done in place or on a fresh array, and the transformed values are the same either way.
 
 ## Failure modes
 

@@ -27,4 +27,4 @@ Rules are kept when both exceed chosen thresholds. Apriori prunes the search usi
 
 ## Where it is used
 
-Retail placement and recommendation.
+Retail placement and recommendation: which products to shelve together, and what to suggest once a basket already holds an item. It is one of the tasks of [[Unsupervised Learning]], since transactions carry no label and the rules are structure found in the data itself. [[Clustering]] and [[Anomaly Detection]] are its sibling unsupervised tasks, and the contrast is what each one groups: clustering groups instances by similarity, anomaly detection singles out the instances that fit no group, and association rule learning groups attribute values rather than instances, by how often they occur together.

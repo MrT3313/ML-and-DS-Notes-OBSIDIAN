@@ -22,4 +22,4 @@ Any utility can be written as a [[Cost Function]] by negation, $J = -U$, so the 
 
 ## Where it is used
 
-Rare in supervised learning, where the [[Cost Function]] form dominates. It is the native form in reinforcement learning and evolutionary search.
+Rare in supervised learning, where the [[Cost Function]] form dominates. It is the native form in reinforcement learning and evolutionary search. It is the maximized one of the two sign conventions a [[Performance Measure]] can take, and [[Model Selection]] compares candidates on a validation score of either sign, ranking them by $\arg\max$ under a utility where it ranks by $\arg\min$ under a cost. [[Accuracy]] is a utility in this sense, higher being better, though it is reported rather than optimized, since the indicator inside it has no gradient to follow.

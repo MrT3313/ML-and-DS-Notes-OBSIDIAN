@@ -24,4 +24,4 @@ Prediction cost grows with $m$ because every stored instance is a candidate.
 
 ## Where it is used
 
-The alternative is [[Model-Based Learning]]. The canonical method is [[K-Nearest Neighbours]]. Fails when the similarity measure ignores what matters, and when $m$ is too large to search at prediction time.
+The alternative is [[Model-Based Learning]], which fits parameters once and never consults the stored instances again, so its prediction cost is independent of $m$ where this paradigm's grows with it. The canonical method is k-nearest neighbours, which has no note yet and which no HOML chapter takes as its subject. Every method here measures distance between instances, so it depends on [[Feature Scaling]]: a column measured in tens of thousands swamps a column in $[0, 1]$ in every similarity computed, and the nearest neighbours are then chosen by that one column. Fails when the similarity measure ignores what matters, and when $m$ is too large to search at prediction time.

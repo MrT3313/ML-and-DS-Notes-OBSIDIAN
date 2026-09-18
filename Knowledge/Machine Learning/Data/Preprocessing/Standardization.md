@@ -32,7 +32,8 @@ scikit-learn uses the population divisor $m$, not $m - 1$. The map is affine, so
 |---|---|---|---|---|
 | `with_mean` | | `True` | turning it on centres the column at $0$, which is what a gradient-based learner wants but which destroys sparsity | off for sparse matrices, where centring is rejected because it would densify the array |
 | `with_std` | | `True` | turning it on divides by $\sigma_j$, equalizing spread across columns | off only when you want centring alone, for instance ahead of a method that rescales internally |
-| `copy` | | `True` | turning it off permits in-place scaling to save memory | leave on unless memory is the binding constraint |
+
+`copy` is not in the table: it only decides whether the scaling is done in place or on a fresh array, and the transformed values are the same either way.
 
 ## Failure modes
 

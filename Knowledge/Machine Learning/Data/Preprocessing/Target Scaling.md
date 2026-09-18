@@ -31,7 +31,8 @@ For [[Standardization]] of the target, $g(y) = (y - \mu_y)/\sigma_y$ with $\mu_y
 |---|---|---|---|---|
 | `transformer` | $g$ | `None` | supplying a scaler sets the label geometry the model optimizes in | `StandardScaler` for range problems, a log or `PowerTransformer` for skew |
 | `func` / `inverse_func` | $g, g^{-1}$ | `None` | supplying a plain function pair replaces `transformer`, which cannot be set at the same time | `func=np.log, inverse_func=np.exp` when no fitted state is needed |
-| `check_inverse` | | `True` | keeping it on verifies on a subsample that $g^{-1}(g(y)) \approx y$ and warns if not | turn off only when the round trip is intentionally lossy |
+
+`check_inverse` is not in the table: it only verifies on a subsample that $g^{-1}(g(y)) \approx y$ and warns when the round trip fails, and it changes nothing that comes back.
 
 ## Failure modes
 

@@ -24,9 +24,11 @@ Given $D = \{(\mathbf{x}^{(i)}, y^{(i)})\}_{i=1}^{m}$, find $h$ such that $h(\ma
 
 ### Tasks
 
-- [[Classification]] 
-- [[Regression]] 
+- [[Classification]] is the supervised task whose label is discrete, so the model learns to assign each instance a class.
+- [[Regression]] is the supervised task whose label is continuous, so the model learns to predict a number.
+
 ### Models
-- [[Linear Regression]] 
-- [[Logistic Regression]] 
+
+- [[Linear Regression]] is the base supervised model for regression, fitting a weighted sum of the features to the label.
+- [[Logistic Regression]] is the base supervised model for classification, squashing that same weighted sum into a class probability.
 

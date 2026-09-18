@@ -21,6 +21,8 @@ A *data engineer* is someone who knows how to integrate the operational and anal
 
 An *analytics engineer* models and transforms data to make it more useful for business analysts and data scientists in an organization. The title is recent and traceable: practitioners in the analytics community started using it in late 2018 and early 2019, Michael Kaminsky's "The Analytics Engineer" (January 2019) is the first piece written about it, and dbt Labs adopted it and did most of the work of spreading it. Those accounts add one thing to the description above that is worth keeping, namely what makes the role *engineering*: software engineering discipline is applied to the analytics code itself, so transformations are version controlled, tested, documented, and deployed, rather than being SQL passed between people.
 
+This division of labour is a description of how the work splits once there is enough of it, not a rule, and the boundaries are not sharp in practice. One person holds several of these roles in a small organization, and the analytics engineer in particular is often an analyst who drifted toward engineering rather than a separate hire.
+
 ### The teams a data engineer sits between
 
 On the operational side are backend engineers, who build and run the services and databases that record what users do, an [[Online Transaction Processing]] workload. On the analytical side are business analysts (the business intelligence function) and data scientists, whose work runs against an [[Online Analytical Processing]] system.
@@ -28,8 +30,6 @@ On the operational side are backend engineers, who build and run the services an
 The asymmetry between the two sides is what creates the role. Analysts and data scientists perform analytics and typically do not modify the data; they read it. What they do produce is [[Derived Data]], datasets in which the original data has been processed in some way, which are new artifacts sitting beside the original rather than edits to it. So the flow a data engineer maintains runs mostly one way, out of the [[System of Record]] and into somewhere the same facts can be read at length without degrading the service the users are waiting on, and the analysts' own output accumulates alongside that rather than flowing back into it.
 
 ## Formal statement
-
-The division of labour set out above is a description of how the work splits once there is enough of it, not a rule, and the boundaries are not sharp in practice. One person holds several of these roles in a small organization, and the analytics engineer in particular is often an analyst who drifted toward engineering rather than a separate hire.
 
 **Not further quantitative at this depth.**
 

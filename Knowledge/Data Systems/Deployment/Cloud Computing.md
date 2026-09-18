@@ -41,13 +41,9 @@ Everything else in the comparison follows from who holds the machines, and what 
 
 [[Self-Hosting]] states the same trade from the other side.
 
-## Formal statement
+### What it cost in 2022
 
-What is precise here is the contract and the price.
-
-**The contract.** The vendor owns the machines, employs the operators, decides what is exposed and what is not, and sets the price. You own the configuration, the bill, and the cost of leaving. Every row of the control table above is that one line applied to a situation, and each row is checkable against a named service: either the status page is the only signal during an outage or it is not, either the export path exists or it does not.
-
-**The price.** Two published figures, both from 2022, give the argument a number.
+Two published figures, both from 2022, give the argument a number.
 
 | comparison | figure |
 |---|---|
@@ -60,6 +56,10 @@ That comparison is Nima Badizadegan, "Use One Big Server", specbranch.com, Augus
 What that ratio looks like as an annual line item: David Heinemeier Hansson reported in October 2022 that his company was paying Amazon over half a million dollars a year for managed database and search alone, RDS and Elasticsearch, and left the cloud over it ("Why We're Leaving the Cloud", world.hey.com, October 2022).
 
 Both sources are written by people arguing for leaving, and both quote 2022 list prices that have moved since. Treat the ratio as the durable part and the absolute numbers as dated. The figures also only price hardware: staff time, outage risk and regulatory exposure share no unit with dollars per month, which is why the decision has a contract and a price range rather than a formula.
+
+## Formal statement
+
+The vendor owns the machines, employs the operators, decides what is exposed and what is not, and sets the price. You own the configuration, the bill, and the cost of leaving. Every row of the control table above is that one line applied to a situation, and each row is checkable against a named service: either the status page is the only signal during an outage or it is not, either the export path exists or it does not.
 
 ## Where it is used
 

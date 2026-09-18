@@ -19,6 +19,8 @@ From an unlabeled $\mathbf{x}$, construct a pair $(\tilde{\mathbf{x}}, t(\mathbf
 
 **Not further quantitative at this depth.**
 
+Self-supervised learning is a paradigm, and the construction of the pair above is the whole of its mathematics at this depth: once the pair exists, everything that follows belongs to the [[Supervised Learning]] loss it hands off to. A later chapter would add the specific pretext objectives, ex a masked-token or a contrastive loss, each with a formula of its own.
+
 ## Where it is used
 
 My formulation: it is supervised learning on manufactured labels. It starts from unlabeled data like [[Unsupervised Learning]], but its objective is a [[Classification]] or [[Regression]] loss, and its output is a model rather than a description of the data. [[HOML]] notes that some authors file it under unsupervised learning; I do not.

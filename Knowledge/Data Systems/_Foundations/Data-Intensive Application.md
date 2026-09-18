@@ -21,7 +21,7 @@ An application is **data-intensive** when data management is one of the primary 
 - managing changes to data
 - ensuring consistency in the face of failures and concurrency
 - making services highly available. 
-The label is a statement about where the difficulty lives, not about how much data there happens to be.
+The label is a statement about where the difficulty lives, not about how much data there happens to be, and any one of the four is enough to earn it.
 
 ## VS
 
@@ -32,8 +32,6 @@ The two are a pair of answers to one question, which is what the scarce resource
 They are also not exclusive, and the interesting systems are usually both. Model training on a scientific cluster is compute-intensive in the arithmetic and data-intensive in getting the training set to the cores and keeping the checkpoints consistent. (NIST SP 800-223)[https://csrc.nist.gov/pubs/sp/800/223/final] describes present-day [[High-Performance Computing]] installations whose parallel file systems are measured in petabytes and can reach exabytes, sitting next to compute nodes carrying GPUs for modelling and machine learning, which is both challenges in one machine room.
 
 ## Formal statement
-
-The four challenges are what make the label checkable rather than merely asserted. A system that answers all four comfortably is not data-intensive, however many bytes it holds; a system that fails any one of them is, and that failing answer is where the engineering effort goes.
 
 **Not further quantitative at this depth.**
 

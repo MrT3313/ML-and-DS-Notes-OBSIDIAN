@@ -60,14 +60,7 @@ Uncertain: the notebook's Error Analysis section is code only, carrying no prose
 
 ## Hyperparameters
 
-The protocol has two genuine knobs, and both are display arguments that change the numbers on the screen and therefore the conclusion you draw. Neither fits an estimator, which is exactly why they are easy to mistake for cosmetics and get set once and never questioned.
-
-| name | symbol | default | effect of increasing | how to tune |
-|---|---|---|---|---|
-| `normalize`, the axis | $\tilde{C}$ | `None`, raw counts | moving from `None` to `"true"` divides each row by its support and each cell becomes a rate conditioned on the actual class; `"pred"` divides by column totals and conditions on the predicted class instead; `"all"` divides by $m$ and makes every cell a share of the whole set. The three give three different orderings of which confusion is worst | read `"true"` and `"pred"` as a pair, always both, and treat a conclusion that only one of them supports as unproven. `None` when absolute volume is the point, since a $60$ percent rate over nine instances is not a finding |
-| the error mask, passed as `sample_weight` | $w^{(n)} = \mathbb{1}[\hat{y}^{(n)} \neq y^{(n)}]$ | `None`, every instance weighted $1$ | switching it on zeroes the diagonal and rescales every row or column total to the error count for that class rather than its support, so the off-diagonal cells stop competing with the correct predictions for the colour scale and the displayed rates become shares of errors instead of shares of instances | on when the question is how the mistakes are distributed, off when the question is how often the model is right. Never compare a masked rate against an unmasked one, since the denominators are different quantities |
-
-`values_format`, `cmap`, `colorbar`, `include_values`, `xticks_rotation` and `ax` change only the appearance of the plot and are not hyperparameters by this test.
+None. The arguments that change what the reading says, `normalize` and the error mask passed as `sample_weight`, belong to the confusion matrix the protocol reads rather than to the protocol, and they are tabulated in [[Confusion Matrix]].
 
 ## Failure modes
 

@@ -36,11 +36,12 @@ Two settings matter downstream. `handle_unknown="ignore"` encodes a level unseen
 | name | symbol | default | effect of increasing | how to tune |
 |---|---|---|---|---|
 | `handle_unknown` | | `"error"` | `"ignore"` turns an unseen level into an all-zero row block instead of an exception | `"ignore"` for any pipeline that will be refitted or deployed |
-| `sparse_output` | | `True` | setting `False` densifies the block, costing $m \times K$ floats of memory | leave `True` unless a downstream step rejects sparse input |
 | `drop` | | `None` | `"first"` removes one column per feature, cutting width by the number of features and breaking the collinearity | `"first"` for linear models with an intercept, `None` for trees |
 | `min_frequency` | | `None` | raising it folds more rare levels into a single infrequent column, shrinking $K$ | set to a count or a fraction when a long tail of levels is near-empty |
 | `max_categories` | | `None` | caps the number of output columns per feature, bucketing the remainder as infrequent | a few dozen at most, chosen against the downstream score |
 | `categories` | | `"auto"` | fixes the level set and column order rather than inferring it from the training data | set explicitly when the full level set is known in advance |
+
+`sparse_output` is not in the table: it changes only the representation of the block, sparse or dense, and not a single entry in it.
 
 ## Failure modes
 

@@ -36,13 +36,13 @@ The axis is what a single request does to the data. OLTP reads and writes indivi
 | Data represents     | latest state of the data (current point in time)       | history of events that happened over time      |
 | Dataset size        | gigabytes (GB) to terabytes (TB)                       | terabytes (TB) to petabytes (PB)               |
 
+The size band in the table is an order-of-magnitude comparison taken from [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]], not a threshold. A system does not stop being OLTP when it crosses a petabyte; the band says only that an operational dataset holds current state while an analytical one accumulates history, so the two grow at different rates.
+
 "Online" in this name means interactive and live: the request is answered while somebody waits for the answer, as opposed to being queued and run later in a batch. That is the sense the term was coined in, back when the alternative was submitting a job and collecting the output afterwards, and it survives in benchmark definitions, where a transaction is described as either executed online or queued for deferred execution. It is a different word from the "online" in [[Online Learning]], which names a model that updates its parameters one instance or mini-batch at a time. Neither is the everyday networked sense of the word.
 
-## Formal statement
-
-The size band in the table above is an order-of-magnitude comparison taken from [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]], not a threshold. A system does not stop being OLTP when it crosses a petabyte; the band says only that an operational dataset holds current state while an analytical one accumulates history, so the two grow at different rates.
-
 The latency requirement is implied by "online" and by nothing stronger: a human or a service is blocked until the answer comes back. The term fixes no particular number of milliseconds.
+
+## Formal statement
 
 **Not further quantitative at this depth.**
 

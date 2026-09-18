@@ -17,7 +17,13 @@ Grid search takes a list of candidate values for each [[Hyperparameter]], forms 
 
 One requirement outranks the rest: the estimator handed to the search must be the whole [[Pipeline]], preprocessing included, so imputation and scaling are refit inside each fold. Searching over a model given already-transformed data lets the validation folds shape the transformer that is then scored on them, which is [[Data Snooping Bias]] wearing a tuning loop as a disguise.
 
-## Algorithm or formula
+## Algorithm
+
+1. List the candidate values for every hyperparameter to be searched, as one dictionary, or as a list of dictionaries when some combinations make no sense jointly.
+2. Form the Cartesian product of the values within each dictionary; every combination is a candidate.
+3. Score every candidate by $K$-fold [[Cross-Validation]], the whole pipeline refit inside each fold.
+4. Keep the candidate with the best mean fold score.
+5. Refit the winner on the whole [[Training Set]] and evaluate it once on the [[Testing Set]].
 
 For $k$ hyperparameters with $v$ values each and $K$ folds, the search costs
 
@@ -46,10 +52,11 @@ Scikit-learn scorers always follow "higher is better", so error metrics are expo
 |---|---|---|---|---|
 | `cv` | $K$ | 5 | less selection noise, linearly more fits | 3 while iterating on a large grid, 5 or 10 to decide |
 | `scoring` | | estimator's own `score` | changes which candidate wins | name the metric the project is judged on |
-| `n_jobs` | | 1 | wall-clock falls, memory rises with parallel copies | `-1` locally |
 | `refit` | | `True` | `best_estimator_` becomes usable directly | leave on unless refitting is prohibitive |
 | `factor` (halving) | | 3 | fewer, harsher rounds; faster but likelier to kill a slow starter | 2 for a cautious search, 3 or 4 when compute is short |
 | `min_resources` (halving) | | `'exhaust'` | first round more reliable, fewer rounds fit | raise it if early rounds look like coin flips |
+
+`n_jobs` is not in the table: it changes wall-clock time and memory, never which candidate wins.
 
 ## Failure modes
 
