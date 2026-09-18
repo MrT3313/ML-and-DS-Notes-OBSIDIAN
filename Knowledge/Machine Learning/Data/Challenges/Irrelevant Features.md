@@ -17,7 +17,9 @@ Irrelevant features are input columns that carry no information about the target
 
 ## Formal statement
 
-A [[Feature]] $x_j$ is irrelevant when $y \perp x_j \mid \mathbf{x}_{-j}$, so no model gains from it. Feature engineering is a map $\phi: \mathbb{R}^{n} \to \mathbb{R}^{n'}$ chosen so that $y$ is easier to predict from $\phi(\mathbf{x})$. Not further quantitative at this depth.
+A [[Feature]] $x_j$ is irrelevant when $y \perp x_j \mid \mathbf{x}_{-j}$, so no model gains from it. Feature engineering is a map $\phi: \mathbb{R}^{n} \to \mathbb{R}^{n'}$ chosen so that $y$ is easier to predict from $\phi(\mathbf{x})$.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

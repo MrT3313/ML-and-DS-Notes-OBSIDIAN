@@ -28,7 +28,7 @@ Mitchell's $E$, $T$ and $P$ are the three hooks the rest of the domain hangs on:
 - **`Data/`** everything about the input. At the top sit [[Feature Engineering]], deciding what the model actually sees, [[Data Augmentation]], growing the training set with label-preserving transformations of what is already in it, and [[Open Data Repositories]], where a dataset comes from in the first place. `Challenges/` holds the seven ways data defeats a model, [[Class Imbalance]] among them, a label whose classes are not present in comparable numbers, so predicting the majority beats learning anything. `Sampling/` carves a dataset up: [[Random Sampling]], [[Stratified Sampling]], and the [[Random Seed]] that makes either one reproducible. `Exploration/` is the looking that comes before any fitting: [[Exploratory Data Analysis]], [[Correlation]], [[Skewed Data]]. `Preprocessing/` falls into three jobs. Fill the gaps, [[Missing Value Imputation]]. Turn categories into numbers, [[Ordinal Encoding]] and [[One-Hot Encoding]]. Put columns on comparable ranges, [[Feature Scaling]] and its two forms [[Min-Max Scaling]] and [[Standardization]], with [[Feature Distribution Transformation]] for columns that need reshaping first and [[Target Scaling]] for the label.
 - **`Composition/`** the plumbing that combines estimators into one estimator, acting on estimators rather than on data. [[Scikit-Learn Estimator API]] is the contract the other six rest on, and its estimator, transformer and predictor taxonomy is what the `## Implementation` sections across the vault assume, not these six alone. [[Pipeline]] chains steps into a single fitted object and is what guarantees each step sees training folds only, [[Column Transformer]] routes named column subsets to their own branch and concatenates the results, and [[Custom Transformer]] is how an idea of your own earns the same interface, and so the same safety, as a built-in. The same job on a different axis is done by the meta-estimators, which wrap one estimator to give it a capability it does not natively have: [[One-versus-Rest]] and [[One-versus-One]] hand a two-class algorithm a multiclass target, the first by fitting one classifier per class and the second one per pair of classes, and [[Classifier Chain]] hands a single-label algorithm a multilabel one, by fitting a classifier per label in a fixed order and feeding each of them the labels already decided.
 
-Operational concerns sit outside this domain, in `Knowledge/MLOps/`, indexed at [[MLOps]]. [[Model Rot]] is the first of them. The mathematics these notes lean on sits outside it too, in `Knowledge/Mathematics/`, indexed at [[Mathematics]], which lists its own contents.
+Operational concerns sit outside this domain, in `Knowledge/MLOps/`, indexed at [[MLOps]]. [[Model Rot]] is the first of them. The mathematics these notes lean on sits outside it too, in `Knowledge/Mathematics/`, indexed at [[Mathematics]], which lists its own contents. The machinery that stores, moves and serves the data sits outside it as well, in `Knowledge/Data Systems/`, indexed at [[Data Systems]], a subject that stands whether or not a model is ever fitted on anything it holds.
 
 ## What is missing
 
@@ -42,3 +42,17 @@ Operational concerns sit outside this domain, in `Knowledge/MLOps/`, indexed at 
 - Feature extraction is the one branch of [[Feature Engineering]] with no note of its own.
 - Launch, monitor and maintain, the last section of chapter 2, produced nothing. It belongs in `Knowledge/MLOps/` beside [[Model Rot]], and it is the largest single gap chapter 2 left.
 - Framing the business objective and the machine learning project checklist, which open chapter 2, likewise produced no note.
+
+```base
+filters:
+  and:
+    - file.hasLink(this.file)
+    - file.inFolder("Knowledge")
+views:
+  - type: table
+    name: Linked here
+    order:
+      - file.name
+      - note_kind
+      - confidence
+```

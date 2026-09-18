@@ -23,7 +23,7 @@ Scikit-Learn gives every object in the library one interface, so imputers, scale
 
 ## Formal statement
 
-Not further quantitative at this depth. The API is an interface contract rather than a mathematical object, so what can be stated precisely is which methods each role owes its caller.
+The API is an interface contract, and what it fixes precisely is which methods each role owes its caller.
 
 | role        | required                 | usually also                                                                 | example                           |
 |-------------|--------------------------|------------------------------------------------------------------------------|-----------------------------------|

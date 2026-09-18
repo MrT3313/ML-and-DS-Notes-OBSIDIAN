@@ -15,7 +15,9 @@ The unreasonable effectiveness of data is the empirical finding that very differ
 
 ## Formal statement
 
-Not further quantitative at this depth. The evidence is a plot of accuracy against training-set size on a natural-language disambiguation task, where the curves for four algorithms rise together and converge as $m$ goes from $10^5$ to $10^9$ words.
+The evidence is a plot of accuracy against training-set size on a natural-language disambiguation task, where the curves for four algorithms rise together and converge as $m$ goes from $10^5$ to $10^9$ words.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

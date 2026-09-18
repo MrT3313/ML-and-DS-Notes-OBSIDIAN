@@ -15,7 +15,9 @@ In batch learning the system is trained once on the whole available dataset, the
 
 ## Formal statement
 
-Training consumes all $m$ instances of $D$ at once to produce $\boldsymbol\theta^{*}$; a fixed $h_{\boldsymbol\theta^{*}}$ serves every query until the next retrain. Cost of an update is a full pass over $|D_{\text{old}}| + |D_{\text{new}}|$ instances. Not further quantitative at this depth.
+Training consumes all $m$ instances of $D$ at once to produce $\boldsymbol\theta^{*}$; a fixed $h_{\boldsymbol\theta^{*}}$ serves every query until the next retrain. Cost of an update is a full pass over $|D_{\text{old}}| + |D_{\text{new}}|$ instances.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

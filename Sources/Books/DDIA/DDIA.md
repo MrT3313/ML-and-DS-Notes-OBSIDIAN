@@ -5,7 +5,7 @@ author:
   - Martin Kleppmann
   - Chris Riccomini
 year: 2026
-url: https://github.com/ept/ddia-references
+url: https://github.com/ept/ddia2-references
 up: "[[Home]]"
 aliases:
   - Designing Data-Intensive Applications
@@ -15,7 +15,7 @@ aliases:
 
 ## Chapters
 
-- DDIA Ch01 Trade-Offs in Data Systems Architecture
+- [[DDIA Ch01 Trade-Offs in Data Systems Architecture]]
 - DDIA Ch02 Defining Nonfunctional Requirements
 - DDIA Ch03 Data Models and Query Languages
 - DDIA Ch04 Storage and Retrieval

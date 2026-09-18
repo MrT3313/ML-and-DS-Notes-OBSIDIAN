@@ -15,7 +15,9 @@ Self-supervised learning generates its own labels from unlabeled data, typically
 
 ## Formal statement
 
-From an unlabeled $\mathbf{x}$, construct a pair $(\tilde{\mathbf{x}}, t(\mathbf{x}))$ where $\tilde{\mathbf{x}}$ is a corrupted or partial view and $t(\mathbf{x})$ is the withheld part; then train $h(\tilde{\mathbf{x}}) \approx t(\mathbf{x})$ as ordinary [[Supervised Learning]]. Not further quantitative at this depth.
+From an unlabeled $\mathbf{x}$, construct a pair $(\tilde{\mathbf{x}}, t(\mathbf{x}))$ where $\tilde{\mathbf{x}}$ is a corrupted or partial view and $t(\mathbf{x})$ is the withheld part; then train $h(\tilde{\mathbf{x}}) \approx t(\mathbf{x})$ as ordinary [[Supervised Learning]].
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

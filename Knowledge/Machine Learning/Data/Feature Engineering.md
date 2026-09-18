@@ -11,6 +11,7 @@ aliases:
 up: "[[Feature]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
 confidence: draft
 ---
 
@@ -31,6 +32,8 @@ so the fitted object is the composition $h \circ \phi$, not $h$ alone. Two conse
 **Attribute combination** builds a feature as a ratio or product of existing ones, and it is where Chapter 2 spends its effort. A district's `total_rooms` is nearly useless alone, because districts differ wildly in size and the count therefore measures population more than housing. Dividing that out fixes it: against `median_house_value`, `total_bedrooms` correlates at $0.055$ while `bedrooms_ratio` (bedrooms over rooms) correlates at $-0.256$, far stronger and opposite in sign, since a district whose homes are mostly bedrooms is a district of small homes. [[Correlation]] is how you check whether a candidate earned its place.
 
 **Transformation** reshapes a column to suit the model's assumptions, through [[Feature Scaling]] or [[Feature Distribution Transformation]]. **Encoding** turns categories into numbers, through [[One-Hot Encoding]] or [[Ordinal Encoding]]. **Selection** drops what does not pay, the practical answer to [[Irrelevant Features]] and the neighbour of [[Dimensionality Reduction]]. **Extraction** pulls structured signal out of a raw one, ex. a `day_of_week` from a timestamp, or an embedding from text.
+
+The substrate this work runs on is part of the choice. A conformed relational schema reached through SQL is an awkward place to do it rather than an impossible one, since a warehouse can fit some model families in place without the data leaving it, and it stops being an option at all once the input is a photograph or free text rather than columns. That is much of why the reshaping that happens before a fit tends to move to the files of a [[Data Lake]], where a reader imposes whatever structure the work needs.
 
 ### Feature importance closes the loop
 

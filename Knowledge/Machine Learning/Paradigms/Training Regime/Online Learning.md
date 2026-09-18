@@ -8,6 +8,7 @@ up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch04 Training Models]]"
+  - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
 confidence: draft
 ---
 ## Definition
@@ -22,4 +23,4 @@ Step size and adaptation rate are one number read two ways, not two knobs. On a 
 
 ## Where it is used
 
-The alternative is [[Batch Learning]]. [[Stochastic Gradient Descent]] is the update that makes any of this possible, being the $b = 1$ case of the step above, and [[Mini-Batch Gradient Descent]] is the same thing for $b > 1$; in scikit-learn 1.6 both reach an estimator through `partial_fit`, which keeps its update counter running across calls rather than restarting. That detail has a consequence in production: a decaying [[Learning Schedule]] goes on decaying through the stream, so a system meant to track a changing environment wants a rate that does not decay, in practice `learning_rate="constant"`, or it stops adapting while still appearing to train. The same mechanism run over a dataset too large for memory is [[Out-of-Core Learning]], which is why "online" is a misnomer there. The failure mode is bad data arriving live: the model degrades in production, so monitoring and the ability to roll back matter more than in batch settings.
+The alternative is [[Batch Learning]]. [[Stochastic Gradient Descent]] is the update that makes any of this possible, being the $b = 1$ case of the step above, and [[Mini-Batch Gradient Descent]] is the same thing for $b > 1$; in scikit-learn 1.6 both reach an estimator through `partial_fit`, which keeps its update counter running across calls rather than restarting. That detail has a consequence in production: a decaying [[Learning Schedule]] goes on decaying through the stream, so a system meant to track a changing environment wants a rate that does not decay, in practice `learning_rate="constant"`, or it stops adapting while still appearing to train. The same mechanism run over a dataset too large for memory is [[Out-of-Core Learning]], which is why "online" is a misnomer there. The word is overloaded a second time outside this domain, and not in this sense at all: in [[Online Transaction Processing]] and [[Online Analytical Processing]] "online" means interactive, a request answered while the caller sits waiting for it, which says nothing about whether anything is fitted one instance at a time. The failure mode is bad data arriving live: the model degrades in production, so monitoring and the ability to roll back matter more than in batch settings.

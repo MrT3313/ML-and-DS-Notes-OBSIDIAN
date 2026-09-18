@@ -9,6 +9,7 @@ aliases:
 up: "[[Scikit-Learn Estimator API]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
 confidence: draft
 ---
 
@@ -19,7 +20,7 @@ A pipeline bundles a sequence of transformers, plus an optional final predictor,
 The second reason is deployment: a fitted pipeline carries preprocessing and [[Model]] in one artifact, so serving cannot apply a different median than training did.
 
 > [!warning]
-> The word carries a second, unrelated sense in data engineering: a *data pipeline* is a chain of data-processing components running asynchronously, each pulling input from a data store, processing it, and writing its output back for the next component to pick up later. There the interface between components is storage, and a component can fail without stopping the others. A `sklearn.pipeline.Pipeline` is the in-memory version: ordinary objects in one process, passing arrays directly from call to call.
+> The word carries a second, unrelated sense in data engineering, the one [[Extract-Transform-Load]] carries: a *data pipeline* is a chain of data-processing stages run on a schedule, each pulling input from a data store, processing it, and writing its output back for a later stage to pick up. There the interface between stages is storage, so a stage can fail and be rerun without the stages around it being rerun too. A `sklearn.pipeline.Pipeline` is the in-memory version: ordinary objects in one process, passing arrays directly from call to call, the whole chain living and dying inside a single `fit`.
 
 ## Algorithm or formula
 

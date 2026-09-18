@@ -14,7 +14,9 @@ Semi-supervised learning trains on a small labeled set together with a large unl
 
 ## Formal statement
 
-$D = D_L \cup D_U$ with $|D_L| \ll |D_U|$, where $D_L$ carries labels and $D_U$ does not. Most algorithms combine an unsupervised step on all of $D$ with a supervised step on $D_L$. Not further quantitative at this depth.
+$D = D_L \cup D_U$ with $|D_L| \ll |D_U|$, where $D_L$ carries labels and $D_U$ does not. Most algorithms combine an unsupervised step on all of $D$ with a supervised step on $D_L$.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

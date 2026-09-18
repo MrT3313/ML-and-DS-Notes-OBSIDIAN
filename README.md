@@ -1,6 +1,6 @@
 # ML and DS Notes
 
-An Obsidian vault of machine learning and data science notes, built from numerous book & online sources.
+An Obsidian vault of machine learning, data systems, and data science notes, built from numerous book & online sources.
 
 The notes are restatements, not transcriptions. Every concept is written in my own words against a stated source, and a note does not count as done until it meets the [Quality Bar](__Meta/Quality-Bar.md). If you are here for a summary of a textbook, this is not that. If you are here for a linked reference you can navigate by concept, it is.
 
@@ -23,8 +23,8 @@ You can also just read the Markdown on GitHub. Nothing here depends on Obsidian 
 
 | Path | What lives there |
 |------|------------------|
-| `Knowledge/` | The permanent notes, filed by what kind of thing they are. `Machine Learning/` is the main body, `MLOps/` is early. |
-| `Sources/` | One note per source, plus one per chapter extracted from it, and one per dataset those chapters work on. Currently HOML (Géron, 2022), chapters 1 to 4, and three datasets, California housing, MNIST and iris. |
+| `Knowledge/` | The permanent notes, filed by what kind of thing they are. `Machine Learning/` is the main body. `Data Systems/` is one chapter old. `Mathematics/` holds only the results the other domains actually lean on, six so far. `MLOps/` is a single note. |
+| `Sources/` | One note per source, plus one per chapter extracted from it, and one per dataset those chapters work on. Currently HOML (Géron, 2022), chapters 1 to 4, and DDIA (Kleppmann and Riccomini, 2026), chapter 1, plus three datasets, California housing, MNIST and iris. |
 | `_Slip Box (Zettelkasten)/` | Landing place for quick notes taken on the fly, before integration. Nothing here is expected to meet the quality bar. |
 | `__Meta/` | The vault's own documentation: the quality bar, callout reference, note templates, and the study prompt. |
 

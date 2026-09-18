@@ -15,7 +15,9 @@ Out-of-core learning trains on a dataset too large for main memory by loading it
 
 ## Formal statement
 
-Partition $D$ into chunks $C_1, \dots, C_K$ with $|C_k| \cdot \text{bytes per instance} \le \text{RAM}$; for each $k$ run the online update on $C_k$. One pass over all chunks is one epoch. Not further quantitative at this depth.
+Partition $D$ into chunks $C_1, \dots, C_K$ with $|C_k| \cdot \text{bytes per instance} \le \text{RAM}$; for each $k$ run the online update on $C_k$. One pass over all chunks is one epoch.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 

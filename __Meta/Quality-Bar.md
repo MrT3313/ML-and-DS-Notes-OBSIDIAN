@@ -59,7 +59,17 @@ A new `note_kind` is earned when the thing shares no required sections with any 
 ```
 
 - **Definition** is one or two sentences, in your own words. If it reproduces the book's phrasing, it does not count. When the source uses the term without defining it and you supplied the definition, say so here.
-- **Formal statement** carries the mathematics. If the idea genuinely is not quantitative, discharge the section with exactly this string and nothing else: **Not further quantitative at this depth.** Then say why. The string is fixed so the discharged notes can be found in one search; "Not quantitative.", "Not quantitative as a law." and the rest are drift and get normalised on sight.
+- **Formal statement** carries the precise content: what the idea says, stated exactly enough that a claim about it could be checked. Three rungs, and a note takes the highest it can reach.
+
+  **Mathematics.** The definitions, the formula, the derivation, the bounds. Every note in `Knowledge/Mathematics/` and most under `Knowledge/Machine Learning/` stands here. A note with mathematics available that does not state it is unfinished, not discharged.
+
+  **A precise non-mathematical statement**, where the idea is exact but not numeric: an interface contract, a system model, an invariant, the conditions under which the thing holds, a table of what is guaranteed and what is not. It faces the same test the mathematics faces, that a claim could be found false against it. `Scikit-Learn Estimator API` states which methods each role owes its caller; `Object Storage` states which filesystem operations an object store keeps and which it drops. History, motivation, product lists, vendor comparisons and evidence audits do not qualify, however well researched. They are real content and they belong under `## Definition`, under `## Where it is used`, or under a named `###` of their own.
+
+  **The discharge**, where neither rung is reachable: the idea is a label, a role or a category and there is nothing exact under it at this depth. The string is fixed so the discharged notes can be found in one search: **Not further quantitative at this depth.** Then say why, in at most two sentences. "Not quantitative.", "Not quantitative as a law." and the rest are drift and get normalised on sight.
+
+  The discharge goes **last**, never first. It marks where the treatment stops, which is what "not further" means, and a note that has reached rung one or rung two may still end with it. Placed above content it becomes a premise the rest of the section has to justify, which is where padding comes from. A "why" that runs past two sentences is the section telling you it was rung two all along: delete the discharge and state the thing.
+
+  A note never contradicts its own rung. The discharge line above a formula, a contract or an invariant is the defect this ladder exists to stop.
 - **Where it is used** is where the note earns its place in the graph. At least two outbound `[[links]]`, each with the phrase that explains the relationship. A bare list of links does not count.
 
 Three optional sections, all in use:
@@ -153,6 +163,7 @@ For a data file the vault works on, under `Sources/Datasets/`. Frontmatter is `n
 - Placement commentary in the body. Where a note lives is expressed by the folder tree and by `up`, never by a sentence in the prose explaining why it was filed somewhere. Such sentences go stale the first time anything moves.
 - A heading that names a source, and "the chapter" used as a bare subject in the prose. A note under `Knowledge/` is organized by its topic, with attribution in `sources:` and in `[[links]]`. See section 2.
 - `confidence: solid` on a note you have not been questioned on.
+- The discharge string above a formula, a contract, or an invariant. Discharge is the bottom rung, not a hedge appended to real content.
 
 ## 4. Review protocol
 

@@ -17,7 +17,9 @@ Training data is nonrepresentative when it does not reflect the population the m
 
 ## Formal statement
 
-The sample is drawn from $q(\mathbf{x}, y) \ne p(\mathbf{x}, y)$, where $p$ is the population. A model fit to $q$ minimizes $\mathbb{E}_q[\ell]$, not $\mathbb{E}_p[\ell]$, and the gap between them is not visible from within the sample. Not further quantitative at this depth.
+The sample is drawn from $q(\mathbf{x}, y) \ne p(\mathbf{x}, y)$, where $p$ is the population. A model fit to $q$ minimizes $\mathbb{E}_q[\ell]$, not $\mathbb{E}_p[\ell]$, and the gap between them is not visible from within the sample.
+
+**Not further quantitative at this depth.**
 
 ## Where it is used
 
