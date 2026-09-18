@@ -32,7 +32,7 @@ Folder placement and the `up` frontmatter key answer different questions. The fo
 
 ## Conventions
 
-Notes under `Knowledge/` carry a frontmatter contract: `note_kind`, `aliases`, `up`, `sources`, and `confidence`. Required sections vary by `note_kind` (`concept`, `method`, `index`, `source`, `dataset`, `meta`). The [Quality Bar](__Meta/Quality-Bar.md) is the authority on all of it, including what disqualifies a note. Templates for new source and chapter notes are in `__Meta/templates/`.
+Notes under `Knowledge/` carry a frontmatter contract: `note_kind`, `aliases`, `up`, `sources`, and `confidence`. Required sections vary by `note_kind` (`concept`, `method`, `index`, `source`, `dataset`, `meta`). The [Quality Bar](__Meta/Quality-Bar.md) is the authority on all of it, including what disqualifies a note. A template per note kind, with the required frontmatter and headings already in place, is in `__Meta/templates/Note Kinds/`.
 
 ## What git tracks
 

@@ -1,8 +1,13 @@
 ---
 note_kind: source
-medium:
+medium: book
 author:
 year:
 url:
+aliases:
 up: "[[Home]]"
 ---
+
+# 
+
+## Chapters

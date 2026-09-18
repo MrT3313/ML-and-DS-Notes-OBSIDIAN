@@ -2,7 +2,7 @@
 note_kind: source
 medium: book
 chapter:
-up:
+up: ""
 url:
 aliases:
 ---
