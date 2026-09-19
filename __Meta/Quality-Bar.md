@@ -25,7 +25,7 @@ Two rules that are easy to break:
 
 - The key is `confidence`, not `con`. A typo here makes the note invisible to every Bases query.
 - `up` is a link, not a folder. Folder placement and `up` answer different questions: the folder says what kind of thing this is, `up` says what it is part of. `Logistic Regression` lives in `Models/Linear/` and has `up: "[[Classification]]"`. Both are correct.
-- `up` stays inside the domain the folder belongs to. No note points across a domain boundary, and a note that belongs to two domains is filed in one, points `up` within it, and states its debt to the other in `## Where it is used`. A feature store is an MLOps note with an MLOps parent, and feature engineering is a link in its prose.
+- `up` stays inside the domain the folder belongs to. No note points across a domain boundary, and a note that belongs to two domains is filed in one, points `up` within it, and states its debt to the other in `## Where it is used`. `Object Storage` is a Systems Architecture note with a Systems Architecture parent, and `Data Lake` is a Data Systems link in its prose.
 
 Notes outside `Knowledge/` carry their own contract: `source` and `dataset` under `Sources/`, `meta` under `__Meta/`. Their keys are given with their sections in section 2.
 
