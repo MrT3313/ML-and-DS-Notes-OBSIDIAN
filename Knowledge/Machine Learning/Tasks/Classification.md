@@ -47,11 +47,3 @@ views:
         direction: DESC
 
 ```
-
-## What is missing
-
-- No classifier note for the families the later chapters own: support vector machines, decision trees, and the ensembles. Until those are written, every model on this list is linear and the index offers no alternative to a [[Decision Boundary]] that is a flat surface.
-- k-nearest neighbours is used by chapter 3 and owned by no chapter, so it is reachable only through the notes that mention it in passing, and the one link already pointing at it resolves to nothing.
-- The multiclass and multilabel metrics are thin. What exists covers the averaging arguments (`macro`, `micro`, `weighted`, `samples`) and stops there, with nothing on the measures native to a $K \times K$ matrix rather than built by averaging binary ones.
-- Calibration of predicted probabilities appears nowhere, although the gap between a score and a probability is raised every time a threshold is set. A classifier is calibrated when its predicted probabilities match observed frequencies, and ranking and calibration are independent, so [[Log Loss]] separates two models that a [[ROC Curve]] cannot. [[Softmax Regression]] is where the gap already shows on this list, since regularization flattens the probabilities it returns without changing which class wins. Neither the measurement nor the repair has a note.
-- Nothing here yet on what to do when the confusions [[Error Analysis]] surfaces are structural rather than fixable by more data, which is where a model that builds in the invariance replaces one that learns it from [[Data Augmentation]]. That argument belongs to the deep learning chapters and no note carries it.

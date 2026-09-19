@@ -1,6 +1,6 @@
-# System Architecture, Machine Learning, and Data Science Notes
+# Systems Architecture, Machine Learning, and Data Science Notes
 
-An [Obsidian](https://obsidian.md/) vault of system architecture, machine learning, and data science notes, built from numerous book & online sources.
+An [Obsidian](https://obsidian.md/) vault of systems architecture, machine learning, and data science notes, built from numerous book & online sources.
 
 The notes are restatements, not transcriptions. A note does not count as done until it meets the [Quality Bar](__Meta/Quality-Bar.md).
 

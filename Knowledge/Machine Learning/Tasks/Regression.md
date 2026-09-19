@@ -34,10 +34,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-- The regressors fitted in [[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]] have no notes. `DecisionTreeRegressor`, `RandomForestRegressor` and `SVR` all appear in its worked example and are owned by chapters 6, 7 and 5. Every method listed above is linear in its parameters, so this index offers no nonlinear alternative to any of them.
-- Nothing on multivariate regression, several targets predicted per instance, although the scope statement above names the axis. `MultiOutputRegressor` and the estimators with native multi-target support have no note, though the classification analogue is [[Multioutput Classification]].
-- No regression counterpart to [[Error Analysis]]. Residual plots, heteroscedasticity and where a model's errors concentrate are absent, which leaves a single averaged number from [[Root Mean Squared Error]] or [[Mean Absolute Error]] as the only available reading of a regressor's errors.
-- Quantile and robust regression are unwritten, so nothing covers the case where squared error is the wrong loss because the outliers are real rather than erroneous. [[Lp Norm]] sets the argument up and no method note follows it, and Huber loss appears only as a `loss="huber"` row in [[Stochastic Gradient Descent]]'s hyperparameter table, named without being explained.

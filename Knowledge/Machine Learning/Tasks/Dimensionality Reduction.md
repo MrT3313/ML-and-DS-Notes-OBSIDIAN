@@ -26,7 +26,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-All methods; the curse of dimensionality that motivates them; when reduction hurts.

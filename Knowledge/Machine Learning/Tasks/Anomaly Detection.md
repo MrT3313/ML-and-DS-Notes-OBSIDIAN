@@ -26,7 +26,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-All methods; the threshold choice; evaluation when anomalies are rare.

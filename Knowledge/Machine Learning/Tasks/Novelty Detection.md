@@ -25,7 +25,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-All methods; whether this deserves its own map or folds into [[Anomaly Detection]] after chapter 9.

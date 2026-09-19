@@ -26,7 +26,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-All methods; how to choose the number of clusters; how to evaluate a clustering without labels.

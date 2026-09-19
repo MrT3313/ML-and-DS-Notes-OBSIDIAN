@@ -8,7 +8,7 @@ aliases:
   - on-premises
   - on-prem
   - on premise
-up: "[[Data Systems]]"
+up: "[[Systems Architecture]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
 confidence: draft

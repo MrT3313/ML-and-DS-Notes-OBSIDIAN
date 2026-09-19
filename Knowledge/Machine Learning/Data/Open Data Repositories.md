@@ -47,11 +47,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
-
-- Quora, which [[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]] names beside Wikipedia and r/datasets as a page listing repositories. Not checked in September 2026 and so not listed.
-- Hugging Face Datasets, named above only as the replacement for Papers with Code and owed an entry of its own.
-- Google Dataset Search, a search engine over datasets rather than a host, which the scope statement's "portal cataloguing other repositories" covers.
-- The government portals themselves, data.gov and data.europa.eu among them, reachable here only through the meta portals that catalogue them.
-- Datasets that ship inside a library, the `sklearn.datasets` loaders and the like, which are a source of data and appear here only through `fetch_openml`.

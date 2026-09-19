@@ -60,8 +60,9 @@ Amended, not produced, by this chapter:
 
 Hubs and indexes revised to match what the chapter delivered, rather than notes it produced:
 - [[Data Systems]], the new domain hub
-- [[Machine Learning]], the domain hub, whose cross-domain paragraph now names the third domain sitting outside it
-- [[MLOps]], whose scope paragraph now carries the boundary against [[DevOps]] and whose deployment gap is now partly filled
+- [[Systems Architecture]], the second domain hub the chapter's material produced, holding what is true of any software system regardless of what it stores
+- [[Machine Learning]], the domain hub, whose cross-domain paragraph now names the other domains sitting outside it
+- [[MLOps]], whose scope paragraph now carries the boundary against [[DevOps]] and the vocabulary for where anything at all runs
 - [[Home]] and the README, which count the sources and the domains
 
 ## Open questions

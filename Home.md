@@ -8,11 +8,12 @@ Root of the vault. A source of truth for machine learning, MLOps, data systems, 
 
 ## Areas
 
-Four domains, each answering a different question, none of them subordinate to another. Their sizes differ only because of which chapters have been extracted so far.
+Five domains, each answering a different question, none of them subordinate to another. Their sizes differ only because of which chapters have been extracted so far.
 
 - **`Knowledge/Machine Learning/`** how a model is specified, fitted and evaluated, indexed at [[Machine Learning]].
 - **`Knowledge/MLOps/`** operating models in production, indexed at [[MLOps]].
 - **`Knowledge/Data Systems/`** where data lives, how it gets there and who serves it, indexed at [[Data Systems]].
+- **`Knowledge/Systems Architecture/`** the concepts that hold for any software system regardless of what it stores, how work is distributed across machines, who owns the machines and who operates them, indexed at [[Systems Architecture]].
 - **`Knowledge/Mathematics/`** the results the other domains lean on, indexed at [[Mathematics]], which lists them.
 
 ```base

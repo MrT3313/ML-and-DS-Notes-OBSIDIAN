@@ -19,5 +19,3 @@ views:
       - note_kind
       - confidence
 ```
-
-## What is missing
