@@ -6,6 +6,7 @@ aliases:
 up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
 confidence: draft
 ---
 
@@ -23,4 +24,4 @@ Batch learning is a training regime, and the update cost above is the whole of i
 
 ## Where it is used
 
-The alternative is [[Online Learning]]. A fixed model decays as the world moves, which is [[Model Rot]]; the retrain cadence is the lever. Batch learning fails outright when the data exceeds memory, which is where [[Out-of-Core Learning]] comes in.
+The alternative is [[Online Learning]]. A fixed model decays as the world moves, which is [[Model Rot]]; the retrain cadence is the lever, and setting that cadence deliberately is how [[Continual Learning]] is most often carried out in practice, which is why batch fitting and continual updating are not opposites. Batch learning fails outright when the data exceeds memory, which is where [[Out-of-Core Learning]] comes in.

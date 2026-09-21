@@ -9,7 +9,7 @@ aliases:
 up: "[[Machine Learning]]"
 ---
 
-Places to obtain a dataset when you do not have one of your own. What qualifies is a source of data: a repository you download from, a portal cataloguing other repositories, or a maintained list. Individual datasets do not qualify, and neither do the notes about what to do with data once you have it. Links checked September 2026; entries the book recommended that have since changed are marked rather than dropped, because the drift is itself worth knowing.
+Places to obtain a dataset when you do not have one of your own. What qualifies is a source of data: a repository you download from, a portal cataloguing other repositories, or a maintained list. Individual datasets do not qualify, and neither do the notes about what to do with data once you have it. Several of the entries below are benchmarks, and what makes a benchmark one is a fixed canonical split that everybody reporting a number uses unchanged, which is the whole reason two papers' scores can be set side by side; no running deployment has such a split, so a leaderboard position is evidence about the benchmark and not about anything in [[Production Machine Learning]]. Links checked September 2026; entries that have since changed are marked rather than dropped, because the drift is itself worth knowing.
 
 ## Repositories
 

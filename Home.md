@@ -33,6 +33,7 @@ views:
 
 - [[HOML]] Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, Géron, 2022.
 - [[DDIA]] Designing Data-Intensive Applications, Kleppmann and Riccomini, 2026.
+- [[DMLS]] Designing Machine Learning Systems, Huyen, 2022.
 
 ## Datasets
 

@@ -8,6 +8,7 @@ up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
 confidence: draft
 ---
 
@@ -29,4 +30,4 @@ Formal sample-complexity results bound the gap of [[Generalization]] in terms of
 
 ## Where it is used
 
-It is the first of the data-side challenges a project has to clear, and the [[Unreasonable Effectiveness of Data]] is its empirical counterpart: past a certain size, data beats algorithm choice. The remedies split by which term is dominant: more instances, whether collected or manufactured by [[Data Augmentation]], against the variance term; a simpler model or stronger [[Regularization]] against it too, by cutting $d$ rather than raising $m$; and transfer from a model trained elsewhere when neither is available. Left unaddressed it shows up as [[Overfitting]], since too few instances relative to capacity leaves the model free to fit noise.
+It is the first of the data-side challenges a project has to clear, and the [[Unreasonable Effectiveness of Data]] is its empirical counterpart: past a certain size, data beats algorithm choice. The remedies split by which term is dominant: more instances, whether collected or manufactured by [[Data Augmentation]], against the variance term; a simpler model or stronger [[Regularization]] against it too, by cutting $d$ rather than raising $m$; and transfer from a model trained elsewhere when neither is available, which divides by how many labelled examples of the target classes are left: [[Few-Shot Learning]] when a handful of them exist and the model is adapted from those, and [[Zero-Shot Learning]] when there are none at all and a description of the classes has to stand in for the missing labels. Left unaddressed it shows up as [[Overfitting]], since too few instances relative to capacity leaves the model free to fit noise.
