@@ -12,7 +12,7 @@ Four domains, each answering a different question, none of them subordinate to a
 
 - **`Knowledge/Machine Learning/`** how a model is specified, fitted and evaluated, indexed at [[Machine Learning]].
 - **`Knowledge/Data Systems/`** where data lives, how it gets there and who serves it, indexed at [[Data Systems]].
-- **`Knowledge/Systems Architecture/`** the concepts that hold for any software system regardless of what it stores, how work is distributed across machines, who owns the machines and who operates them, indexed at [[Systems Architecture]].
+- **`Knowledge/Systems Architecture/`** the concepts that hold for any software system regardless of what it stores, what is required of such a system before anything about its arrangement is settled, how work is distributed across machines, who owns the machines and who operates them, indexed at [[Systems Architecture]].
 - **`Knowledge/Mathematics/`** the results the other domains lean on, indexed at [[Mathematics]], which lists them.
 
 ```base

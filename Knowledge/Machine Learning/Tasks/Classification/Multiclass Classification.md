@@ -13,6 +13,7 @@ up: "[[Classification]]"
 sources:
   - "[[HOML Ch03 Classification]]"
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
 confidence: draft
 ---
 
@@ -49,6 +50,14 @@ When the underlying algorithm only knows how to separate two classes, the $K$-cl
 $$\binom{K}{2} = \frac{K!}{2!\,(K-2)!} = \frac{K(K-1)}{2}$$
 
 Read the arithmetic directly: there are $K$ choices for the first class of a pair and $K - 1$ remaining for the second, giving $K(K-1)$ ordered pairs, and each unordered pair is counted twice, so divide by $2$. For the ten MNIST digits this is $\frac{10 \times 9}{2} = 45$, which is exactly the number of scores `SVC` computes internally on that dataset.
+
+### When the class count is large
+
+A label space with many classes is a **high cardinality** target, and it is a condition on $\mathcal{Y}$ rather than on the data or the algorithm: it is $K$ that is large, and both counts above grow in it, $K$ linearly and $\frac{K(K-1)}{2}$ quadratically.
+
+The word is overloaded in this vault and the two senses are worth holding apart. In [[One-Hot Encoding]] and [[Feature Engineering]], cardinality counts the distinct values a categorical **feature** takes, and high cardinality is a problem about how wide the encoded input becomes. Here it counts the values the **label** takes, and high cardinality is a problem about how many decisions the model has to make. Neither note claims the bare word as a name for itself.
+
+[[Hierarchical Classification]] is the remedy on this side of the ambiguity: give the $K$ classes a tree and put a classifier at each internal node over its own children, so the one $K$-way decision becomes a short chain of narrow ones. It is available only when the problem domain supplies the tree, and it carries its own arithmetic, in classifier count and in how accuracy decays along the path.
 
 ### In scikit-learn
 

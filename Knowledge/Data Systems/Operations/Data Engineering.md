@@ -10,6 +10,7 @@ aliases:
 up: "[[Data Systems]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
 confidence: draft
 ---
 
@@ -42,3 +43,5 @@ These are roles rather than measurable quantities, so the division of labour is 
 [[Data Warehouse]] is the thing an analytics engineer shapes data for, a store whose schema is chosen for the questions analysts ask rather than for the transactions that produced the rows, and [[Data Lake]] is the looser alternative that accepts raw files first and leaves the modelling until later. [[Data Silo]] is what the organization gets when nobody holds the role: data trapped in the system that produced it, reachable only by the team that owns that system.
 
 [[Derived Data]] is the output side of the same picture, what an analyst produces when they process an original instead of modifying it, which is why read access to the [[System of Record]] is usually enough for the analytical side.
+
+[[Machine Learning Project Lifecycle]] gives the second of its six phases this same name, and the two are not the same thing: that phase is one stretch of one project, curating a training set out of whatever raw data has arrived so that there is something to fit on, while what is described here is a standing role and the infrastructure it owns, held whether or not a model is ever fitted on anything it moves.

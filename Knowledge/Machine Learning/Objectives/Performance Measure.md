@@ -8,12 +8,13 @@ up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
 confidence: draft
 ---
 
 ## Definition
 
-A performance measure is the number that says how well a model does its task. It plays two roles that are easy to conflate: the quantity optimized during training, and the quantity reported to judge the trained model. The two need not be the same function.
+A performance measure is the number that says how well a model does its task. It plays two roles that are easy to conflate: the quantity optimized during training, and the quantity reported to judge the trained model. The two need not be the same function. Beyond both sits a third quantity that is not a performance measure at all, the [[Business Objective]] the decision is finally made on, which the model neither optimizes nor reports.
 
 ## Formal statement
 

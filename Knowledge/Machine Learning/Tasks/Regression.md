@@ -7,7 +7,7 @@ aliases:
 up: "[[Machine Learning]]"
 ---
 
-Every method that predicts a continuous numerical value for an input: a house price, a temperature, next month's sales. A [[Supervised Learning]] task. Géron's terms run along two independent axes. Univariate versus multivariate counts the outputs, one predicted value per instance or several at once; simple versus multiple counts the inputs, one feature or many. The housing problem in [[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]] is both multiple and univariate: many features per district, a single median house value out.
+Every method that predicts a continuous numerical value for an input: a house price, a temperature, next month's sales. A [[Supervised Learning]] task. The continuous target is a framing and not a fact about the problem: quantizing it into buckets, house prices into low, medium and high, turns the same data into a [[Classification]] target, which is where the interconversion between the two tasks is stated in full. Géron's terms run along two independent axes. Univariate versus multivariate counts the outputs, one predicted value per instance or several at once; simple versus multiple counts the inputs, one feature or many. The housing problem in [[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]] is both multiple and univariate: many features per district, a single median house value out.
 
 ## Methods
 

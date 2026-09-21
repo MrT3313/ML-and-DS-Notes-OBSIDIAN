@@ -11,6 +11,7 @@ aliases:
 up: "[[Classification]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
 confidence: draft
 ---
 
@@ -34,7 +35,7 @@ $$\sum_{j=1}^{L} y_j = 1$$
 
 Imposing that constraint is exactly what would collapse this back to [[Multiclass Classification]] over $L$ classes, whose one-hot targets are only $L$ of the $2^{L}$ vectors. Dropping it multiplies the output space by $2^{L}/L$.
 
-Because the coordinates are unconstrained, the task decomposes cleanly: fitting $L$ independent [[Binary Classification]] models, one per label, is a correct decomposition, and it is the naive one. What it throws away is correlation between labels, since it models
+Because the coordinates are unconstrained, the task decomposes cleanly: fitting $L$ independent [[Binary Classification]] models, one per label, is a correct decomposition, it is the naive one, and it has a standard name in the multilabel literature, **binary relevance**, which turns any multilabel problem into one binary problem per label and trains $L$ classifiers, each responsible for one coordinate's $0$ or $1$. It is the same construction as [[One-versus-Rest]] under a different name, which is why handing `OneVsRestClassifier` a 2D indicator matrix instead of a 1D label fits exactly these $L$ models. What it throws away is correlation between labels, since it models
 
 $$P(\mathbf{y} \mid \mathbf{x}) = \prod_{j=1}^{L} P(y_j \mid \mathbf{x})$$
 

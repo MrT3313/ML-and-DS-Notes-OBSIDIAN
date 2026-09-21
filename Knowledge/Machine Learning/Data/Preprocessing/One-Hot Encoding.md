@@ -10,6 +10,7 @@ aliases:
 up: "[[Feature Engineering]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
 confidence: draft
 ---
 
@@ -45,7 +46,7 @@ Two settings matter downstream. `handle_unknown="ignore"` encodes a level unseen
 
 ## Failure modes
 
-- High cardinality: a ZIP code column with thousands of levels becomes thousands of near-empty columns, inflating memory, slowing the fit, and leaving each level too few instances to estimate its coefficient. This is the standard motivation for target encoding or a learned embedding.
+- High cardinality: a ZIP code column with thousands of levels becomes thousands of near-empty columns, inflating memory, slowing the fit, and leaving each level too few instances to estimate its coefficient. This is the standard motivation for target encoding or a learned embedding. The cardinality counted here is the number of distinct values a categorical feature takes, which is a problem about how wide the encoded input becomes, and it is a different problem from the cardinality of the label space in [[Multiclass Classification]], which counts the classes a model has to decide among and is a problem about how many decisions it has to make.
 - The default `handle_unknown="error"` crashes at transform time on any level absent when the encoder was fitted, exactly the case a live model meets first.
 - Keeping all $K$ columns alongside an intercept in a linear model: the fit runs, but the coefficients are not uniquely determined and reading one as the effect of that level is wrong.
 - Forgetting the output is sparse and calling a dense-only operation on it, or densifying a wide block and exhausting memory on data that fit comfortably while sparse.
