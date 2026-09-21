@@ -3,6 +3,9 @@
 .idea/
 .vscode/
 
+# Research / UnImplemented Proposals
+__Proposals/*
+
 # Obsidian: per-machine UI state
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
