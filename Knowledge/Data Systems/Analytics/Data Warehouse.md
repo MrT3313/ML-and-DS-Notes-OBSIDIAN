@@ -10,6 +10,7 @@ aliases:
 up: "[[Online Analytical Processing]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -27,7 +28,7 @@ The schema that gets chosen is usually dimensional, a large table of events (sal
 
 ## VS
 
-A warehouse imposes its schema at write time; a [[Data Lake]] imposes one at read time. That single difference sets everything else about the two. Because the warehouse decides once, and decides for every reader, every consumer gets the same conformed columns with the same meanings, and the storage engine can lay out, partition and index for the queries those columns permit. The price is that a question the schema did not anticipate is not merely slow, it is unanswerable: whatever the transform dropped is not in the warehouse at all, and getting it back means changing the pipeline and reloading from the source. The lake note carries the other side of the trade.
+A warehouse imposes its schema at write time; a [[Data Lake]] imposes one at read time. That single difference sets everything else about the two, including the coarser way the pair is often split: imposing a schema on write is what producing [[Structured Data]] means, so a warehouse holds structured data by construction rather than by a second axis. Because the warehouse decides once, and decides for every reader, every consumer gets the same conformed columns with the same meanings, and the storage engine can lay out, partition and index for the queries those columns permit, which in practice means keeping them in [[Row-Major and Column-Major Order|column-major order]]. The price is that a question the schema did not anticipate is not merely slow, it is unanswerable: whatever the transform dropped is not in the warehouse at all, and getting it back means changing the pipeline and reloading from the source. The lake note carries the other side of the trade.
 
 ## Formal statement
 

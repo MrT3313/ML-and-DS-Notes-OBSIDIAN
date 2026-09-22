@@ -14,6 +14,7 @@ aliases:
 up: "[[Data Warehouse]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -21,7 +22,7 @@ confidence: draft
 
 An ETL pipeline is the scheduled machinery that copies data out of the systems that produced it and puts it, reshaped, somewhere analysts can query. Data is extracted from the operational databases, transformed into an analysis-friendly schema, cleaned up, and loaded into the destination. The usual source is a set of [[Online Transaction Processing]] databases and the usual destination is a [[Data Warehouse]]; a [[Data Lake]] can be the destination instead, or an intermediate stop on the path from the operational system to the warehouse, holding the raw landing copy while the warehouse holds the conformed one.
 
-Reach for one whenever analysis has to read data that lives somewhere it must not be queried from, which is the normal case: the four reasons an analyst should not hit an operational database directly are exactly the reasons this pipeline exists. It is bulk, scheduled work, not request-response work, and its unit of output is a batch of rows rather than an answer to a question.
+Reach for one whenever analysis has to read data that lives somewhere it must not be queried from, which is the normal case: the four reasons an analyst should not hit an operational database directly are exactly the reasons this pipeline exists. It is the standing example of [[Batch Processing]], bulk scheduled work over an input that is fixed before the run starts rather than request-response work, and its unit of output is a batch of rows rather than an answer to a question.
 
 > [!warning]
 > This is the data-engineering sense of the word "pipeline", not the one [[Pipeline]] carries. A `sklearn.pipeline.Pipeline` chains estimator calls inside a single process, handing an array straight from one object's `fit_transform` to the next object's `fit`, and the whole chain lives and dies within one `fit` call. Here the stages are separate programs, usually separate machines, run on a schedule, and the interface between them is storage: a stage writes its output to a table or a file and a later stage reads it back, possibly hours later, which is what lets a stage fail and be rerun without the stages around it being rerun too. The two share the word and nothing else.
@@ -30,9 +31,9 @@ Reach for one whenever analysis has to read data that lives somewhere it must no
 
 The letters name the order of three steps. Extract-transform-load:
 
-1. **Extract.** Read the rows out of each source system, either as a periodic snapshot or as a feed of the changes since the last run. This is the step that has to be gentle with the source, since the source is a live operational database.
-2. **Transform.** Reshape into the destination's analysis schema: conform identifiers so that a customer in the billing system and a customer in the support system become the same key, cast types, fix units, deduplicate, clean, aggregate. This runs before anything is written to the destination, on compute that the destination does not own.
-3. **Load.** Write the transformed result into the destination, normally in bulk.
+1. **Extract.** Read the rows out of each [[Data Source|source]] system, either as a periodic snapshot or as a feed of the changes since the last run. This is the step that has to be gentle with the source, since the source is usually a live operational database.
+2. **Transform.** Reshape into the destination's analysis schema. Most of the processing in the pipeline is here: join the extracted sources together, conform identifiers so that a customer in the billing system and a customer in the support system become the same key, cast types, fix units, standardize value ranges, transpose, sort, deduplicate, clean, aggregate, derive new features, and validate what comes out. This runs before anything is written to the destination, on compute that the destination does not own.
+3. **Load.** Write the transformed result into the destination, normally in bulk. The two decisions this step really carries are where the rows go and how often they go there. The target is whatever the consumers read from: a flat file, an ordinary database, a [[Data Warehouse]] or a [[Data Lake]].
 
 Extract-load-transform is the same three steps in a different order:
 

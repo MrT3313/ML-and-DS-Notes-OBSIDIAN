@@ -8,6 +8,7 @@ aliases:
 up: "[[Online Analytical Processing]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -17,7 +18,7 @@ A data lake is a centralized repository holding a copy of any data that might be
 
 ## VS
 
-The difference from a [[Data Warehouse]] is when the schema is imposed: at write time there, at read time here. Deferring it means each consumer transforms the raw data into the form that best suits their needs, and two consumers can read the same bytes into two different shapes without either having to win an argument first. It also means nothing conforms the data on the way in, so every reader repeats the cleaning, and two readers who clean it differently produce two numbers that disagree with no error anywhere to say so.
+The difference from a [[Data Warehouse]] is when the schema is imposed: at write time there, at read time here. Imposing none is also why a lake can hold [[Structured Data|structured and unstructured data]] alike, so unstructured data ending up here is a consequence of that deferral and not a second way of telling the two repositories apart. Deferring it means each consumer transforms the raw data into the form that best suits their needs, and two consumers can read the same bytes into two different shapes without either having to win an argument first. It also means nothing conforms the data on the way in, so every reader repeats the cleaning, and two readers who clean it differently produce two numbers that disagree with no error anywhere to say so.
 
 The named form of the argument for deferring is the **sushi principle**, "raw data is better": data that has not been cooked can still be cooked any number of ways, and data that has been cooked cannot be uncooked. The phrase comes from a 2015 talk by Bobby Johnson and Joseph Adler, "The Sushi Principle: Raw Data Is Better", at Strata+Hadoop World, which is the citation [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]] attaches to it.
 
@@ -36,14 +37,8 @@ A lake is what you reach for when the consumers are not writing SQL. A warehouse
 > [!note] How far the SQL claim goes
 > "Bad for data scientists" is stronger than the evidence supports. Warehouses today can fit models from SQL without the data leaving them, ex. BigQuery ML, whose `CREATE MODEL` statement trains linear and logistic regression, k-means and matrix factorization in place. Dan Olteanu's "The Relational Data Borg Is Learning" (*PVLDB* 13(12), 2020), which [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]] lists among its references, argues further that a relational engine can exploit the structure of relational data to train faster than exporting the join result and fitting outside would. The defensible version is narrower: SQL over a conformed relational schema is an awkward substrate for that work, not an impossible one, and it stops being an option entirely once the input is a photograph.
 
-Two structural relationships beyond that:
+Three structural relationships beyond that:
 
 - [[Object Storage]] is what a lake is usually built on now. The lake is a pile of files, and services such as Amazon S3 are a pile of files that hides the machines underneath, which is the same shape at a price that makes keeping everything affordable.
 - [[Extract-Transform-Load]] is how data arrives. A lake can be the destination, with each consumer transforming on read, or an intermediate stop on the path from the operational system to a [[Data Warehouse]], with the lake holding the raw landing copy and the warehouse holding the conformed one.
-
-### File formats that turn up most
-
-Neither is part of the concept, and a lake holding neither is still a lake. They are worth knowing because they are what the files usually are, and they differ in orientation.
-
-- **Avro** is a row-oriented binary serialization format whose container file stores the writer's schema alongside the records, so a program that did not write the file can still read it.
-- **Parquet** is a column-oriented file format, so a query touching three columns out of two hundred reads only those three off disk.
+- [[Data Serialization]] is what the files in one actually are. A lake fixes no format, so they are whatever the producers happened to write, which in practice is usually Avro and Parquet; neither is part of the concept, a lake holding neither is still a lake, and what those formats are and what choosing between them costs belongs to that note.

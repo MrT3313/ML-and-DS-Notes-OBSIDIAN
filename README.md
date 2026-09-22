@@ -2,10 +2,8 @@
 
 An [Obsidian](https://obsidian.md/) vault of systems architecture, machine learning, and data science notes, built from numerous book & online sources.
 
-The notes are restatements, not transcriptions. A note does not count as done until it meets the [Quality Bar](__Meta/Quality-Bar.md).
-
 > [!IMPORTANT]
-> If you are here for a summary of a textbook, this is not that. If you are here for a linked reference you can navigate by concept, it is.
+> The notes are restatements, not transcriptions. If you are here for a summary of a textbook, this is not that. If you are here for a linked reference you can navigate by concept, it is.
 
 ## Use
 

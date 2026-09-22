@@ -12,6 +12,7 @@ aliases:
 up: "[[Data Systems]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -37,7 +38,7 @@ What separates them from a warehouse-shaped analytical system is the ingest path
 
 The whole difference from [[Online Transaction Processing]] is what one request touches: an operational request reads or writes a handful of current records by key, an analytical one sweeps millions of historical records and returns a summary. The eight-row comparison of read pattern, write pattern, users, query set, query volume, what the data represents, and dataset size lives in [[Online Transaction Processing]] and is not repeated here.
 
-The reduction is the property every downstream design choice follows from, columnar storage included, and it is why the dataset sizes reported in [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]] run to terabytes and petabytes: a system that answers questions about history has to keep the history.
+The reduction is the property every downstream design choice follows from, columnar storage included, that being the layout set out in [[Row-Major and Column-Major Order]] and the one a query reading a few columns of very many rows wants. It is also why the dataset sizes reported in [[DDIA Ch01 Trade-Offs in Data Systems Architecture|DDIA chapter 1]] run to terabytes and petabytes: a system that answers questions about history has to keep the history.
 
 "Online" in this name means interactive: the analyst asks a question and waits for the answer, rather than commissioning a report and receiving it next week. It is a different word from the "online" in [[Online Learning]], which names a model that updates its parameters one instance or mini-batch at a time.
 

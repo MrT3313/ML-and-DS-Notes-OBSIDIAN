@@ -12,6 +12,7 @@ aliases:
 up: "[[Data Systems]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -19,7 +20,7 @@ confidence: draft
 
 Online transaction processing is the workload an operational system carries: a large number of small requests, each touching very few records, each arriving because a user or a service acting for a user just did something, and each answered while the caller is waiting for it. An *operational system* is the backend service and the data infrastructure under it, where data is read, created, and modified in a database based on actions performed by users. Backend engineers are the people who build and run it.
 
-A request typically looks up a small number of records by a key, which is a [[Point Query]], and then inserts, updates, or deletes records based on the user's input. The queries themselves are mostly a fixed set baked into the application code. One-off custom queries do get written, but for maintenance or troubleshooting rather than as the normal traffic, which means the access paths an OLTP database has to serve well are known in advance and can be indexed for.
+A request typically looks up a small number of records by a key, which is a [[Point Query]], and then inserts, updates, or deletes records based on the user's input. The queries themselves are mostly a fixed set baked into the application code. One-off custom queries do get written, but for maintenance or troubleshooting rather than as the normal traffic, which means the access paths an OLTP database has to serve well are known in advance and can be indexed for. Because a request of this shape wants the whole record and not one field of many records, the layout underneath it is row-major, the storage consequence of the read pattern rather than a separate design decision, and [[Row-Major and Column-Major Order]] is where the two orderings and the cost of each are set out.
 
 ## VS
 
@@ -41,6 +42,8 @@ The size band in the table is an order-of-magnitude comparison taken from [[DDIA
 "Online" in this name means interactive and live: the request is answered while somebody waits for the answer, as opposed to being queued and run later in a batch. That is the sense the term was coined in, back when the alternative was submitting a job and collecting the output afterwards, and it survives in benchmark definitions, where a transaction is described as either executed online or queued for deferred execution. It is a different word from the "online" in [[Online Learning]], which names a model that updates its parameters one instance or mini-batch at a time. Neither is the everyday networked sense of the word.
 
 The latency requirement is implied by "online" and by nothing stronger: a human or a service is blocked until the answer comes back. The term fixes no particular number of milliseconds.
+
+Availability is the separate requirement standing beside it, and it is the one the analytical side does not share. These requests exist because users are making them, so the system has to answer quickly and has to be there to answer at all. An analytical system that is unreachable for an hour delays a report; an operational system that is unreachable for an hour stops the product, which is why availability targets are written against this half of the axis and rarely against the other.
 
 ## Formal statement
 

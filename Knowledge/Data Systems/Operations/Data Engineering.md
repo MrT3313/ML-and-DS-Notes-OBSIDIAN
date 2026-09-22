@@ -11,6 +11,7 @@ up: "[[Data Systems]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
   - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -18,7 +19,7 @@ confidence: draft
 
 Data engineering is the work of connecting the two kinds of system an organization runs and of owning the infrastructure that connection is made of. It is a field defined by its roles more than by any single technique, and there are two of them.
 
-A *data engineer* is someone who knows how to integrate the operational and analytical systems and who takes responsibility for the organization's data infrastructure. That is close to the whole job description. The two systems are built for opposite access patterns and are normally separate databases, so somebody has to own the movement of data between them, along with the pipelines, schedules, and storage that movement runs on.
+A *data engineer* is someone who knows how to integrate the operational and analytical systems and who takes responsibility for the organization's data infrastructure. That is close to the whole job description. The two systems are built for opposite access patterns and are normally separate databases, so somebody has to own the movement of data between them, along with the pipelines, schedules, and storage that movement runs on. The scope of that ownership is wider than the pipeline: where the records come from in the first place is a question about [[Data Source]], what holds them once they land is a [[Storage Engine]], and whether they move in scheduled bulk or one at a time as they are produced is the choice between [[Batch Processing]] and [[Stream Processing]].
 
 An *analytics engineer* models and transforms data to make it more useful for business analysts and data scientists in an organization. The title is recent and traceable: practitioners in the analytics community started using it in late 2018 and early 2019, Michael Kaminsky's "The Analytics Engineer" (January 2019) is the first piece written about it, and dbt Labs adopted it and did most of the work of spreading it. Those accounts add one thing to the description above that is worth keeping, namely what makes the role *engineering*: software engineering discipline is applied to the analytics code itself, so transformations are version controlled, tested, documented, and deployed, rather than being SQL passed between people.
 

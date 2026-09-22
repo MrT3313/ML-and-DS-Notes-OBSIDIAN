@@ -6,6 +6,7 @@ aliases:
 up: "[[Distributed System]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -13,7 +14,7 @@ confidence: draft
 
 A **node** is one participant in a [[Distributed System]]: a single process that holds its own state, runs on its own, and reaches the other participants only by sending messages across a network.
 
-The word is often used loosely to mean "a machine", and in most deployments one machine does run one node, which makes the two readings agree in practice. They are not the same claim, and the process reading is the one to keep. Van Steen and Tanenbaum define a distributed system as a collection of autonomous computing elements, and say that such an element, generally called a node, can be either a hardware device or a software process. What makes something a node is the role it plays in the protocol, not the box it is running in.
+The word is often used loosely to mean "a machine", and in most deployments one machine does run one node, which makes the two readings agree in practice. They are not the same claim, and the process reading is the one to keep. Van Steen and Tanenbaum define a distributed system as a collection of autonomous computing elements, and say that such an element, generally called a node, can be either a hardware device or a software process. What makes something a node is the role it plays in the protocol, not the box it is running in. A vertex in a graph data model is a different thing carrying the same word, a stored record with no protocol role and no machine behind it, and it is treated at [[Data Model]].
 
 The difference shows up as soon as the two readings disagree. Three database nodes running on one laptop for a test are three nodes, not one, because each keeps its own state and they talk to each other by messages. A machine running twenty shards is running twenty participants. Going the other way, a node's storage need not be inside the machine at all, since a virtual disk is a service on other machines that is made to behave like a local one.
 

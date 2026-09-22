@@ -1,7 +1,6 @@
 ---
 note_kind: method
 aliases:
-  - normalization
   - MinMaxScaler
   - min max scaling
   - min-max normalization
@@ -10,12 +9,13 @@ aliases:
 up: "[[Feature Scaling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-Min-max scaling shifts and stretches a column so its training values land exactly on a chosen interval, by default $[0, 1]$. Reach for it over [[Standardization]] when something downstream needs a bounded input: a neural network layer whose activation saturates outside a known range, pixel intensities, or any consumer that would rather have a guaranteed interval than a guaranteed mean. Avoid it when the column has outliers, because the interval is defined by the two most extreme points in the training data.
+Min-max scaling shifts and stretches a column so its training values land exactly on a chosen interval, by default $[0, 1]$. Reach for it over [[Standardization]] when something downstream needs a bounded input: a neural network layer whose activation saturates outside a known range, pixel intensities, or any consumer that would rather have a guaranteed interval than a guaranteed mean. Avoid it when the column has outliers, because the interval is defined by the two most extreme points in the training data. The bare word "normalization" also names an unrelated operation on a different object: [[Database Normalization]] decomposes a relation so that every fact is stored in one place, which changes which tables exist and rescales no column into any interval.
 
 ## Algorithm or formula
 

@@ -8,6 +8,7 @@ aliases:
 up: "[[Distributed System]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -38,7 +39,7 @@ The precise form is an architectural contract. A running system either honors ea
 
 ## Where it is used
 
-Microservices is one of the reasons a system becomes a [[Distributed System]] on purpose rather than by accident: the moment two services communicate over a network, every failure mode in that note applies to every call between them. [[Serverless]] is the same line pushed further, asking how fine a service can be cut and who pays for it while it is idle, and answering with metered billing for execution time instead of provisioned capacity.
+Microservices is one of the reasons a system becomes a [[Distributed System]] on purpose rather than by accident: the moment two services communicate over a network, every failure mode in that note applies to every call between them. Those service-to-service calls are the request-driven mode of data flow, and [[Request-Driven Communication]] is where that mode's contract and the alternative to it are set out. [[Serverless]] is the same line pushed further, asking how fine a service can be cut and who pays for it while it is idle, and answering with metered billing for execution time instead of provisioned capacity.
 
 The operational bill is what ties the architecture to the rest of the cloud material. [[Cloud-Native Architecture]] is the deployment style built around services of this shape, and [[DevOps]] is the organizational answer to the fact that each service now needs its own deployment, logging and monitoring, which is work that has to belong to the team that owns the service rather than to a separate department. That is the same people problem the architecture was adopted to solve, showing up again on the operations side.
 

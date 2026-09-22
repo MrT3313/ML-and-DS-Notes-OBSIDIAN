@@ -9,6 +9,7 @@ aliases:
 up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[DMLS Ch03 Data Engineering Fundamentals]]"
 confidence: draft
 ---
 
@@ -22,4 +23,4 @@ The observed value is $\tilde{\mathbf{x}}^{(i)} = \mathbf{x}^{(i)} + \boldsymbol
 
 ## Where it is used
 
-Remedies are per-defect: drop or fix outliers; for a [[Feature]] with missing values, drop the feature, drop the instances, or impute (median fill, or train with and without). Chapter 2 gives the pipeline. Closely related challenges are [[Irrelevant Features]] and [[Nonrepresentative Training Data]].
+Remedies are per-defect: drop or fix outliers; for a [[Feature]] with missing values, drop the feature, drop the instances, or impute (median fill, or train with and without). [[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]] gives the pipeline. Closely related challenges are [[Irrelevant Features]] and [[Nonrepresentative Training Data]]. [[Data Source]] is the upstream account of where the defects come from, since the origins a record can arrive from differ in how likely they are to arrive wrong and in who is answerable for it.
