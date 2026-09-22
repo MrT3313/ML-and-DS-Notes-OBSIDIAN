@@ -9,15 +9,16 @@ aliases:
   - train_test_split
   - hash split
   - ID hash split
-up: "[[Testing Set]]"
+up: "[[Sampling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-Carve a [[Testing Set]] out of the data by drawing instances uniformly at random, every instance equally likely and no structure imposed. It is the default when instances are independent and identically distributed and $m$ is large enough that chance alone is unlikely to skew the sample; when a variable that matters is unevenly distributed, or $m$ is small, use [[Stratified Sampling]] instead. The three implementations below differ only in how membership is decided.
+Draw a subset from a population with every unit equally likely to be selected: fix a fraction, and every member of the population carries that same chance of ending up in the draw, so the inclusion probability is one number rather than a per-unit quantity ([[Sampling]]). No structure is imposed on the draw, which is what makes it the easiest form of sampling to implement and the one reached for by default. Carving a [[Testing Set]] out of the available data is its most frequent application, and the same draw serves anywhere else a subset has to stand in for the whole. It is the right default when instances are independent and identically distributed and $m$ is large enough that chance alone is unlikely to skew the sample; when a variable that matters is unevenly distributed, when a category is rare, or when $m$ is small, use [[Stratified Sampling]] instead. The three implementations below differ only in how membership is decided.
 
 ## Algorithm
 
@@ -54,6 +55,11 @@ That is why the hash route exists. A seeded permutation is reproducible only whi
 
 - Data that is not independent and identically distributed. A time series split at random puts future rows into training and leaks them into the past. Grouped rows (several readings per patient) and duplicates do the same, splitting a group across train and test.
 - Small $m$, where a fair draw is unrepresentative by luck. Sampling 1000 people from a population that is 51.1% female lands outside 48.5% to 53.5% about 10.7% of the time: sampling noise, not a bug, producing [[Nonrepresentative Training Data]].
+- A rare category that does not appear at all. The previous bullet is about a share coming back wrong; this one is about a share coming back zero, and a class the sample never contains is a class the model is never shown, so it fits as though the category did not exist. For a population of $N$ units of which a fraction $p$ carry the rare class, a sample of size $n = fN$ drawn without replacement contains none of them with probability
+
+  $$P(\text{none}) = \frac{\binom{N(1-p)}{n}}{\binom{N}{n}} \approx (1-f)^{Np} \approx e^{-fNp}$$
+
+  where $f$ is the sampling fraction, which is the test ratio $r$ when the draw is a split. A class holding 0.01% of a population of $N = 10^{6}$ has $Np = 100$ members, so a 1% sample misses it with probability $(0.99)^{100} = 0.3660$, which agrees with the exact hypergeometric value to four figures: roughly one draw in three, which is not a corner case. What decides this is $fNp$, the expected number of rare-class members drawn, and not the rarity or the sampling fraction on its own, since the same $p$ in a population of $N = 10^{8}$ gives $fNp = 10^{4}$ and a miss probability indistinguishable from zero. That is [[Class Imbalance]] biting at the sampling stage rather than at the loss, and [[Stratified Sampling]] removes it by construction, because a draw taken from inside the rare group cannot come back empty.
 - The unstable split: a permutation reshuffles silently whenever the data is refreshed, reordered, or filtered, even with the seed fixed.
 - `reset_index()` as the identifier column is safe only if new rows are appended at the end and none is ever deleted or reordered. Otherwise the index is reassigned and rows migrate across the split; a natural immutable key is better.
 - `crc32(np.int64(identifier))` truncates toward zero, so a float identifier built from coordinates collides past the decimal point.

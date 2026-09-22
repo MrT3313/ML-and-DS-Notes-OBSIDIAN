@@ -12,6 +12,7 @@ aliases:
 up: "[[Confusion Matrix]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
@@ -79,4 +80,4 @@ The signature is `recall_score(y_true, y_pred, *, labels=None, pos_label=1, aver
 
 It is one of the two ratios read off a [[Confusion Matrix]], specifically its actual-positive row, and the measure to lead with in [[Classification]] whenever a missed positive is the expensive error, since it is the only one of the four cells' ratios that counts false negatives against the model.
 
-[[Precision]] is the quantity it trades against for one fixed model, and neither is informative without the other, because recall alone is driven to $1$ by predicting positive for everything. [[F1 Score]] is their harmonic mean, which stays low unless both are high. [[Precision-Recall Tradeoff]] is the threshold sweep that moves both and the home of the curve. [[ROC Curve]] plots recall as its vertical axis under the name true positive rate, against the false positive rate on the horizontal, which is the same model viewed against the negative class instead of against its own positive predictions.
+[[Precision]] is the quantity it trades against for one fixed model, and neither is informative without the other, because recall alone is driven to $1$ by predicting positive for everything. [[F1 Score]] is their harmonic mean, which stays low unless both are high. [[Precision-Recall Tradeoff]] is the threshold sweep that moves both and the home of the curve. [[ROC Curve]] plots recall as its vertical axis under the name true positive rate, against the false positive rate on the horizontal, which is the same model viewed against the negative class instead of against its own positive predictions. [[Class Imbalance]] is the condition that makes it worth reporting at all, since recall reads only the actual-positive row of the [[Confusion Matrix]] and the large true-negative count that inflates [[Accuracy]] on a skewed target never enters either of its terms.

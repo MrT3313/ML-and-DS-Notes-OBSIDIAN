@@ -9,6 +9,7 @@ aliases:
 up: "[[Confusion Matrix]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
@@ -72,4 +73,4 @@ The user guide states the same ratio, `tp / (tp + fp)`, and describes it as the 
 
 It is one of the two ratios read off a [[Confusion Matrix]], specifically its predicted-positive column, and the first measure to report for [[Classification]] whenever a false alarm is expensive, since it is the only one of the four cells' ratios that counts false positives against the model. It is also the vertical axis of the precision/recall curve.
 
-[[Recall]] is the quantity it trades against for one fixed model, and reporting precision without it is the standing failure mode, because precision alone can be driven to $1$ by predicting almost nothing. [[F1 Score]] is their harmonic mean, the single number that refuses to be high unless both are. [[Precision-Recall Tradeoff]] is the threshold sweep that moves both at once and the place the curve and its operating points belong.
+[[Recall]] is the quantity it trades against for one fixed model, and reporting precision without it is the standing failure mode, because precision alone can be driven to $1$ by predicting almost nothing. [[F1 Score]] is their harmonic mean, the single number that refuses to be high unless both are. [[Precision-Recall Tradeoff]] is the threshold sweep that moves both at once and the place the curve and its operating points belong. [[Class Imbalance]] is the condition that makes it worth reporting at all, since precision reads only the predicted-positive column of the [[Confusion Matrix]] and the large true-negative count that inflates [[Accuracy]] on a skewed target never enters either of its terms.

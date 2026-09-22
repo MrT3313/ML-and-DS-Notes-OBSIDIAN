@@ -9,6 +9,7 @@ aliases:
 up: "[[Machine Learning]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
@@ -22,7 +23,7 @@ Few-shot learning is the setting where a model has to recognise a class from a s
 
 The rest of this folder sorts on a different question, and saying so is more useful than forcing the analogy. [[Supervised Learning]], [[Semi-Supervised Learning]] and [[Unsupervised Learning]] are separated by what fraction of the training instances carry labels, a property of the training set as a whole. Few-shot learning is separated by how many labelled examples exist for the classes you want predictions on, a property of one region of the label space. The two questions are independent: every instance in a few-shot episode is labelled, so on the folder's axis the setting is fully supervised, and what is scarce is coverage of the target classes rather than supervision. [[Semi-Supervised Learning]] is the nearest-looking sibling and is still a different thing, since its scarcity is of labels against a large pool of unlabelled instances from the same classes, while few-shot scarcity is of instances of the class at all.
 
-Against transfer in general: reusing what was learned on a source distribution to help on a target one is the broad case, and few-shot learning is the version where the target contributes only a handful of labelled examples. Fine-tuning a pretrained model on a small labelled set is squarely transfer, and it becomes few-shot only once that set is small enough for the count per class to be the binding constraint.
+Against [[Transfer Learning]] in general: reusing what was learned on a source distribution to help on a target one is the broad case, and few-shot learning is the version where the target contributes only a handful of labelled examples. Fine-tuning a pretrained model on a small labelled set is squarely transfer, and it becomes few-shot only once that set is small enough for the count per class to be the binding constraint.
 
 ## Formal statement
 
@@ -53,6 +54,8 @@ The N-way K-shot episode with its support and query sets is the exact parameteri
 It is one of the two answers to [[Insufficient Training Data]], the one for when a handful of labelled examples of the target classes does exist, against [[Zero-Shot Learning]] for when none does. It is also condition 6 of [[Machine Learning Applicability]] read from the human side: the requirement that a problem be repetitive is a statement about the gap between the few examples a person needs and the many an algorithm needs, and few-shot learning is the research programme aimed at closing it. The embedding $f_\phi$ that makes an episode solvable is normally pretrained before any episode is seen, and [[Self-Supervised Learning]] is the usual way to obtain it without paying for labels. Every formulation above is stated over [[Classification]], since an episode is defined by a set of $N$ classes to tell apart. And the query set is a [[Generalization]] measurement in miniature, held out from the support set exactly as a test set is held out from a [[Training Set]], with the difference that here the class set itself is new at every evaluation.
 
 The family it joins on the supervision axis is [[Supervised Learning]], [[Semi-Supervised Learning]] and [[Unsupervised Learning]], with the caveat above about what that axis actually measures.
+
+Severe [[Class Imbalance]] produces this setting without anyone choosing it. When a class holds only a handful of instances, predictions on that class are constrained by exactly the quantity this note is parameterized by, so the rare classes of an imbalanced dataset are few-shot problems sitting inside an otherwise ordinary supervised one. That is the axis argued above and not a coincidence of wording: what is short in both cases is coverage of one region of the label space, while the training set as a whole stays fully labelled.
 
 ### On the child and the cat
 

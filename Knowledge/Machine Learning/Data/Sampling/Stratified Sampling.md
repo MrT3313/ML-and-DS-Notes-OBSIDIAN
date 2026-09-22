@@ -8,15 +8,16 @@ aliases:
   - stratum
   - StratifiedShuffleSplit
   - proportional allocation
-up: "[[Testing Set]]"
+up: "[[Sampling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-Split the population into disjoint homogeneous subgroups, the strata, and draw from each in proportion to its size, so the [[Testing Set]] reproduces the population mix by construction instead of by luck. Prefer it to plain [[Random Sampling]] when a variable strongly related to the target is unevenly distributed and a fair draw could still misrepresent it, which is likeliest when $m$ is small or a stratum is rare. The cost is that you must name the variable that matters, a modelling judgement rather than a mechanical step.
+Divide the population into the groups you care about, the strata, and sample from each group separately rather than from the pool as a whole. Take 1% from class A and 1% from class B and both come back at 1%, however lopsided the ratio between them, because the fraction is applied inside each group instead of across all of them. That is the whole promise: a group is represented at its own rate by construction rather than in expectation, so nothing about it is left to the draw. Reproducing the population mix in a [[Testing Set]] is the application reached for most often, and the technique is the same wherever else [[Sampling]] must not leave a group to chance. Prefer it to plain [[Random Sampling]] when a variable strongly related to the target is unevenly distributed and a fair draw could still misrepresent it, which is likeliest when $m$ is small or a stratum is rare. The cost is that you must name the variable that matters, a modelling judgement rather than a mechanical step.
 
 ## Algorithm
 
@@ -25,7 +26,7 @@ Split the population into disjoint homogeneous subgroups, the strata, and draw f
 
    $$w_s = \frac{|S_s|}{m}, \qquad \sum_{s=1}^{k} w_s = 1$$
 
-3. Under proportional allocation, draw $w_s \cdot m_{\text{test}}$ instances at random from within each stratum $s$, so the realised test share equals $w_s$ up to rounding. Random sampling matches it only in expectation, with variance $w_s(1 - w_s)/m_{\text{test}}$ around it.
+3. Under proportional allocation, draw $w_s \cdot m_{\text{test}}$ instances at random from within each stratum $s$, so the realised test share equals $w_s$ up to rounding. [[Random Sampling]] matches it only in expectation: the share it returns scatters around $w_s$ with variance $w_s(1 - w_s)/m_{\text{test}}$, and the far end of that scatter, for a small enough $w_s$, is a stratum that comes back empty, at the miss probability derived in [[Random Sampling]]. Allocating from within each stratum removes the scatter and the empty draw together, since a draw taken inside a group cannot return none of it.
 4. Drop the proxy column from both halves right afterwards. It existed only to steer the split, and left in place it leaks in as a [[Feature]].
 
 Create a categorical proxy, split on it, drop it: that move is the part worth remembering, and it generalizes to any continuous variable you need represented faithfully.
@@ -43,7 +44,8 @@ Create a categorical proxy, split on it, drop it: that move is the part worth re
 
 ## Failure modes
 
-- Too many strata. Push $k$ up and some stratum holds a handful of instances, its test allocation rounds to zero or one, and the guarantee evaporates. scikit-learn refuses outright when a class has fewer members than the number of splits.
+- Strata that are not a partition. Everything above assumes each unit lands in exactly one $S_s$, and that assumption fails whenever the variable you care about is multi-valued per unit: an instance carrying several labels at once ([[Multilabel Classification]]), overlapping customer segments, a customer trading in two regions. The group shares then sum past one and the per-stratum allocations double-count every unit in more than one group, so there is no partition to allocate over and stratification on that variable is not defined. Three ways out, each with a price: impose a membership rule that picks one group per unit, and accept that the rule is now a modelling choice; cross the variables into a finer partition, one stratum per observed combination, and accept that $k$ grows while the strata shrink; or leave that variable unstratified and stratify on something else. scikit-learn 1.6 takes the middle route silently. Hand `stratify` a 2D indicator matrix and `StratifiedShuffleSplit` joins each row into one string before counting classes, so what it stratifies on is the label combination and not the labels, and because most rows of real multilabel data are unique it then refuses with `The least populated class in y has only 1 member`. `StratifiedKFold` rejects the same input outright, with `Supported target types are: ('binary', 'multiclass')`, so the two routes through the library do not agree with each other.
+- Too many strata. Push $k$ up and some stratum holds a handful of instances, its test allocation rounds to zero or one, and the guarantee evaporates. `StratifiedShuffleSplit`, which is what `train_test_split` reaches for whenever `stratify` is set, refuses when any stratum holds fewer than two units, and refuses again when the absolute train or test count falls below $k$. `StratifiedKFold` draws its line elsewhere, warning when the smallest stratum has fewer units than `n_splits` and raising only when every stratum does.
 - Stratifying on a variable unrelated to the target. You pay the complexity, get none of the variance reduction, and the variable that actually drives the target is still left to chance.
 - Stratifying on the target itself, or on a binning of it. Forcing the label distribution to match makes the test set easier than a fresh draw from the deployment distribution, so the [[Generalization]] estimate flatters exactly the quantity being measured.
 - Leaving the proxy column in place. `income_cat` is engineered from a feature the model already sees, so if it survives the split the model trains on a hand-built summary of the target's best predictor.

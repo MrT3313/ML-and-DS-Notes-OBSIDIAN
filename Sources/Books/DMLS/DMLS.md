@@ -17,7 +17,7 @@ aliases:
 - [[DMLS Ch01 Overview of Machine Learning Systems]]
 - [[DMLS Ch02 Introduction to Machine Learning Systems Design]]
 - [[DMLS Ch03 Data Engineering Fundamentals]]
-- DMLS Ch04 Training Data
+- [[DMLS Ch04 Training Data]]
 - DMLS Ch05 Feature Engineering
 - DMLS Ch06 Model Development and Offline Evaluation
 - DMLS Ch07 Model Deployment and Prediction Service

@@ -6,10 +6,13 @@ aliases:
 up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 ## Definition
-A [[Training Instance]] is one row of it: one feature vector, and in supervised learning one label.
+A [[Training Instance]] is one row of the [[Training Set]]: one feature vector, and in supervised learning one label.
+
+The bare word "sample" is claimed here and means that row. In the statistical sense a sample is instead a subset drawn from a population, which is [[Sampling]]'s subject, so a text that speaks of drawing a sample means a set of rows and not one of them.
 
 ## Formal statement
 

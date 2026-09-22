@@ -15,6 +15,7 @@ aliases:
 up: "[[Data Systems]]"
 sources:
   - "[[DMLS Ch03 Data Engineering Fundamentals]]"
+  - "[[DMLS Ch04 Training Data]]"
 confidence: draft
 ---
 
@@ -51,6 +52,10 @@ The first is that the signal is lost in the noise. Having logged everything, nob
 
 The second is volume. The number of logs grows fast enough that storing them is a problem in its own right, separate from the problem they were kept to solve.
 
+### Keeping track of where each record came from
+
+The accountability column above is a claim about origins, and it only pays off if the origin of a given row can still be named after the rows have been mixed together. So the origin is recorded per record, and per label alongside it, rather than only per feed: a set assembled from several origins that differ in who answers for quality will otherwise fail in ways nobody can attribute, the failure surfacing downstream while the cause sits in one feed that nothing now identifies. Kept at that grain, the origin is what turns a bias noticed in the data into a bias traced back to the origin that introduced it. The narrow fact of where a record started is its provenance; lineage in the stricter sense used in data engineering is the wider transformation history of a dataset as it is moved and rewritten, and the two are worth holding apart, since only the first is fixed at the moment the record arrives.
+
 ### First-party, second-party and third-party
 
 Three labels for who did the collecting, and they say nothing about what the data contains.
@@ -78,3 +83,5 @@ What none of this settles is whether the trade is smaller. The facts above are p
 [[System of Record]] is what separates the internal database row from the other three: an internal database is usually the authoritative copy of whatever it holds, so anything derived from it loses a disagreement with it, while user input, telemetry and purchased data are inputs to a record rather than the record.
 
 [[Poor-Quality Data]] is the same trouble seen from the modelling end, errors, outliers and missing values in a training set, and the user input row above is the upstream origin of most of it. [[Batch Processing]] is the processing mode the system generated row makes available, available precisely because nobody is waiting on those records.
+
+[[Label Multiplicity]] is the machine learning side of the concern the origin record answers: where keeping the origin per record says which feed a label arrived through, that note takes up what to do when annotators of differing accuracy have given the same instance conflicting labels.
