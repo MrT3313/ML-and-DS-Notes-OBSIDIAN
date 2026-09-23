@@ -14,6 +14,7 @@ up: "[[Random Sampling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch05 Feature Engineering]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -28,6 +29,8 @@ A pseudorandom generator is a state $s_t$, a transition $s_{t+1} = f(s_t)$, and 
 ## Where it is used
 
 Fixing the seed is what makes a [[Testing Set]] hold still across runs. Without it, [[Random Sampling]] draws a different split every execution, and over enough executions the model has trained on every row, which is [[Data Leakage]] reached by accident rather than by carelessness. [[Stratified Sampling]] takes the same argument for the same reason.
+
+The second use is not about the split at all, and it is the fit rather than the sample that it holds still. An unseeded training run differs from itself between executions, in its initialization, in the order it shuffles batches, and in every stochastic component of the optimizer, so two runs that were supposed to differ in one hyperparameter differ in that as well and the change in score cannot be attributed to either. Fixing the seed is what makes the comparison a comparison, and it is also what lets somebody else hit the error you hit rather than take your word for it, which is the difference between a bug report and an anecdote. The seed is therefore one of the inputs a recorded run has to carry, alongside the code version, the data version, the configuration and the environment; [[Experiment Tracking]] holds that list and the invariant it satisfies, and [[Model Debugging]] is where the seed earns its place in a protocol, since a run that cannot be repeated cannot be bisected. What a seed cannot do is make a fit deterministic that was never deterministic to begin with: floating point sums reduced in whatever order parallel workers finish, and batches arriving in whatever order a distributed loader delivers them, are both outside its reach.
 
 The failure mode worth stating plainly: a fixed seed makes a result reproducible, not correct. One seeded split can still be an unlucky split, and reporting its score as though the seed were irrelevant is reading noise as signal. [[Cross-Validation]] is the defence, since averaging over folds estimates how much of the score was the split. If a conclusion changes when the seed changes, the conclusion was never about the [[Model]].
 

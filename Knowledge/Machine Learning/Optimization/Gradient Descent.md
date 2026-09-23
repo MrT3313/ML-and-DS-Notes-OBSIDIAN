@@ -8,6 +8,7 @@ aliases:
 up: "[[Cost Function]]"
 sources:
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -33,6 +34,8 @@ The family splits three ways, and the three differ in exactly one respect: how m
 The update in step 4 is the whole algorithm in one line:
 
 $$\boldsymbol\theta^{\text{next step}} = \boldsymbol\theta - \eta \, \nabla_{\boldsymbol\theta} J(\boldsymbol\theta)$$
+
+That rule is the plainest way to spend a gradient rather than the only one, and as of 2022 the ones practitioners reached for were Adam (Kingma and Ba, ICLR 2015), momentum, and plain [[Stochastic Gradient Descent]], which is the variant this vault owns. Momentum does not sit in that list as a peer of the other two: it is not an optimizer but a modification of the update rule, replacing the raw gradient with a velocity accumulated over past gradients, so the optimizer is SGD with momentum and momentum alone is a term in it. Adam and that velocity term are owed to a later source and have no notes here yet.
 
 There is a ceiling on $\eta$ and it is sharp rather than gradual: outside $0 < \eta < 2/\lambda_{\max}$, where $\lambda_{\max}$ is the largest curvature of the cost, each step overshoots further than the last and the parameters diverge geometrically. [[Learning Rate]] carries the threshold and what sets it.
 
@@ -65,7 +68,7 @@ Not every cost is a well-behaved bowl. Some carry holes, ridges, plateaus and ot
 
 Conditioning is the second property of the terrain and it survives convexity. When the features are on wildly different scales the eigenvalues of $\mathbf{X}^{T}\mathbf{X}$ spread out, the level sets of the cost stretch from circles into a long thin ravine, and the steepest direction points across the ravine rather than along it and the path zigzags. Putting all the features on a similar scale with [[Feature Scaling]] is the fix, and it is cheap: one pass over the columns buys back iterations that would otherwise be spent on the geometry rather than on the fit.
 
-The search itself runs over [[Parameter Space]], one axis per parameter being optimized. Linear regression on $n$ features searches $n+1$ dimensions. A model with a million parameters searches a million, and the difficulty of the search grows with them, which is the practical reason the cheap-per-step variants win as models get large.
+The search itself runs over [[Parameter Space]], one axis per parameter being optimized. Linear regression on $n$ features searches $n+1$ dimensions. A model with a million parameters searches a million, and the difficulty of the search grows with them, which is the practical reason the cheap-per-step variants win as models get large, and at that size the search is itself spread across machines, which is [[Distributed Training]].
 
 ## Hyperparameters
 

@@ -14,6 +14,7 @@ sources:
   - "[[HOML Ch03 Classification]]"
   - "[[HOML Ch04 Training Models]]"
   - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -41,7 +42,7 @@ The scores become probabilities obeying the sum rule through the softmax,
 
 $$P(y = k \mid \mathbf{x}) = \frac{e^{s_k(\mathbf{x})}}{\sum_{j=1}^{K} e^{s_j(\mathbf{x})}}$$
 
-which sums to $1$ by construction and is strictly increasing in $s_k$, so softmax never changes which class wins the $\arg\max$. It supplies calibrated-looking probabilities, not a different decision. Nothing here says where the scores come from; [[Softmax Regression]] is the model that fits them, one linear score per class, and it is named for this function because the function is the only part of it that is not already [[Logistic Regression]].
+which sums to $1$ by construction and is strictly increasing in $s_k$, so softmax never changes which class wins the $\arg\max$. It supplies calibrated-looking probabilities, not a different decision, and whether they are calibrated in fact is a separate and separately measurable property that the sum rule does not deliver. [[Model Calibration]] carries the condition and the counting behind it, including the two forms a $K$-class target admits: the weaker check on the winning class's number alone, and the per-class one that reduces the target to $K$ binary calibrations. Nothing here says where the scores come from; [[Softmax Regression]] is the model that fits them, one linear score per class, and it is named for this function because the function is the only part of it that is not already [[Logistic Regression]].
 
 ### Counting the binary sub-problems
 

@@ -11,6 +11,7 @@ aliases:
 up: "[[Confusion Matrix]]"
 sources:
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -30,7 +31,7 @@ The instrument is the confusion matrix throughout, the table every [[Classificat
 3. Normalize by row, `normalize="true"`, which divides each row by its own support. Now cell $(i, j)$ reads "of the instances that really were class $i$, this fraction was called $j$", and classes of different sizes become comparable. Under [[Class Imbalance]] this is the step that stops a rare class with a terrible rate from hiding behind a common class with a good one.
 4. Mask the correct predictions with `sample_weight = (y_pred != y_true)`. The boolean array weights every correct prediction by $0$ and every mistake by $1$, so the diagonal empties and the picture becomes the distribution of the errors alone. This is the step that makes the structure visible, because the diagonal otherwise carries almost all the mass.
 5. Normalize the masked matrix by row and by column, and read both. They answer different questions. The row version answers "when the true class is $i$, what does the model predict instead?". The column version, `normalize="pred"`, answers "when the model predicts $j$ wrongly, what was it really?". A confusion that looks severe one way can look mild the other, and reading only one of them is the standard way to draw a directional conclusion the data does not support.
-6. Pull out the individual instances behind the pair that interests you: the true $a$ predicted $a$, true $a$ predicted $b$, true $b$ predicted $a$ and true $b$ predicted $b$ blocks. Aggregates say which pair is confused; only the instances say what about them is confusable.
+6. Pull out the individual instances behind the pair that interests you: the true $a$ predicted $a$, true $a$ predicted $b$, true $b$ predicted $a$ and true $b$ predicted $b$ blocks. Aggregates say which pair is confused; only the instances say what about them is confusable. A pattern named this way is a slice, which makes reading the errors by hand the manual route to the slices [[Slice-Based Evaluation]] systematizes.
 7. Convert the finding into a next action, and re-run the whole protocol after making the change, since fixing one confusion redistributes the rest.
 
 ### Why both axes have to be read

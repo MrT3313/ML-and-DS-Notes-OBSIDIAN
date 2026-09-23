@@ -6,9 +6,12 @@ aliases:
   - machine learning lifecycle
   - ML lifecycle
   - machine learning project life cycle
+  - four phases of ML development
+  - 4 phases of ML development
 up: "[[Machine Learning]]"
 sources:
   - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -84,6 +87,21 @@ The never-ending claim is a property of the same graph. The cycle above passes t
 Nothing at the learning level of an organization is reachable until the layers under it are in place, and there are four of them: collecting, moving and storing, exploring and transforming, and aggregating and labelling. That is the same ordering step 2 of the loop asserts, a training set curated out of raw data before step 3 has anything to fit. Three of those four layers are the subject of the neighbouring data domain rather than this one. [[Data Engineering]] is the role that owns the moving and the storing, [[Extract-Transform-Load]] is the machinery the moving and the transforming are usually made of, and [[Data Systems]] is the domain both of those sit in.
 
 The ordering is Monica Rogati's, from "The AI Hierarchy of Needs", published on Hacker Noon in June 2017 as a blog post rather than as a reviewed paper. That is worth saying plainly, because a pyramid published that way is weak evidence for anything structural, and only the precedence claim above is taken from it.
+
+### The four phases inside model development
+
+Phase 3 of the cycle, machine learning model development, is not entered the same way twice. Four phases sit inside it, written $d_1$ to $d_4$ and numbered separately from the six nodes above because they subdivide node 3 rather than extend the sequence around it. They also attach to a problem type rather than to a team, so one organization sits at a different $d_i$ for every problem it is solving.
+
+- **$d_1$, before machine learning.** Nothing is fitted. The solution is a non-learned heuristic, ex recommending the most popular item or ordering by recency, and one legitimate outcome of this phase is the finding that no learned model is needed at all.
+- **$d_2$, simplest machine learning models.** The first fitted model for this problem, chosen as the simplest thing that could work rather than the strongest thing available. That choice is a judgement about candidates and belongs to [[Model Selection]], which carries the argument for making it.
+- **$d_3$, optimizing simple models.** The same family pushed as far as it will go, through the objective function, hyperparameter search, features, more training data, and ensembles of simple learners.
+- **$d_4$, complex models.** Entered once the simple family has run out, and carrying an obligation the earlier phases do not: measuring how fast the model decays, which is what gives the retraining in phase 5 a schedule.
+
+$$d_1 \prec d_2 \prec d_3 \prec d_4$$
+
+One claim makes that order checkable rather than a taste for simplicity: the best solution reached in $d_i$ is the floor that the first candidate of $d_{i+1}$ has to clear. Every transition is therefore licensed by a number the previous phase left behind, which is the role [[Baseline Model]] plays within a single fit raised one level, the thing to beat being the previous phase's best rather than a constant predictor. A phase is left when it stops paying, and [[Learning Curve]] is the instrument that reads that condition off a fitted candidate: curves flat, close together and high say the family is saturated and that the next move is $d_4$ rather than more data ([[Underfitting]]), while a gap still open at the largest training size says the work remaining is inside $d_3$ ([[Overfitting]]). [[Model Debugging]] arrives at the same first step from the other side, since a simple implementation is the one whose failures can be localized at all.
+
+$d_1$ is the phase most often skipped, and two rules of thumb make it concrete, both of them from Huyen's earlier public booklet *Machine Learning Systems Design* rather than from the reading this note records, which is worth saying because each attaches a number to a judgement. On the value of not skipping it, Martin Zinkevich's handbook "Rules of Machine Learning: Best Practices for ML Engineering" gives the estimate that "if you think that machine learning will give you a 100% boost, then a heuristic will get you 50% of the way there". On when to leave it, a heuristic stack grown past about a hundred nested conditionals costs more to maintain than a fitted model would, and that is the signal to move to $d_2$.
 
 ## Where it is used
 

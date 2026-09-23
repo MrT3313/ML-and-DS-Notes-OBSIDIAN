@@ -9,6 +9,7 @@ aliases:
 up: "[[MLOps]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -50,7 +51,7 @@ Production replaces the single scalar with a conjunction of requirements held by
 
 The practice has a standing device for recovering a total order anyway: fix a threshold on every requirement but one and maximize the remaining one subject to those thresholds. Ng names the two roles satisficing metrics and an optimizing metric (*Machine Learning Yearning*, a self-published draft rather than a reviewed text, and satisficing is Simon's word from 1956), and the manoeuvre is the epsilon-constraint method of multi-objective optimization under another name. It works, and it works by making exactly the outside judgement named above, since the thresholds are chosen rather than derived. Nothing in the problem supplies them.
 
-The claim is falsifiable in the ordinary way. It predicts that in production you can be handed two candidate systems with every number measured and still have no fact of the matter about which is better, and that is what happens every time a faster model is also a less accurate one. The five rows above are five instances of this one difference, not five separate observations.
+The claim is falsifiable in the ordinary way. It predicts that in production you can be handed two candidate systems with every number measured and still have no fact of the matter about which is better, and that is what happens every time a faster model is also a less accurate one. The concrete form of that is hardware: a more accurate candidate can require a GPU rather than a CPU to return its prediction within the same latency, so the accuracy was bought with serving cost. The five rows above are five instances of this one difference, not five separate observations.
 
 ## Where it is used
 

@@ -14,6 +14,7 @@ up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -40,10 +41,10 @@ The predictor row above understates what a classifier owes its caller, so take t
 | method | what it returns | range |
 |---|---|---|
 | `decision_function(X)` | one uncalibrated signed score per instance. The sign gives the predicted class, the magnitude gives how far from the boundary the instance fell, so it reads as confidence and not as probability | all of $\mathbb{R}$ |
-| `predict_proba(X)` | one estimated probability per class, calibrated only as well as the model happens to be | $[0, 1]$, each row summing to $1$ |
+| `predict_proba(X)` | one estimated probability per class, calibrated only as well as the model happens to be. The contract fixes the range and the sum and requires nothing about those numbers matching observed frequencies; [[Model Calibration]] is where that "happens to be" is turned into a measurement | $[0, 1]$, each row summing to $1$ |
 | `predict(X)` | the label, obtained by thresholding whichever of the two the estimator has | the class set |
 
-Which of the two an estimator exposes is a property of that estimator, not of the contract. [[Stochastic Gradient Descent Classifier]] always has `decision_function`, and has `predict_proba` only for `loss="log_loss"` or `loss="modified_huber"`; under the default hinge loss there is no probability to report without wrapping the model in a separate calibration step. `RandomForestClassifier` is the mirror image: `predict_proba` is there, computed from the class votes of its trees, and `decision_function` does not exist on it at all.
+Which of the two an estimator exposes is a property of that estimator, not of the contract. [[Stochastic Gradient Descent Classifier]] always has `decision_function`, and has `predict_proba` only for `loss="log_loss"` or `loss="modified_huber"`; under the default hinge loss there is no probability to report without wrapping the model in a separate calibration step, which at this interface is `CalibratedClassifierCV`, itself an estimator under this same contract and so composable like any other. `RandomForestClassifier` is the mirror image: `predict_proba` is there, computed from the class votes of its trees, and `decision_function` does not exist on it at all.
 
 This is not API trivia. Anything that sweeps a threshold needs a continuous response to sweep, so a [[ROC Curve]] and a [[Precision-Recall Tradeoff]] are built from whichever of the two the estimator provides, and code that compares two classifiers has to ask each one for the method it actually has rather than assume they share one. That is why a random forest has to be scored through the positive-class column of `predict_proba` while a linear classifier is scored from `decision_function` directly, and why the generic `cross_val_predict` takes the response method as an argument instead of fixing it.
 

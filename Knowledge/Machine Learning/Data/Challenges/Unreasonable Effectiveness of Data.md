@@ -7,6 +7,7 @@ up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -16,7 +17,7 @@ The unreasonable effectiveness of data is the empirical finding that very differ
 
 ### Mind against data and compute
 
-The finding is contested rather than settled. Against "Data" stands "Mind", meaning inductive biases or intelligent architectural design, and "Data" is itself grouped with computation, since more data tends to require more computation, so what gets traded against architecture is data and the compute needed to consume it. Nobody disputes that finite data is necessary; what is contested is whether it is sufficient. Judea Pearl presses the mind side hardest, titling the introduction to *The Book of Why* (2018) "Mind over Data", and Christopher Manning puts the milder version, that structure is what lets a system learn more from less data. An *inductive bias* is any basis a learner has for preferring one generalization over another beyond bare consistency with the training instances, and Mitchell (1980) makes it a necessity rather than a taste: a learner carrying none cannot classify anything it has not already seen, so it cannot beat rote lookup. This is not the *bias* of the [[Bias-Variance Tradeoff]], which is a statistical quantity inside a decomposition of expected error, and a reader who arrived wanting that one wants that note instead.
+The finding is contested rather than settled. Against "Data" stands "Mind", meaning [[Inductive Bias|inductive biases]] or intelligent architectural design, and "Data" is itself grouped with computation, since more data tends to require more computation, so what gets traded against architecture is data and the compute needed to consume it. Nobody disputes that finite data is necessary; what is contested is whether it is sufficient. Judea Pearl presses the mind side hardest, titling the introduction to *The Book of Why* (2018) "Mind over Data", and Christopher Manning puts the milder version, that structure is what lets a system learn more from less data. What the mind side rests on is held by [[Inductive Bias]]: the definition of the term, Mitchell's (1980) result that a learner carrying none cannot classify anything it has not already seen and so cannot beat rote lookup, and the no free lunch theorem that no particular bias outperforms any other averaged over all targets. Together those say a bias is necessary and that no particular one is universally best, and neither touches the question this note is about, which is how much of the remaining work finite data can do once a bias is in place.
 
 ## Formal statement
 

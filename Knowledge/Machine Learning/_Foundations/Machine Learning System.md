@@ -11,6 +11,7 @@ aliases:
 up: "[[Machine Learning]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -63,6 +64,6 @@ What a data version pins is not settled vocabulary, and named systems differ on 
 
 ## Where it is used
 
-[[Model]] is the third part of the triple under its own name, the artifact fitted from code and data, and this note is the system it is one part of rather than the whole of. [[Training Set]] is the data part, the $D$ every claim above is conditioned on. [[MLOps]] is the practice of operating one of these once it ships, and it is where versioning the data as well as the code actually has to be carried out rather than merely asserted. [[DevOps]] is the same practice for a system whose behaviour is written by hand instead of learned, and it already states what MLOps adds that it lacks. [[Model Rot]] is the failure mode that follows from the data part: nothing in the code changes and the system gets worse anyway.
+[[Model]] is the third part of the triple under its own name, the artifact fitted from code and data, and this note is the system it is one part of rather than the whole of. [[Training Set]] is the data part, the $D$ every claim above is conditioned on. [[MLOps]] is the practice of operating one of these once it ships, and it is where versioning the data as well as the code actually has to be carried out rather than merely asserted. [[Experiment Tracking]] is that pinning done to one training run rather than to a deployment, naming the arguments $\text{fit}$ reads so that each of the three is recorded separately, and a run is repeatable only when all three are. [[DevOps]] is the same practice for a system whose behaviour is written by hand instead of learned, and it already states what MLOps adds that it lacks. [[Model Rot]] is the failure mode that follows from the data part: nothing in the code changes and the system gets worse anyway.
 
 [[Machine Learning Applicability]] is the set of conditions a problem has to meet before building one of these is the right move at all, and [[Production Machine Learning]] is what one is asked for once it is serving traffic rather than being built. [[Data-Intensive Application]] is the neighbouring domain's answer to the same kind of question, what sort of system this is, and the two classifications cut on different axes: that one sorts systems by where the difficulty lives, this one by what the behaviour is made of.

@@ -12,6 +12,7 @@ aliases:
 up: "[[Data Augmentation]]"
 sources:
   - "[[DMLS Ch04 Training Data]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -92,6 +93,6 @@ One further difference is a tendency and not a rule, so it settles nothing on it
 
 ## Where it is used
 
-[[Data Augmentation]] is the family this sits in, and perturbation is the member of it whose copies are also what an attacker builds, which is why the adversarial material lands here rather than there. [[Decision Boundary]] is what an adversarial example is evidence about: a step of norm at most $\rho$ that changes the prediction proves the boundary passes within $\rho$ of a genuine instance, so the size of the smallest successful $\boldsymbol\delta$ is a direct measurement of how close the boundary runs. [[Semi-Supervised Learning]] is the other use of the same operation, spending it on unlabelled instances as a constraint rather than on labelled ones as a copy, which is the contrast set out above.
+[[Data Augmentation]] is the family this sits in, and perturbation is the member of it whose copies are also what an attacker builds, which is why the adversarial material lands here rather than there. [[Decision Boundary]] is what an adversarial example is evidence about: a step of norm at most $\rho$ that changes the prediction proves the boundary passes within $\rho$ of a genuine instance, so the size of the smallest successful $\boldsymbol\delta$ is a direct measurement of how close the boundary runs. [[Semi-Supervised Learning]] is the other use of the same operation, spending it on unlabelled instances as a constraint rather than on labelled ones as a copy, which is the contrast set out above. The same operation is also run as a measurement rather than as training data, where a perturbed copy of the [[Testing Set]] is scored and the fall in the score is the reading, which is the perturbation test of [[Behavioral Testing]]: there the perturbed split is scored, and here the perturbed instance is manufactured to be trained on.
 
 [[Regularization]] is the category adversarial training falls into under that note's own test, since the min-max objective is a constraint imposed on purpose that is *meant* to cost clean accuracy in exchange for a smaller gap on perturbed inputs; the consistency penalty in the previous section is more literally so, being a term added to the [[Cost Function]] with $\alpha$ in front of it. [[Generalization]] is what both uses are aimed at and is also where the limit shows honestly: robustness inside one ball is not the same quantity as expected loss on the deployment distribution, and the Tsipras result above is the case where the two move in opposite directions.

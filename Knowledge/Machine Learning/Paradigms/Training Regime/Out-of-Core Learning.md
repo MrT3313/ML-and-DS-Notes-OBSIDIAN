@@ -7,6 +7,7 @@ up: "[[Online Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 ## Definition
@@ -23,4 +24,4 @@ Out-of-core learning is a training regime, and the chunk partition above is the 
 
 ## Where it is used
 
-It needs an algorithm with an incremental update, which rules out closed-form fits like the [[Normal Equation]] for [[Linear Regression]], since that one needs the whole design matrix at once. [[Stochastic Gradient Descent]] and [[Mini-Batch Gradient Descent]] are the options that qualify: each step reads one instance or one small batch and touches nothing else, so the chunk on disk can be the batch. [[Batch Gradient Descent]] does not qualify despite being iterative, because every one of its steps sums a gradient over all $m$ instances, and a method that needs the full dataset per step is no better off than a closed form when the dataset does not fit. In scikit-learn the qualifying estimators are the ones exposing `partial_fit`, which the user guide's page on scaling computationally lists; `SGDClassifier` and `SGDRegressor` are both on it. It is the answer when [[Batch Learning]] is impossible for size reasons rather than for freshness reasons.
+It needs an algorithm with an incremental update, which rules out closed-form fits like the [[Normal Equation]] for [[Linear Regression]], since that one needs the whole design matrix at once. [[Stochastic Gradient Descent]] and [[Mini-Batch Gradient Descent]] are the options that qualify: each step reads one instance or one small batch and touches nothing else, so the chunk on disk can be the batch. [[Batch Gradient Descent]] does not qualify despite being iterative, because every one of its steps sums a gradient over all $m$ instances, and a method that needs the full dataset per step is no better off than a closed form when the dataset does not fit. In scikit-learn the qualifying estimators are the ones exposing `partial_fit`, which the user guide's page on scaling computationally lists; `SGDClassifier` and `SGDRegressor` are both on it. It is the answer when [[Batch Learning]] is impossible for size reasons rather than for freshness reasons. The same constraint also reaches everything upstream of the fit, since preprocessing, shuffling and batching a training set that does not fit in memory all have to run chunk by chunk and across machines before the first gradient is computed, which is where [[Distributed Training]] picks the problem up.

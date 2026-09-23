@@ -11,6 +11,7 @@ aliases:
 up: "[[Multiclass Classification]]"
 sources:
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -83,7 +84,7 @@ Setting two class scores equal gives $\big(\boldsymbol\theta^{(j)} - \boldsymbol
 
 - **Unscaled features stall the fit at `max_iter=100`.** One step size serves every coordinate, so a feature in the thousands and a feature in the unit interval cannot both be stepped well, and the $\ell_2$ penalty charges the same per unit of weight regardless of the column's unit, which silently penalizes small-scale features harder. The symptom is a `ConvergenceWarning` and a model whose coefficients change when you raise `max_iter`. Put a [[Standardization]] step in front of it in a [[Pipeline]].
 - **Nearly separable classes plus a large $C$ send weights toward infinity.** No finite minimizer exists on separable data, for the reason [[Logistic Regression]] sets out; only the penalty stops it, so `C=1e9` and `penalty=None` are the settings that produce it. The visible symptom here is that the probabilities harden toward $0$ and $1$ and the boundary is placed by whichever instances happen to sit nearest it.
-- **Reading the probabilities as calibrated.** Softmax output sums to $1$ and looks like a posterior, but nothing enforces that $\hat{p}_k$ matches the empirical frequency of class $k$ among instances scored $\hat{p}_k$. Regularization systematically shrinks the scores and therefore flattens the probabilities, and the $\arg\max$ is unaffected either way, so an over-regularized model can look accurate and be badly calibrated. Check against held-out frequencies before any of the numbers reach a decision rule.
+- **Reading the probabilities as calibrated.** Softmax output sums to $1$ and looks like a posterior, but nothing enforces that $\hat{p}_k$ matches the empirical frequency of class $k$ among instances scored $\hat{p}_k$. Regularization systematically shrinks the scores and therefore flattens the probabilities, and the $\arg\max$ is unaffected either way, so an over-regularized model can look accurate and be badly calibrated. [[Model Calibration]] is where that gap stops being a warning and becomes a number: it supplies the reliability diagram and the expected calibration error that measure it, and the maps fitted on held-out scores that close it. Take the measurement before any of these numbers reach a decision rule.
 - **Using it where the labels are not mutually exclusive.** A multilabel target passed to `LogisticRegression` does not raise a helpful error about the modelling assumption, it just fits something whose output space cannot represent the answer. The check is on the target, not the model: `type_of_target(y) == "multilabel-indicator"` means the wrong estimator.
 - **Assuming the strategy is fixed across versions.** The `multi_class` argument was deprecated in scikit-learn 1.5 and is scheduled for removal in 1.7, and `newton-cholesky` gained multinomial support only in 1.6. Code that was correct on 1.4 can fit a different model on 1.6 without any warning being read, so the version matters as much as the arguments.
 

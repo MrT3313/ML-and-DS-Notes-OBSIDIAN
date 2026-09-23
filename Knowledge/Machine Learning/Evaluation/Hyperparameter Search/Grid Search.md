@@ -9,6 +9,7 @@ up: "[[Model Selection]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch05 Feature Engineering]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -45,7 +46,7 @@ Scikit-learn scorers always follow "higher is better", so error metrics are expo
 
 ### Successive halving
 
-`HalvingGridSearchCV` is a tournament rather than a sweep. Every candidate is fitted on a small resource budget, the best $1 / \texttt{factor}$ survive, the budget is multiplied by `factor`, and the round repeats, so weak candidates are eliminated while they are still cheap. The resource is `n_samples` by default and can instead be any positive integer parameter such as a forest's `n_estimators`.
+`HalvingGridSearchCV` is a tournament rather than a sweep. Every candidate is fitted on a small resource budget, the best $1 / \texttt{factor}$ survive, the budget is multiplied by `factor`, and the round repeats, so weak candidates are eliminated while they are still cheap. The resource is `n_samples` by default and can instead be any positive integer parameter such as a forest's `n_estimators`. The policy is due to Jamieson and Talwalkar, "Non-stochastic Best Arm Identification and Hyperparameter Optimization" (AISTATS 2016), and its budget-allocation refinement is Hyperband, Li, Jamieson, DeSalvo, Rostamizadeh and Talwalkar (*JMLR* 18, 2018), the two references scikit-learn itself cites for it. Seen from [[AutoML]] this is one performance estimation strategy and no more than that: it decides how a fixed budget is spread across the candidates it was handed, and it never proposes a candidate that was not written down.
 
 ## Hyperparameters
 

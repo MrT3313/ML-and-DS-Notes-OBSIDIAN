@@ -9,6 +9,7 @@ aliases:
 up: "[[Gradient Descent]]"
 sources:
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -18,7 +19,7 @@ Mini-batch gradient descent computes each gradient on a small random set of inst
 
 Its main advantage over the stochastic variant is not statistical but architectural. A gradient over $b$ instances is one matrix product rather than $b$ separate vector operations, so it lands on the hardware optimizations for matrix arithmetic, which matters most on GPUs, where a batch of $32$ or $256$ rows costs very little more wall-clock time than a batch of one. The step is also less noisy, so the path is more regular and ends up walking closer to the minimum than the stochastic path does. The trade is in the other direction on an irregular cost: less noise means less help escaping a local minimum.
 
-Reach for it as the default whenever the hardware can vectorize and the training set is too large for full batches, which is to say almost always at scale. The two pure forms are best understood as its limiting cases rather than as separate methods.
+Reach for it as the default whenever the hardware can vectorize and the training set is too large for full batches, which is to say almost always at scale. The two pure forms are best understood as its limiting cases rather than as separate methods. At scale $b$ also stops being one number chosen once, since under [[Data Parallelism]] it is the per-worker batch and the batch a single update is actually computed from is the effective $Wb$ summed across $W$ workers.
 
 ## Algorithm
 

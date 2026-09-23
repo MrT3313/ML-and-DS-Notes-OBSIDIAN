@@ -19,6 +19,7 @@ up: "[[Training Set]]"
 sources:
   - "[[HOML Ch03 Classification]]"
   - "[[DMLS Ch04 Training Data]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -65,7 +66,7 @@ Binary imbalance is also the easy case: with $K > 2$ there is no single $\pi_{\m
 
 ## Where it is used
 
-It is a property of the [[Training Set]] you check before choosing how to score anything, by counting the labels. It is the condition under which [[Accuracy]] and its complement the error rate stop being informative, since the constant predictor already takes $\max_k \pi_k$ of it and the whole remaining range is the part worth arguing about. What you look at instead is the [[Confusion Matrix]], which keeps the two error types apart, and the measures read off it: [[Precision]] and [[Recall]] survive imbalance because both are conditioned on a single row or column of that matrix and so cannot be inflated by a large true-negative count. A [[Baseline Model]] is what makes the problem visible in one line, by putting $\max_k \pi_k$ on the same page as the model's score.
+It is a property of the [[Training Set]] you check before choosing how to score anything, by counting the labels. It is the condition under which [[Accuracy]] and its complement the error rate stop being informative, since the constant predictor already takes $\max_k \pi_k$ of it and the whole remaining range is the part worth arguing about. What you look at instead is the [[Confusion Matrix]], which keeps the two error types apart, and the measures read off it: [[Precision]] and [[Recall]] survive imbalance because both are conditioned on a single row or column of that matrix and so cannot be inflated by a large true-negative count. A [[Baseline Model]] is what makes the problem visible in one line, by putting $\max_k \pi_k$ on the same page as the model's score. Structurally this is the case where the slicing variable is the label itself and one slice is small, so the general claim that a pooled score hides a subgroup's score belongs to [[Slice-Based Evaluation]] and this note carries the version of it where the subgroup is a class.
 
 At the sharp end it stops being a scoring problem and becomes a coverage one. A class whose $m_k$ is a handful is not a badly weighted class, it is a class the model has barely seen, so the task it poses locally is the one [[Few-Shot Learning]] is named for: that note's own contrast puts its axis at coverage of the target classes rather than at supervision, and severe imbalance is one of the ordinary ways a dataset arrives with full supervision and no coverage. Reading a rare class that way changes what you would do about it, since no reweighting of five instances manufactures a sixth.
 

@@ -9,6 +9,7 @@ up: "[[Model Selection]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch05 Feature Engineering]]"
+  - "[[DMLS Ch06 Model Development and Offline Evaluation]]"
 confidence: draft
 ---
 
@@ -34,7 +35,7 @@ The reason this beats a grid is an argument from *effective dimension*, due to B
 
 A value may be given as a list, which is sampled uniformly, or as any object with an `rvs` method, which is what `scipy.stats` supplies. `randint(low, high)` samples integers and is **high-exclusive**, so `randint(low=3, high=50)` never returns $50$. `uniform(loc, scale)` covers a bounded continuous range. `loguniform(a, b)` is the one worth deliberate thought: for anything spanning orders of magnitude, such as a regularization strength, a [[Learning Rate]], or an SVM's $C$, uniform sampling on $[a, b]$ puts almost every draw in the top decade, while log-uniform sampling spreads them evenly across decades, which is how such parameters actually behave.
 
-`HalvingRandomSearchCV` composes the two savings: sample candidates at random, then eliminate them in successive-halving rounds of growing resource. When even that is too slow, the next step up is Bayesian optimization, which fits a surrogate model to the scores seen so far and samples where the expected improvement is highest, rather than sampling blindly.
+`HalvingRandomSearchCV` composes the two savings: sample candidates at random, then eliminate them in successive-halving rounds of growing resource. When even that is too slow, the next step up is Bayesian optimization, which fits a surrogate model to the scores seen so far and samples where the expected improvement is highest, rather than sampling blindly (Snoek, Larochelle and Adams, "Practical Bayesian Optimization of Machine Learning Algorithms", NeurIPS 2012). Past that point the search stops being over configurations of a fixed model and starts being over the model itself, which is [[AutoML]].
 
 Scoring follows the "higher is better" convention described under grid search, so error metrics arrive negated and `-search.best_score_` is the readable [[Root Mean Squared Error]].
 
