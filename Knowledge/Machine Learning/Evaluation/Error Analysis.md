@@ -56,7 +56,7 @@ The moves error analysis points to, once a confusion is established:
 - **Preprocessing that removes the nuisance variation**, centring and de-skewing the images so a shifted or rotated stroke stops landing on foreign weights. Worth knowing that MNIST is already centred on each digit's centre of mass, so this means going further than the file already goes, not correcting an oversight.
 - **Growing the training set with transformed copies of its own images**, which is [[Data Augmentation]]. In the [[HOML Ch03 Classification|HOML chapter 3]] notebook this is exercise 2 and its solution, headed `## 2. Data Augmentation`, which shifts every training image one pixel in each of four directions, retrains, and reports about a half point of accuracy. That notebook's Error Analysis section contains no augmentation prose, so the connection is one it makes across its own sections rather than in a single paragraph.
 
-Uncertain: the notebook's Error Analysis section is code only, carrying no prose at all, so which of the first three remedies the printed [[HOML Ch03 Classification|HOML chapter 3]] text actually proposes and in what words could not be checked against a primary source. The book text is paywalled. Treat the first three bullets as the moves this analysis licenses, not as verified quotations of a source.
+Uncertain: the notebook's Error Analysis section is code only, carrying no prose at all, so which of the first three remedies the printed [[HOML Ch03 Classification|HOML chapter 3]] text actually proposes and in what words could not be checked against a primary source. That printed text is paywalled. Treat the first three bullets as the moves this analysis licenses, not as verified quotations of a source.
 
 ## Hyperparameters
 

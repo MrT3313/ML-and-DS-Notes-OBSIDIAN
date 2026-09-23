@@ -11,6 +11,7 @@ aliases:
 up: "[[Feature Scaling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -40,7 +41,7 @@ scikit-learn uses the population divisor $m$, not $m - 1$. The map is affine, so
 - $\mu$ and $\sigma$ are not robust statistics. A handful of extreme rows inflates $\sigma$, which shrinks every ordinary value toward zero. Standardization is better than min-max here, not immune. `RobustScaler`, which centres on the median and divides by the interquartile range, is the genuinely outlier-resistant option.
 - Centring a sparse matrix turns millions of structural zeros into nonzero entries. `StandardScaler` raises on sparse input unless `with_mean=False`.
 - A constant column has $\sigma_j = 0$. scikit-learn detects it and sets the scale to $1$ rather than dividing by zero, so the column becomes all zeros and passes through silently.
-- Fitting on the full dataset rather than the training split leaks the [[Testing Set]] mean and variance into training, which is [[Data Snooping Bias]]. A [[Pipeline]] is what makes this hard to get wrong.
+- Fitting on the full dataset rather than the training split leaks the [[Testing Set]] mean and variance into training, which is [[Data Leakage]]. A [[Pipeline]] is what makes this hard to get wrong.
 - A heavy-tailed column is still heavy-tailed afterwards. Fix the shape first with [[Feature Distribution Transformation]], then standardize.
 
 ## Implementation

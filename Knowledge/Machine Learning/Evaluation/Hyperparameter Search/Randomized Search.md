@@ -8,6 +8,7 @@ aliases:
 up: "[[Model Selection]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -15,7 +16,7 @@ confidence: draft
 
 Randomized search draws a fixed number of [[Hyperparameter]] combinations at random, from explicit lists or from continuous distributions, scores each by [[Cross-Validation]], and keeps the best. Reach for it whenever the space is large, continuous, or only partly understood, which in practice is most of the time. Its decisive property is that the budget `n_iter` is set independently of how many hyperparameters are in play: widening the search costs nothing extra, and the run can be stopped whenever the compute runs out, whereas [[Grid Search]] must finish its product or finish nothing.
 
-As with any search, the estimator passed in is the whole [[Pipeline]], so preprocessing is refit inside each fold rather than once on data that includes the validation rows ([[Data Snooping Bias]]).
+As with any search, the estimator passed in is the whole [[Pipeline]], so preprocessing is refit inside each fold rather than once on data that includes the validation rows ([[Data Leakage]]).
 
 ## Algorithm
 

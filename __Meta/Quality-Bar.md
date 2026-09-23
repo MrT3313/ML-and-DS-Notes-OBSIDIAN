@@ -134,6 +134,8 @@ Three optional sections, all in use:
 - **Extracted** is every note this chapter produced, grouped by theme.
 - **Open questions** are the things the chapter left unresolved for you, each phrased so a later chapter can settle it.
 
+Its aliases are `<BOOK> Chapter N` and the chapter's own title, except that the chapter note yields the title wherever a note under `Knowledge/` already holds it, as a filename or as an alias, and takes the prefixed form `<BOOK> <Title>` instead, since Obsidian resolves aliases case-insensitively and a duplicate claim makes one of the two unreachable with nothing raising an error: `DMLS Ch04 Training Data` yields to `Training Set`, and `DMLS Ch05 Feature Engineering` to `Feature Engineering`.
+
 **Container notes**, one per book:
 
 ```

@@ -10,12 +10,13 @@ up: "[[Scikit-Learn Estimator API]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
 ## What it does and when
 
-A pipeline bundles a sequence of transformers, plus an optional final predictor, into one estimator obeying the [[Scikit-Learn Estimator API]]. It exists for correctness, not convenience. Because the sequence is a single object with a single `fit`, nesting it inside [[Cross-Validation]] or [[Grid Search]] fits the preprocessing on the training folds alone. Running the same steps by hand on the full dataset before splitting lets a median or a category list computed from held-out rows leak into training, the ordinary route by which [[Data Snooping Bias]] enters a project and makes every score optimistic. Reach for a pipeline the moment a preprocessing step *learns* anything.
+A pipeline bundles a sequence of transformers, plus an optional final predictor, into one estimator obeying the [[Scikit-Learn Estimator API]]. It exists for correctness, not convenience. Because the sequence is a single object with a single `fit`, nesting it inside [[Cross-Validation]] or [[Grid Search]] fits the preprocessing on the training folds alone. Running the same steps by hand on the full dataset before splitting lets a median or a category list computed from held-out rows leak into training, the ordinary route by which [[Data Leakage]] enters a project and makes every score optimistic. Reach for a pipeline the moment a preprocessing step *learns* anything.
 
 The second reason is deployment: a fitted pipeline carries preprocessing and [[Model]] in one artifact, so serving cannot apply a different median than training did.
 

@@ -10,6 +10,7 @@ sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[HOML Ch03 Classification]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -54,7 +55,7 @@ The output is a distribution, not a point. Ten tree scores on the housing data c
 
 - Compute: $K$ fits per candidate per hyperparameter setting.
 - Leakage across folds when instances are not independent (time series, grouped data, duplicate rows) gives an optimistic estimate.
-- Preprocessing fitted outside the folds. The estimator passed in must be the complete [[Pipeline]], preprocessing included, so that the imputer and the scaler are refit on each training fold. Fitting them once on the whole training set before the split lets every validation fold contribute to the transformer that is then evaluated on it, which is [[Data Snooping Bias]] in miniature.
+- Preprocessing fitted outside the folds. The estimator passed in must be the complete [[Pipeline]], preprocessing included, so that the imputer and the scaler are refit on each training fold. Fitting them once on the whole training set before the split lets every validation fold contribute to the transformer that is then evaluated on it, which is [[Data Leakage]] in miniature.
 - Folds that do not preserve class balance in [[Classification]] give noisy scores, worst of all under [[Class Imbalance]], where a rare class can come out thin or missing in a fold. In scikit-learn 1.6 this particular case is already handled rather than left to the caller: for an integer or `None` `cv`, `cross_val_score` and `cross_validate` split with `StratifiedKFold` when the estimator is a classifier and `y` is binary or multiclass, and with plain `KFold` in every other case. What they do not do is shuffle. Both splitters are instantiated with `shuffle=False`, so the folds are contiguous blocks of the row order and repeat identically across calls; a file sorted by class, by time, or by any other structure needs an explicit splitter with `shuffle=True` and a [[Random Seed]], because stratification is no defence against ordering.
 
 ## Implementation

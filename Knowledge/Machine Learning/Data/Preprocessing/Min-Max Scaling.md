@@ -10,6 +10,7 @@ up: "[[Feature Scaling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch03 Data Engineering Fundamentals]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -43,7 +44,7 @@ Both constants are stored at fit time and reapplied unchanged to validation, tes
 - One outlier sets the denominator. In a column where almost all districts hold a few thousand people and one holds thirty thousand, every ordinary value is squeezed into the bottom sliver of $[0,1]$ and the differences the model needed are gone. This is the real cost of the method.
 - New data outside the training range leaves the interval, so a scaler advertised as producing $[0,1]$ can emit $1.4$ in production. `clip=True` prevents it, but clipped values no longer survive `inverse_transform`.
 - A constant column has $x_{\max} - x_{\min} = 0$. scikit-learn's `_handle_zeros_in_scale` replaces the zero range with $1$, so the column silently becomes the constant $l$ rather than raising, and a dead feature passes through unnoticed.
-- Fitting on the whole dataset before splitting lets the [[Testing Set]] extremes define the interval, which is [[Data Snooping Bias]]. Min-max is the worst offender here, because the constants are the extremes.
+- Fitting on the whole dataset before splitting lets the [[Testing Set]] extremes define the interval, which is [[Data Leakage]]. Min-max is the worst offender here, because the constants are the extremes.
 - Sparse input is rejected outright: `MinMaxScaler.transform` does not accept sparse matrices, and subtracting a nonzero $x_{\min}$ would destroy sparsity anyway. Only when $l = 0$ and $x_{\min} = 0$ do zeros stay zero. `MaxAbsScaler`, which divides by $\max |x|$ with no shift, is the sparse-safe analogue.
 
 ## Implementation

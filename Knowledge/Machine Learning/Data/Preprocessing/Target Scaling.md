@@ -10,6 +10,7 @@ aliases:
 up: "[[Feature Scaling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -40,7 +41,7 @@ For [[Standardization]] of the target, $g(y) = (y - \mu_y)/\sigma_y$ with $\mu_y
 - The reported metric changes meaning. Training on $\log y$ minimizes error in log space, so [[Root Mean Squared Error]] computed there is a relative error on the original scale, not a dollar figure. Score after inverting, or say which space the number lives in.
 - Back-transforming the mean. If $\log Y$ is normal then $\exp$ of its mean is the median of $Y$, not the mean: $\mathbb{E}[Y] = \exp(\mu + \sigma^2/2)$. A log-trained regressor systematically under-predicts the mean unless the correction is applied.
 - $\log$ is undefined at $y \le 0$. Use $\log(1 + y)$ or Yeo-Johnson when the target can reach zero.
-- Fitting the target scaler on all labels before the split leaks [[Testing Set]] information exactly as feature scaling does ([[Data Snooping Bias]]).
+- Fitting the target scaler on all labels before the split leaks [[Testing Set]] information exactly as feature scaling does, and what crosses the boundary here is the label itself ([[Data Leakage]]).
 
 ## Implementation
 

@@ -9,12 +9,15 @@ up: "[[Machine Learning]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
 ## Definition
 
 Generalization is a model's ability to perform well on instances it did not train on. It is the actual goal of training; low error on the training set is only a means to it.
+
+The subject here is a fitted model and the quantity is its error on data it was not fitted on. Whether a given *column* is present and meaningful in data the model has not seen is a different question about a different object, and it is [[Feature Generalization]]. The word is shared and the subject is not.
 
 ## Formal statement
 

@@ -45,7 +45,7 @@ boot_result = stats.bootstrap([squared_errors], rmse,
 rmse_lower, rmse_upper = boot_result.confidence_interval
 ```
 
-The book's printed alternative is a $t$-interval on the same quantity:
+[[HOML Ch02 End-to-End Machine Learning Project|HOML chapter 2]]'s printed alternative is a $t$-interval on the same quantity:
 
 ```python
 np.sqrt(stats.t.interval(confidence, len(squared_errors) - 1,
@@ -53,7 +53,7 @@ np.sqrt(stats.t.interval(confidence, len(squared_errors) - 1,
                          scale=stats.sem(squared_errors)))
 ```
 
-Both are legitimate, but the $t$-interval assumes the squared errors are roughly normal, and squared errors are non-negative and heavily right-skewed, so that assumption usually fails. The bootstrap is the safer default, and it is what the book's companion notebook uses.
+Both are legitimate, but the $t$-interval assumes the squared errors are roughly normal, and squared errors are non-negative and heavily right-skewed, so that assumption usually fails. The bootstrap is the safer default, and it is what that chapter's companion notebook uses.
 
 ## Where it is used
 

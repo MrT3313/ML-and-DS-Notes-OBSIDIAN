@@ -10,6 +10,7 @@ up: "[[Machine Learning]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
   - "[[DMLS Ch04 Training Data]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -41,7 +42,7 @@ then classify a query item by a softmax over negative distances to the prototype
 
 $$p_\phi(y = k \mid \mathbf{x}) = \frac{\exp\big({-d\big(f_\phi(\mathbf{x}), \mathbf{c}_k\big)}\big)}{\sum_{k'} \exp\big({-d\big(f_\phi(\mathbf{x}), \mathbf{c}_{k'}\big)}\big)}$$
 
-with $d$ a distance in the embedding space. The $K$ of the episode appears in exactly one place, as $|S_k|$, the number of vectors the prototype averages, which is why the method degrades gracefully as $K$ shrinks and why the same equations extend to the zero-shot case by replacing $\mathbf{c}_k$ with an embedding of class meta-data.
+with $d$ a distance in the [[Embedding|embedding space]]. The $K$ of the episode appears in exactly one place, as $|S_k|$, the number of vectors the prototype averages, which is why the method degrades gracefully as $K$ shrinks and why the same equations extend to the zero-shot case by replacing $\mathbf{c}_k$ with an embedding of class meta-data.
 
 **The prompting sense is a different claim.** Since Brown et al. (2020) "few-shot" is also used for a setting in which nothing is fitted at all: the model "is given a few demonstrations of the task at inference time as conditioning, but no weight updates are allowed", with $K$ typically in the range 10 to 100, bounded by the context window rather than by how many labels anyone could afford. The word is the same and the mechanism is not. A shot has migrated from a labelled example that produces a gradient step into an in-context demonstration that produces none, so a few-shot prompt trains nothing and leaves no artefact behind, and $K$ has moved an order of magnitude. This is the largest source of cross-talk between the two literatures, and a reported few-shot number means nothing until you know which sense it is in. Li and Flanigan (AAAI 2024) add a further caution about the prompting sense: on tasks where contamination of the pretraining corpus could be ruled out, models showed no statistically significant improvement over majority-class baselines in either the zero-shot or the few-shot setting, so some of what reads as few-shot ability is the task having been seen before.
 

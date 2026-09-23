@@ -8,6 +8,7 @@ aliases:
 up: "[[Generalization]]"
 sources:
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -64,7 +65,7 @@ The flat-and-high verdict does not say the model is bad; it says that *this* mod
 - **Float sizes are fractions of the fold's training split, not of the dataset.** With $100$ instances at `cv=5` each fold trains on $80$, so `train_sizes=np.linspace(0.01, 1.0, 40)` produces a curve that ends at $80$, not $100$. Integers are read as absolute counts instead, and mixing the two conventions in one array is a silent error.
 - **Requested ticks get silently collapsed.** Fractions that round to the same integer are deduplicated, so `train_sizes_abs` comes back shorter than what you passed. Plot against the returned array, never against the array you supplied, or the curve is shifted.
 - **Sign.** Every scikit-learn scorer obeys "higher is better", so `scoring="neg_root_mean_squared_error"` returns negative numbers. Plotting the raw arrays draws the picture upside down, and every reading in the table above then inverts.
-- **Preprocessing fitted outside the folds.** The estimator handed in has to be the whole [[Pipeline]]. A scaler or imputer fitted once on the full data before the call lets every validation fold contribute to the transformer that is then scored on it, which is [[Data Snooping Bias]], and it flatters the small-size points worst of all, precisely where the curve is being read.
+- **Preprocessing fitted outside the folds.** The estimator handed in has to be the whole [[Pipeline]]. A scaler or imputer fitted once on the full data before the call lets every validation fold contribute to the transformer that is then scored on it, which is [[Data Leakage]], and it flatters the small-size points worst of all, precisely where the curve is being read.
 - **Cost.** $K \times T$ fits. The $40$-point dense grid at `cv=5` is $200$ fits of the estimator, and if the estimator is itself a search, the curve is not affordable.
 
 ## Implementation

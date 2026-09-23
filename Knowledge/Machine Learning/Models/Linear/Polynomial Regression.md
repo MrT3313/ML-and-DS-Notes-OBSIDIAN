@@ -9,6 +9,7 @@ aliases:
 up: "[[Linear Regression]]"
 sources:
   - "[[HOML Ch04 Training Models]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -59,7 +60,7 @@ $$\hat{\boldsymbol\theta} = \big(\boldsymbol\Phi^{T}\boldsymbol\Phi\big)^{-1}\bo
 
 The cost function stays a convex quadratic in $\boldsymbol\theta$, because it was never the inputs that made it quadratic; it was the squaring of the residual. So there is still exactly one minimum, the closed form still lands on it in one solve, and gradient descent still cannot get stuck. Nothing about the optimization got harder. What got harder is generalization, since $\boldsymbol\theta$ now has more entries than the data may be able to pin down, which is the [[Bias-Variance Tradeoff]] moving one notch toward variance.
 
-Seen from outside, this is [[Feature Engineering]] in its purest form: a fixed map $\phi: \mathbb{R}^{n} \to \mathbb{R}^{d_{\text{out}}}$ applied before the hypothesis, so the fitted object is $h \circ \phi$. Polynomial expansion is the case where $\phi$ is chosen mechanically instead of from domain knowledge.
+Seen from outside, this is [[Feature Engineering]] in its purest form: a fixed map $\phi: \mathbb{R}^{n} \to \mathbb{R}^{d_{\text{out}}}$ applied before the hypothesis, so the fitted object is $h \circ \phi$. Polynomial expansion is the case where $\phi$ is chosen mechanically instead of from domain knowledge. The general operation it mechanizes is [[Feature Crossing]], which builds one new feature from two or more existing ones; what this note specializes is the numeric branch of it, taking every monomial up to degree $d$ rather than one chosen product, so the cross terms $ab$ arrive as a side effect of the count instead of being picked. The branches part company on what the new feature *is*: a cross of two categoricals is a new *category* whose level set is the product of the two parent level sets, while a polynomial interaction term is a new *number*, so the two grow in different currencies, one in levels and one in columns.
 
 ### How many terms, and which
 
@@ -92,7 +93,7 @@ Degree is the one that matters; the other two change the shape of the expansion 
 ## Failure modes
 
 - **Degree set too high.** At degree $300$ on a hundred points the curve threads every training point and swings wildly between them; training error goes to nearly zero while validation error explodes. The tell is a [[Learning Curve]] whose two curves never meet and stay far apart as $m$ grows.
-- **Expanding before splitting.** `fit_transform` on the whole dataset is not itself a leak, since each output column depends only on its own row, but the [[Standardization]] that almost always follows it is fitted across rows, and fitting that on all the data lets test-set statistics into training. That is [[Data Snooping Bias]], and putting the expansion and the scaler inside a [[Pipeline]] is what prevents it, because cross-validation then refits both on the training folds alone.
+- **Expanding before splitting.** `fit_transform` on the whole dataset is not itself a leak, since each output column depends only on its own row, but the [[Standardization]] that almost always follows it is fitted across rows, and fitting that on all the data lets test-set statistics into training. That is [[Data Leakage]], the contamination sitting in the fitted scaler rather than in any choice anyone made, and putting the expansion and the scaler inside a [[Pipeline]] is what prevents it, because cross-validation then refits both on the training folds alone.
 - **Unscaled powers.** Raising a column that ranges over $[0, 1000]$ to the fifth power sends it to $[0, 10^{15}]$, while a column in $[0,1]$ stays in $[0,1]$. The expanded matrix becomes badly conditioned and any gradient or penalty term is swamped by the largest column. [[Feature Scaling]] after the expansion, not before, is the fix, since scaling before expansion is undone by the powers.
 - **Combinatorial blowup.** $\binom{n+d}{d}$ passes the instance count quickly on wide data, and once $d_{\text{out}} > m$ the design matrix is rank deficient by construction, the fit is exactly determined, and training error hits zero while the model has learned nothing. This is the regime where [[Regularization]] stops being optional.
 - **Extrapolation.** A degree-$d$ polynomial diverges like $x^{d}$ outside the range it was fitted on, so predictions just past the edge of the training data are not merely uncertain, they are wrong in a specific and violent direction. A linear fit degrades gracefully there; this does not.

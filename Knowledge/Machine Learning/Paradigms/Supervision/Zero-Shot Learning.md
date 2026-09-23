@@ -10,6 +10,7 @@ up: "[[Machine Learning]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
   - "[[DMLS Ch04 Training Data]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -23,7 +24,7 @@ Zero-shot learning asks a model to assign instances to classes for which it has 
 
 The rest of this folder is sorted on a different question, and pretending otherwise would make the placement look neater than it is. [[Supervised Learning]], [[Semi-Supervised Learning]] and [[Unsupervised Learning]] are separated by what fraction of the training instances carry labels, which is a property of the training set taken as a whole. Zero-shot is separated by how many labelled examples exist for the classes you actually want predictions on, which is a property of one region of the label space. The two can be answered independently: a zero-shot classifier is normally fitted by ordinary [[Supervised Learning]] on fully labelled data for the seen classes, so on the folder's axis it sits at the supervised end while having zero labels where it counts. What is short is coverage, not supervision.
 
-One more separation, because the word invites it. [[Transfer Learning]], reusing what a model learned on a source distribution or task to do better on a target one, is the general case, and zero-shot learning is its limit: the target classes contribute zero labels and the only channel left is the shared semantic space. Every zero-shot method is a transfer method. The converse fails, since fine-tuning on a small labelled target set is transfer and is plainly not zero-shot.
+One more separation, because the word invites it. [[Transfer Learning]], reusing what a model learned on a source distribution or task to do better on a target one, is the general case, and zero-shot learning is its limit: the target classes contribute zero labels and the only channel left is the shared semantic space, an [[Embedding|embedding space]] that inputs and class descriptions are both mapped into. Every zero-shot method is a transfer method. The converse fails, since fine-tuning on a small labelled target set is transfer and is plainly not zero-shot.
 
 ## Formal statement
 

@@ -13,6 +13,7 @@ up: "[[Sampling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch04 Training Data]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -37,9 +38,9 @@ Hash route.
 
 3. Send every other instance to the training set.
 
-CRC32 spreads identifiers roughly uniformly over $[0, 2^{32})$, so the fraction below the threshold is approximately $r$. Membership depends on the identifier alone: not on $m$, not on row order, not on a [[Random Seed]].
+CRC32 spreads identifiers roughly uniformly over $[0, 2^{32})$, so the fraction below the threshold is approximately $r$. Membership depends on the identifier alone: not on $m$, not on row order, not on a [[Random Seed]]. The hash here decides which side of the split a row lands on and nothing else; hashing the *value of a categorical feature* into a fixed number of buckets so it can be encoded is a different job with a different failure mode, and it belongs to [[Feature Hashing]].
 
-That is why the hash route exists. A seeded permutation is reproducible only while the dataset is frozen: append rows and $m$ changes, so the permutation changes and rows that trained last run are tested this run. Refresh a few times and the model has effectively seen everything, which is [[Data Snooping Bias]] by the back door. Hashing pins each row to one side forever, and new rows join the test set at rate $r$ unprompted.
+That is why the hash route exists. A seeded permutation is reproducible only while the dataset is frozen: append rows and $m$ changes, so the permutation changes and rows that trained last run are tested this run. Refresh a few times and the model has effectively seen everything, which is [[Data Leakage]] arriving through the split itself rather than through anyone peeking. Hashing pins each row to one side forever, and new rows join the test set at rate $r$ unprompted.
 
 ## Hyperparameters
 
@@ -53,7 +54,8 @@ That is why the hash route exists. A seeded permutation is reproducible only whi
 
 ## Failure modes
 
-- Data that is not independent and identically distributed. A time series split at random puts future rows into training and leaks them into the past. Grouped rows (several readings per patient) and duplicates do the same, splitting a group across train and test.
+- Time-correlated rows drawn uniformly. When the moment a row was generated shifts the distribution of its label, a uniform draw hands the model rows from the future and then asks it to predict the past. Predicting the seventh day of a price series is the clean shape: train on days one to six and test on day seven, and the split is an estimate of the question actually being asked, whereas a uniform draw scatters day-seven rows through the training set and the resulting score estimates nothing the deployed model will face. The split goes by time instead, and the general account of why is [[Data Leakage]].
+- Data that is not independent and identically distributed in the other direction. Grouped rows (several readings per patient) and duplicates split a family across train and test, so a near copy of a test instance trains the model. [[Data Leakage]] carries that as group leakage.
 - Small $m$, where a fair draw is unrepresentative by luck. Sampling 1000 people from a population that is 51.1% female lands outside 48.5% to 53.5% about 10.7% of the time: sampling noise, not a bug, producing [[Nonrepresentative Training Data]].
 - A rare category that does not appear at all. The previous bullet is about a share coming back wrong; this one is about a share coming back zero, and a class the sample never contains is a class the model is never shown, so it fits as though the category did not exist. For a population of $N$ units of which a fraction $p$ carry the rare class, a sample of size $n = fN$ drawn without replacement contains none of them with probability
 

@@ -8,6 +8,7 @@ aliases:
 up: "[[Model Selection]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -15,7 +16,7 @@ confidence: draft
 
 Grid search takes a list of candidate values for each [[Hyperparameter]], forms their Cartesian product, scores every resulting combination by [[Cross-Validation]], and keeps the best. Reach for it when the space is small and discrete, when you already know roughly which region is worth combing, and when you want the candidate set fixed in advance so two runs examine exactly the same points. Once the space grows past a few hyperparameters, or once you suspect most of them barely move the score, [[Randomized Search]] spends the same budget better.
 
-One requirement outranks the rest: the estimator handed to the search must be the whole [[Pipeline]], preprocessing included, so imputation and scaling are refit inside each fold. Searching over a model given already-transformed data lets the validation folds shape the transformer that is then scored on them, which is [[Data Snooping Bias]] wearing a tuning loop as a disguise.
+One requirement outranks the rest: the estimator handed to the search must be the whole [[Pipeline]], preprocessing included, so imputation and scaling are refit inside each fold. Searching over a model given already-transformed data lets the validation folds shape the transformer that is then scored on them, which is [[Data Leakage]] wearing a tuning loop as a disguise, the transformer being what gets contaminated rather than the choice of candidate.
 
 ## Algorithm
 

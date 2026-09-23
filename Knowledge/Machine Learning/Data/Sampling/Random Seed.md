@@ -13,6 +13,7 @@ aliases:
 up: "[[Random Sampling]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
+  - "[[DMLS Ch05 Feature Engineering]]"
 confidence: draft
 ---
 
@@ -26,7 +27,7 @@ A pseudorandom generator is a state $s_t$, a transition $s_{t+1} = f(s_t)$, and 
 
 ## Where it is used
 
-Fixing the seed is what makes a [[Testing Set]] hold still across runs. Without it, [[Random Sampling]] draws a different split every execution, and over enough executions the model has trained on every row, which is [[Data Snooping Bias]] reached by accident rather than by carelessness. [[Stratified Sampling]] takes the same argument for the same reason.
+Fixing the seed is what makes a [[Testing Set]] hold still across runs. Without it, [[Random Sampling]] draws a different split every execution, and over enough executions the model has trained on every row, which is [[Data Leakage]] reached by accident rather than by carelessness. [[Stratified Sampling]] takes the same argument for the same reason.
 
 The failure mode worth stating plainly: a fixed seed makes a result reproducible, not correct. One seeded split can still be an unlucky split, and reporting its score as though the seed were irrelevant is reading noise as signal. [[Cross-Validation]] is the defence, since averaging over folds estimates how much of the score was the split. If a conclusion changes when the seed changes, the conclusion was never about the [[Model]].
 
