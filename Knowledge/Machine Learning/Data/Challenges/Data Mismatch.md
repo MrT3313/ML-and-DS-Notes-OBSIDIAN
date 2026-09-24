@@ -8,6 +8,7 @@ aliases:
 up: "[[Training Set]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -21,4 +22,4 @@ Training draws from $p_{\text{train}}(\mathbf{x}, y)$, production from $p_{\text
 
 ## Where it is used
 
-The [[Testing Set]] and validation set must be drawn from production-like data or their estimates are meaningless. Géron's example is training on web images of flowers and deploying on phone photos. [[Model Rot]] is the same mechanism arising over time after deployment rather than at collection; [[Nonrepresentative Training Data]] is the sampling-side cause.
+The [[Testing Set]] and validation set must be drawn from production-like data or their estimates are meaningless. Géron's example is training on web images of flowers and deploying on phone photos. [[Model Rot]] is the same mechanism arising over time after deployment rather than at collection; [[Nonrepresentative Training Data]] is the sampling-side cause. Train-serving skew, one of this note's aliases, is wider than mismatch: the same feature computed by two code paths, one for training and one for serving, produces it with no difference in the underlying distribution at all, which is the pipeline agreement [[Feature]] states.

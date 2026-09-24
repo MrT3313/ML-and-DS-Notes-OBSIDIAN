@@ -20,7 +20,7 @@ aliases:
 - [[DMLS Ch04 Training Data]]
 - [[DMLS Ch05 Feature Engineering]]
 - [[DMLS Ch06 Model Development and Offline Evaluation]]
-- DMLS Ch07 Model Deployment and Prediction Service
+- [[DMLS Ch07 Model Deployment and Prediction Service]]
 - DMLS Ch08 Data Distribution Shifts and Monitoring
 - DMLS Ch09 Continual Learning and Test in Production
 - DMLS Ch10 Infrastructure and Tooling for MLOps

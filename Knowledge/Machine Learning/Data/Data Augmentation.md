@@ -15,6 +15,7 @@ sources:
   - "[[HOML Ch03 Classification]]"
   - "[[DMLS Ch04 Training Data]]"
   - "[[DMLS Ch05 Feature Engineering]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -43,7 +44,7 @@ How well it works is the part of this subsection that goes stale fastest, so it 
 Where it is established:
 
 - **Simulation for perception.** In robotics and autonomous driving a renderer supplies images together with their labels for free, since the generator already knows what it drew, and it supplies dangerous edge cases that nobody wants to stage in reality. The practice that is actually reported to work is hybrid rather than synthetic-only: pretrain on the simulated set, fine-tune on a smaller real one, because the real data is what carries sensor noise, lighting, material response and the long tail of things the simulator was never told about. The residual gap between the two distributions is the sim-to-real gap, and it is the reason the real fine-tuning step has not gone away.
-- **Generated text in language model training.** Training partly on text produced by another model is ordinary practice, both as distillation of a large model into a smaller one and as deliberately generated instructional text mixed with filtered real text. The Phi models from Microsoft, from 2023 onward, are the best documented case of the second, and they reached capability at a parameter count well below what the comparable models trained on unfiltered web text needed.
+- **Generated text in language model training.** Training partly on text produced by another model is ordinary practice, both as [[Knowledge Distillation|distillation]] of a large model into a smaller one and as deliberately generated instructional text mixed with filtered real text. The Phi models from Microsoft, from 2023 onward, are the best documented case of the second, and they reached capability at a parameter count well below what the comparable models trained on unfiltered web text needed.
 - **Privacy-constrained domains**, where a synthetic record stands in for a real one that cannot be shared. This is the weakest of the three on evidence: the mechanics are routine, and whether a given synthetic set preserves the utility of the original while genuinely protecting the individuals in it is decided per release, not by the technique.
 
 The failure mode that cuts the other way is **model collapse**. Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal (*Nature* 631, 755, 2024) show that a generative model trained on the output of the previous generation of itself, repeatedly, loses the tails of the original distribution first and degrades across the whole of it after, and they show it holds for large language models, variational autoencoders and Gaussian mixture models alike. The effect matters because scraped training data is no longer reliably human-written.

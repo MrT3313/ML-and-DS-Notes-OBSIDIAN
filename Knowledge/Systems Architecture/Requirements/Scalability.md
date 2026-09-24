@@ -8,6 +8,7 @@ aliases:
 up: "[[Systems Architecture]]"
 sources:
   - "[[DMLS Ch02 Introduction to Machine Learning Systems Design]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -50,7 +51,7 @@ When the thing being run gets bigger, the resources one copy of it needs go up w
 
 $$M_{\text{params}} = P \cdot b \cdot k$$
 
-Serving holds one copy of the weights, $k = 1$. Training with Adam holds four, the weights, the gradients and two moment estimates, so $k = 4$. Mixed precision arrives at the same total from a different direction: Rajbhandari, Rasley, Ruwase and He count 16 bytes per parameter for mixed-precision Adam (ZeRO, SC 2020), 2 for the half-precision weights, 2 for the half-precision gradients and 12 for the single-precision master copy plus the two moments.
+Serving holds one copy of the weights, $k = 1$. Training with Adam holds four, the weights, the gradients and two moment estimates, so $k = 4$. Mixed precision arrives at the same total from a different direction: Rajbhandari, Rasley, Ruwase and He count 16 bytes per parameter for mixed-precision Adam (ZeRO, SC 2020), 2 for the half-precision weights, 2 for the half-precision gradients and 12 for the single-precision master copy plus the two moments. [[Model Quantization]] is a change to $b$ itself, so an 8-bit copy of the weights, $b = 1$, needs a quarter of the single-precision floor.
 
 So for $P = 10^8$ at $b = 4$: serving is 0.4 GB and training is 1.6 GB. Neither is 16 GB. The rest of any training figure is activation memory, the intermediate values of the forward pass held so the backward pass can use them, and that term scales with the batch size, the input length and the depth rather than with $P$. Sixteen gigabytes is reachable for a model of this size, but only as a training figure and only once a batch size is stated with it. Quoted with no batch size it is not a figure about anything, which is the same defect as a scalability claim with no load parameter, arriving one level down.
 

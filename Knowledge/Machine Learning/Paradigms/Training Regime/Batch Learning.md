@@ -8,6 +8,7 @@ sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
   - "[[DMLS Ch03 Data Engineering Fundamentals]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -25,4 +26,4 @@ Batch learning is a training regime, and the update cost above is the whole of i
 
 ## Where it is used
 
-The alternative is [[Online Learning]]. A fixed model decays as the world moves, which is [[Model Rot]]; the retrain cadence is the lever, and setting that cadence deliberately is how [[Continual Learning]] is most often carried out in practice, which is why batch fitting and continual updating are not opposites. Batch learning fails outright when the data exceeds memory, which is where [[Out-of-Core Learning]] comes in. A batch job in the data systems sense has nothing in common with this but the word: [[Batch Processing]] is a bounded computation over records already at rest, fixed before the run starts, and it says nothing about how many training instances any parameter update is computed from or whether anything is fitted at all.
+The alternative is [[Online Learning]]. A fixed model decays as the world moves, which is [[Model Rot]]; the retrain cadence is the lever, and setting that cadence deliberately is how [[Continual Learning]] is most often carried out in practice, which is why batch fitting and continual updating are not opposites. Batch learning fails outright when the data exceeds memory, which is where [[Out-of-Core Learning]] comes in. A batch job in the data systems sense has nothing in common with this but the word: [[Batch Processing]] is a bounded computation over records already at rest, fixed before the run starts, and it says nothing about how many training instances any parameter update is computed from or whether anything is fitted at all. Batch learning also says nothing about how the fitted model is asked: that is the serving axis, [[Batch and Online Prediction]], when a fitted model is asked rather than when it is fitted, and the two axes are independent, so a system can be any of the four combinations, ex a model trained in batch and served online.

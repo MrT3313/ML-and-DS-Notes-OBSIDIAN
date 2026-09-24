@@ -13,12 +13,11 @@ aliases:
   - KBinsDiscretizer
   - QuantileTransformer
   - distribution transformation
-  - quantization
-  - quantize
 up: "[[Feature Engineering]]"
 sources:
   - "[[HOML Ch02 End-to-End Machine Learning Project]]"
   - "[[DMLS Ch05 Feature Engineering]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -26,7 +25,7 @@ confidence: draft
 
 These transforms change the *shape* of a feature's distribution, and run before a scaler, which only changes its range. Reach for one when a histogram shows something a linear model cannot use: a long right tail, several peaks, or a value that matters because it is near some point rather than because it is large. The shape decides which one.
 
-Bucketizing has a second motivation that is not about shape at all: it shrinks what the model has to learn. Fitted on raw income the model is learning a function over an infinite set of possible values; fitted on income cut into lower, middle and upper it is learning three numbers, which is a far easier thing to estimate from few rows. That is the condition under which the operation pays, enough data to pin down a handful of bucket means and not enough to pin down the curve they are standing in for. The standing measurement is Dougherty, Kohavi and Sahami (ICML 1995), who discretized every continuous column in advance across 16 datasets and lifted a naive Bayes classifier from $76.57\%$ to $83.97\%$ average accuracy, past C4.5's own $82.25\%$, with C4.5 itself never significantly worse under the same treatment and significantly better on two datasets. Two things keep that from being a general licence. Their best boundaries are placed using the labels, which is not what any `strategy` below does, and the gain lands on a learner that was assuming a Gaussian per class and was wrong about it. Their reading of why, that a global partition regularizes because it is less exposed to variance estimated from small fragmented data, is offered as a conjecture rather than measured. The operation is not confined to continuous columns either: age arrives already discrete and is still often worth grouping into bands, under 18, 18 to 22, 22 to 30, when the bands are what the question is actually about.
+Bucketizing has a second motivation that is not about shape at all: it shrinks what the model has to learn. Fitted on raw income the model is learning a function over an infinite set of possible values; fitted on income cut into lower, middle and upper it is learning three numbers, which is a far easier thing to estimate from few rows. That is the condition under which the operation pays, enough data to pin down a handful of bucket means and not enough to pin down the curve they are standing in for. The standing measurement is Dougherty, Kohavi and Sahami (ICML 1995), who discretized every continuous column in advance across 16 datasets and lifted a naive Bayes classifier from $76.57\%$ to $83.97\%$ average accuracy, past C4.5's own $82.25\%$, with C4.5 itself never significantly worse under the same treatment and significantly better on two datasets. Two things keep that from being a general licence. Their best boundaries are placed using the labels, which is not what any `strategy` below does, and the gain lands on a learner that was assuming a Gaussian per class and was wrong about it. Their reading of why, that a global partition regularizes because it is less exposed to variance estimated from small fragmented data, is offered as a conjecture rather than measured. The operation is not confined to continuous columns either: age arrives already discrete and is still often worth grouping into bands, under 18, 18 to 22, 22 to 30, when the bands are what the question is actually about. Binning maps a feature's values to bucket indices before anything is fitted, and it is not [[Model Quantization]], which maps a fitted model's weights and activations to fewer bits; the shared operation, rounding onto a grid, is the only thing the two have in common.
 
 ## Algorithm or formula
 

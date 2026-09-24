@@ -13,6 +13,7 @@ aliases:
 up: "[[Systems Architecture]]"
 sources:
   - "[[DDIA Ch01 Trade-Offs in Data Systems Architecture]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -63,4 +64,4 @@ The vendor owns the machines, employs the operators, decides what is exposed and
 
 ## Where it is used
 
-[[Self-Hosting]] is the other side of the deployment question, and the two notes are only meaningful together. [[Cloud-Native Architecture]] is what a system looks like when it is designed for this arrangement from the ground up rather than lifted onto it, and [[Object Storage]] and [[Serverless]] are the two services that show most clearly what designing for it buys. [[DevOps]] is who does the operating once a vendor runs the machines: the work does not disappear, it changes shape, with capacity planning becoming financial planning and performance optimization becoming cost optimization. Anything assembled out of cloud services is a [[Distributed System]] whether you meant it to be or not, because a request from one service to another crosses a network and can fail on the way.
+[[Self-Hosting]] is the other side of the deployment question, and the two notes are only meaningful together. [[Edge Computing]] is the other axis: this note answers who owns the machines, that one answers where the computation runs, and either answer here combines with either answer there. [[Cloud-Native Architecture]] is what a system looks like when it is designed for this arrangement from the ground up rather than lifted onto it, and [[Object Storage]] and [[Serverless]] are the two services that show most clearly what designing for it buys. [[DevOps]] is who does the operating once a vendor runs the machines: the work does not disappear, it changes shape, with capacity planning becoming financial planning and performance optimization becoming cost optimization. Anything assembled out of cloud services is a [[Distributed System]] whether you meant it to be or not, because a request from one service to another crosses a network and can fail on the way.

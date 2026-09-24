@@ -10,7 +10,7 @@ Root of the vault. A source of truth for machine learning, MLOps, data systems, 
 
 Four domains, each answering a different question, none of them subordinate to another. Their sizes differ only because of which chapters have been extracted so far.
 
-- **`Knowledge/Machine Learning/`** how a model is specified, fitted and evaluated, and how the data it is fitted on is obtained, labelled, repaired and built into the columns the model actually reads, indexed at [[Machine Learning]].
+- **`Knowledge/Machine Learning/`** how a model is specified, fitted and evaluated, and how the data it is fitted on is obtained, labelled, repaired and built into the columns the model actually reads, and what it takes to serve a fitted model and keep it working once it ships, indexed at [[Machine Learning]].
 - **`Knowledge/Data Systems/`** where data lives, how it gets there and who serves it, indexed at [[Data Systems]].
 - **`Knowledge/Systems Architecture/`** the concepts that hold for any software system regardless of what it stores, what is required of such a system before anything about its arrangement is settled, how work is distributed across machines, how processes that share no memory pass data to one another, who owns the machines and who operates them, indexed at [[Systems Architecture]].
 - **`Knowledge/Mathematics/`** the results the other domains lean on, indexed at [[Mathematics]], which lists them.

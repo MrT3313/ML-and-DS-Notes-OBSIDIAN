@@ -10,12 +10,15 @@ up: "[[MLOps]]"
 sources:
   - "[[HOML Ch01 The Machine Learning Landscape]]"
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
 ## Definition
 
 Model rot is the slow decline of a deployed model's performance because the world it was trained on has moved: the data distribution, or the relation between features and label, is no longer what it was at training time. The model has not changed; its assumptions have gone stale.
+
+Software rot, also called bit rot, is a different thing and not the general case of which this is an instance. It is a program losing its value while its code stays unchanged because what surrounds it moved: the platform and libraries under it, and what its users need from it. The nearest primary account is Parnas's "Software Aging" (ICSE 1994), which names failing to keep up with changing needs as one of two distinct causes of aging, the other being structure degraded by changes made without understanding the design, and gives his own 1960 program as the example, one that "has aged even though nobody has touched it". Model rot proceeds with the code, the libraries and the platform all pinned, because what moves is the data, the shift in distribution that [[Data Mismatch]] names at collection time: a program's correctness against its specification does not depend on how often each input arrives, and a fitted model's does. The first is a property of any program and the second belongs only to a fitted model, so a deployed model can suffer both at once.
 
 ## Formal statement
 

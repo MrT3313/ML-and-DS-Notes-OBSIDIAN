@@ -8,6 +8,7 @@ aliases:
 up: "[[MLOps]]"
 sources:
   - "[[DMLS Ch01 Overview of Machine Learning Systems]]"
+  - "[[DMLS Ch07 Model Deployment and Prediction Service]]"
 confidence: draft
 ---
 
@@ -30,6 +31,8 @@ The setting is a model $h_{\boldsymbol\theta_t}$ updated on a cadence from data 
 What is wanted guaranteed has two halves: after the update at $t$, loss on $p_t$ falls, and loss on the earlier $p_1, \dots, p_{t-1}$ does not collapse. Only the first half comes for free. Fitting $\boldsymbol\theta_t$ on data from $p_t$ alone drives loss on the earlier distributions up abruptly rather than gradually, and that failure is **catastrophic forgetting**, which is the standard name for it (coined as catastrophic interference by McCloskey and Cohen in 1989, and current in both wordings since French's 1999 review).
 
 Stated this way the setting is the stability-plasticity trade-off raised to the level of a deployed system: how far the system must be plastic enough to integrate new information against how far it must be stable enough not to overwrite consolidated knowledge. [[Learning Rate]] already carries the same trade-off at the level of one step size, where it is exact, a single $\eta$ that fixes both how fast the fit moves and how many past instances it effectively remembers. At system level there is no single number to read it off: the knobs are the update cadence, how much older data is replayed alongside the new, and whether an update resumes from the previous parameters or starts from scratch.
+
+Of those knobs the cadence is the one with a floor, which is why [[DMLS Ch07 Model Deployment and Prediction Service|DMLS chapter 7]] turns the practical question from how often a model should be updated into how often it can be. For a model updated from natural labels, the newest traffic cannot enter an update until its labels have landed, a high quantile $\tau_q$ of the delay in [[Feedback Loop Length]], and the update cannot serve until the pipeline has retrained, validated and shipped it, taking $T_{\text{pipeline}}$. The data behind a model is therefore at least $\tau_q + T_{\text{pipeline}}$ old on the day it goes live, whatever cadence was chosen.
 
 **Not further quantitative at this depth.**
 
